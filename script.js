@@ -1,9 +1,11 @@
 const dialogues = [
     "Rich dude ded",
+    "He left his treasure to whoever finds it",
     "I need money",
     "I am dedicated to fight my way to the money",
     "I am too weak and must train first",
-    "I will train every day"
+    "I will train every day",
+    "I see a old man walking the streets"
 ];
 
 const branchDialogues = {
