@@ -21,47 +21,80 @@ const branchDialogues = {
 
 let currentDialogueIndex = 0;
 let currentBranch = null;
+let isTyping = false; // Track if typing is in progress
+const typingSpeed = 50; // Speed of typing in milliseconds
+const typingAudio = new Audio('typing-sound.mp3'); // Path to typing sound effect
 
 const dialogueElement = document.getElementById('dialogue');
 const nextBtn = document.getElementById('next-btn');
-const optionBtns = document.getElementById('option-btns'); // Add buttons for branching
+const optionBtns = document.getElementById('option-btns');
+
+// Function to type out text
+function typeText(text, callback) {
+    isTyping = true;
+    dialogueElement.textContent = '';
+    let charIndex = 0;
+
+    typingAudio.loop = true; // Loop the typing sound
+    typingAudio.play();
+
+    const interval = setInterval(() => {
+        if (charIndex < text.length) {
+            dialogueElement.textContent += text[charIndex];
+            charIndex++;
+        } else {
+            clearInterval(interval);
+            typingAudio.pause(); // Stop the typing sound
+            typingAudio.currentTime = 0; // Reset the audio
+            isTyping = false;
+            if (callback) callback();
+        }
+    }, typingSpeed);
+}
 
 nextBtn.addEventListener('click', () => {
+    if (isTyping) return; // Prevent skipping while typing
+
     currentDialogueIndex++;
 
     if (currentBranch) {
         // Handle branch dialogues
         if (currentDialogueIndex >= branchDialogues[currentBranch].length) {
             nextBtn.style.display = 'none';
-            dialogueElement.textContent = "The cutscene has ended!";
+            typeText("The cutscene has ended!");
         } else {
-            dialogueElement.textContent = branchDialogues[currentBranch][currentDialogueIndex];
+            typeText(branchDialogues[currentBranch][currentDialogueIndex]);
         }
     } else {
         // Handle main dialogues
         if (currentDialogueIndex >= dialogues.length) {
             nextBtn.style.display = 'none';
-            dialogueElement.textContent = "Choose your path:";
-            optionBtns.style.display = 'block'; // Show branching options
+            typeText("Choose your path:", () => {
+                optionBtns.style.display = 'block'; // Show branching options
+            });
         } else {
-            dialogueElement.textContent = dialogues[currentDialogueIndex];
+            typeText(dialogues[currentDialogueIndex]);
         }
     }
 });
 
 // Add event listeners for branching options
 document.getElementById('fight-btn').addEventListener('click', () => {
+    if (isTyping) return; // Prevent interaction while typing
+
     currentBranch = 'fight';
     currentDialogueIndex = 0;
     optionBtns.style.display = 'none';
     nextBtn.style.display = 'block';
-    dialogueElement.textContent = branchDialogues.fight[currentDialogueIndex];
+    typeText(branchDialogues.fight[currentDialogueIndex]);
 });
 
 document.getElementById('train-btn').addEventListener('click', () => {
+    if (isTyping) return; // Prevent interaction while typing
+
     currentBranch = 'train';
     currentDialogueIndex = 0;
     optionBtns.style.display = 'none';
     nextBtn.style.display = 'block';
-    dialogueElement.textContent = branchDialogues.train[currentDialogueIndex];
+    typeText(branchDialogues.train[currentDialogueIndex]);
 });
