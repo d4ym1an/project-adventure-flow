@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Pixelmax';
+    src: url('Pixelmax.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'PixelmaxOutline';
+    src: url('PixelmaxOutline.otf') format('opentype');
+}

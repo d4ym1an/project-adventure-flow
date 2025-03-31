@@ -1,15 +1,22 @@
+@import url(/font/font.css);
+
 #cutscene-container {
     display: flex;
     /* margin-top: 35%; */
-    background-color:#bbb;
+    background-color: black;
+    border: 4px solid lime;
+    font-family: 'Pixelmax', cursive; /* Use Pixelmax font */
+    color: lime;
     margin-left: 0;
     padding-bottom: 3.2%;
 }
 
 body {
-/* background-image:url(download.jpg);
-background-repeat: no-repeat; */
-
+    /* background-image:url(download.jpg);
+    background-repeat: no-repeat; */
+    background-color: black;
+    color: lime;
+    font-family: 'PixelmaxOutline', cursive; /* Use PixelmaxOutline font */
 }
 
 #next-btn {
@@ -17,11 +24,19 @@ background-repeat: no-repeat; */
     position: absolute;
     margin-top: 4%;
     margin-left: 90%;
+    background-color: lime;
+    color: black;
+    border: 2px solid lime;
+    font-family: 'Pixelmax', cursive; /* Use Pixelmax font */
+    padding: 5px 10px;
+    cursor: pointer;
 }
 
 .background-city {
     display: flex;
     width: 50%;
     margin-left: 25%;
-    
+    background-size: cover;
+    border: 4px solid lime;
+    font-family: 'PixelmaxOutline', cursive; /* Use PixelmaxOutline font */
 }
