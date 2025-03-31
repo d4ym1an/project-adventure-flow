@@ -1,0 +1,27 @@
+#cutscene-container {
+    display: flex;
+    /* margin-top: 35%; */
+    background-color:#bbb;
+    margin-left: 0;
+    padding-bottom: 3.2%;
+}
+
+body {
+/* background-image:url(download.jpg);
+background-repeat: no-repeat; */
+
+}
+
+#next-btn {
+    display: flex;
+    position: absolute;
+    margin-top: 4%;
+    margin-left: 90%;
+}
+
+.background-city {
+    display: flex;
+    width: 50%;
+    margin-left: 25%;
+    
+}
