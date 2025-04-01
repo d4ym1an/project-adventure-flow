@@ -32,7 +32,7 @@ body {
     cursor: pointer;
 }
 
-#fight-btn, #train-btn {
+#swordsman-btn, #mage-btn, #evil-btn {
     background-color: lime;
     color: black;
     border: 2px solid lime;
@@ -42,7 +42,7 @@ body {
     margin: 5px; /* Add spacing between buttons */
 }
 
-#fight-btn:hover, #train-btn:hover {
+#swordsman-btn:hover, #mage-btn:hover, #evil-btn:hover {
     background-color: black;
     color: lime;
     border: 2px solid black;
@@ -52,6 +52,18 @@ body {
     margin: 5px; /* Add spacing between buttons */
 }
 
+#swordsman-btn:hover ~ #image-container {
+    background-image: url('/imgs/char/moistSword.png'); /* Replace with the swordsman image path */
+}
+
+#mage-btn:hover ~ #image-container {
+    background-image: url('/imgs/char/moistWizard.png'); /* Replace with the mage image path */
+}
+
+#evil-btn:hover ~ #image-container {
+    background-image: url('/imgs/char/moistEvil.png'); /* Replace with the evil image path */
+}
+
 #option-btns {
     display: flex;
     justify-content: center;
@@ -59,6 +71,17 @@ body {
     border: 4px solid lime; /* Green border around the buttons */
     padding: 10px;
     background-color: black;
+}
+
+#image-container {
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid lime;
 }
 
 .background-city {

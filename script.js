@@ -5,20 +5,25 @@ const dialogues = [
     "I am dedicated to fight my way to the money",
     "I am too weak and must train first",
     "I will train every day",
-    "I see a old man walking the streets"
+    "You see a old man walking the streets"
 ];
 
 const branchDialogues = {
-    fight: [
+    mage: [
         "You chose to fight!",
         "You encounter your first enemy.",
         "Prepare for battle!"
     ],
-    train: [
+    swordsman: [
         "You chose to train!",
         "You start lifting weights.",
         "Your strength increases!"
-    ]
+    ],
+    evil: [
+        "Go away old dude!",
+        "He gets sad and runs away crying.",
+        "You continue your training."
+    ],
 };
 
 let currentDialogueIndex = 0;
@@ -30,6 +35,7 @@ const typingAudio = new Audio('typing-sound.mp3'); // Path to typing sound effec
 const dialogueElement = document.getElementById('dialogue');
 const nextBtn = document.getElementById('next-btn');
 const optionBtns = document.getElementById('option-btns');
+const imageContainer = document.getElementById('image-container'); // Reference to the image container
 
 // Function to type out text
 function typeText(text, callback) {
@@ -63,7 +69,9 @@ nextBtn.addEventListener('click', () => {
         // Handle branch dialogues
         if (currentDialogueIndex >= branchDialogues[currentBranch].length) {
             nextBtn.style.display = 'none';
-            typeText("The cutscene has ended!");
+            typeText("The cutscene has ended!", () => {
+                imageContainer.style.display = 'none'; // Hide image container after branch ends
+            });
         } else {
             typeText(branchDialogues[currentBranch][currentDialogueIndex]);
         }
@@ -73,6 +81,7 @@ nextBtn.addEventListener('click', () => {
             nextBtn.style.display = 'none';
             typeText("Choose your path:", () => {
                 optionBtns.style.display = 'block'; // Show branching options
+                imageContainer.style.display = 'none'; // Ensure image is hidden before branching
             });
         } else {
             typeText(dialogues[currentDialogueIndex]);
@@ -81,22 +90,35 @@ nextBtn.addEventListener('click', () => {
 });
 
 // Add event listeners for branching options
-document.getElementById('fight-btn').addEventListener('click', () => {
+document.getElementById('mage-btn').addEventListener('click', () => {
     if (isTyping) return; // Prevent interaction while typing
 
-    currentBranch = 'fight';
+    currentBranch = 'mage';
     currentDialogueIndex = 0;
     optionBtns.style.display = 'none';
     nextBtn.style.display = 'block';
-    typeText(branchDialogues.fight[currentDialogueIndex]);
+    imageContainer.style.display = 'block'; // Ensure image container is visible
+    typeText(branchDialogues.mage[currentDialogueIndex]);
 });
 
-document.getElementById('train-btn').addEventListener('click', () => {
+document.getElementById('swordsman-btn').addEventListener('click', () => {
     if (isTyping) return; // Prevent interaction while typing
 
-    currentBranch = 'train';
+    currentBranch = 'swordsman';
     currentDialogueIndex = 0;
     optionBtns.style.display = 'none';
     nextBtn.style.display = 'block';
-    typeText(branchDialogues.train[currentDialogueIndex]);
+    imageContainer.style.display = 'block'; // Ensure image container is visible
+    typeText(branchDialogues.swordsman[currentDialogueIndex]);
+});
+
+document.getElementById('evil-btn').addEventListener('click', () => {
+    if (isTyping) return; // Prevent interaction while typing
+
+    currentBranch = 'evil';
+    currentDialogueIndex = 0;
+    optionBtns.style.display = 'none';
+    nextBtn.style.display = 'block';
+    imageContainer.style.display = 'none'; // Ensure image container is hidden
+    typeText(branchDialogues.evil[currentDialogueIndex]);
 });
