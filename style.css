@@ -1,5 +1,10 @@
 @import url(/font/font.css);
 
+::selection{
+    background: lime;
+    color: rgb(0, 0, 0);
+}
+
 #cutscene-container {
     display: flex;
     /* margin-top: 35%; */
@@ -140,4 +145,13 @@ body {
 
 #game-container {
     display: none; /* Initially hidden */
+}
+
+#cube-container {
+    display: flex; /* Ensure it uses flexbox for proper alignment */
+    justify-content: center; /* Center the cube horizontally */
+    align-items: center; /* Center the cube vertically */
+    width: 100%; /* Full width */
+    height: 100vh; /* Full viewport height */
+    background-color: black; /* Match the background color */
 }
