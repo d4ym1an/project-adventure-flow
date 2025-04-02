@@ -3,27 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Divine treasure hunt</title>
+    <title>Divine Treasure Hunt</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
-    <img class="background-city" src="/imgs/bg/town.jpg">
-    <div id="image-container" style="background-image: url('/imgs/char/moist.png');"></div> <!-- Default image -->
-    <div id="cutscene-container">
-        <div id="background"></div>
-        <div id="dialogue-container">
-            <p id="dialogue">Rich guy ded</p>
-        </div>
-        <button id="next-btn">Next</button>
+    <div id="homepage-container">
+        <h1>Welcome to Divine Treasure Hunt</h1>
+        <p>Embark on an epic adventure to uncover hidden treasures!</p>
+        <a id="start-game-btn" href="game.html">Start Game</a>
     </div>
-    <div id="option-btns-container">
-        <div id="option-btns" style="display: none;">
-            <button id="swordsman-btn">Swordsman</button>
-            <button id="mage-btn">Mage</button>
-            <button id="evil-btn">Go away old dude!</button>
-        </div>
-    </div>
-    <script src="script.js"></script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const startGameBtn = document.getElementById('start-game-btn');
+            const homepageContainer = document.getElementById('homepage-container');
+            const gameContainer = document.getElementById('game-container');
+
+            startGameBtn.addEventListener('click', () => {
+                homepageContainer.style.display = 'none';
+                gameContainer.style.display = 'block';
+            });
+        });
+    </script>
 </body>
 </html>

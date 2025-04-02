@@ -53,15 +53,15 @@ body {
 }
 
 #swordsman-btn:hover ~ #image-container {
-    background-image: url('/imgs/char/moistSword.png'); /* Replace with the swordsman image path */
+    background-image: url('/assets/char/moistSword.png'); /* Replace with the swordsman image path */
 }
 
 #mage-btn:hover ~ #image-container {
-    background-image: url('/imgs/char/moistWizard.png'); /* Replace with the mage image path */
+    background-image: url('/assets/char/moistWizard.png'); /* Replace with the mage image path */
 }
 
 #evil-btn:hover ~ #image-container {
-    background-image: url('/imgs/char/moistEvil.png'); /* Replace with the evil image path */
+    background-image: url('/assets/char/moistEvil.png'); /* Replace with the evil image path */
 }
 
 #option-btns {
@@ -71,17 +71,20 @@ body {
     border: 4px solid lime; /* Green border around the buttons */
     padding: 10px;
     background-color: black;
+    z-index: 1; /* Ensure it is below the image-container */
 }
 
 #image-container {
     position: absolute;
-    top: 20%;
-    left: 5%;
-    width: 150px;
-    height: 150px;
+    top: 45%;
+    left: 13%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
     background-size: cover;
     background-position: center;
     border: 2px solid lime;
+    z-index: 2; /* Ensure it appears on top of other elements */
 }
 
 .background-city {
@@ -91,4 +94,50 @@ body {
     background-size: cover;
     border: 4px solid lime;
     font-family: 'PixelmaxOutline', cursive; /* Use PixelmaxOutline font */
+}
+
+#homepage-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: black;
+    color: lime;
+    font-family: 'Pixelmax', cursive;
+    text-align: center;
+}
+
+#homepage-container h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-family: 'PixelmaxOutline';
+}
+
+#homepage-container p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+#start-game-btn {
+    display: inline-block; /* Ensure it behaves like a button */
+    text-align: center;
+    text-decoration: none; /* Remove underline for the link */
+    background-color: lime;
+    color: black;
+    border: 2px solid lime;
+    font-family: 'Pixelmax', cursive;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+#start-game-btn:hover {
+    background-color: black;
+    color: lime;
+    border: 2px solid black;
+}
+
+#game-container {
+    display: none; /* Initially hidden */
 }
