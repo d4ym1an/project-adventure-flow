@@ -337,7 +337,7 @@ nextBtn.addEventListener('click', () => {
             }else if (currentDialogueIndex === 2) {
                 typeText("You begin practicing the art of quick and precise spellcasting.", () => {
                     currentDialogueIndex++;
-                    nextBtn.style.display = 'block'; 
+                    nextBtn.style.display = 'block'; // Hide next button after the final dialogue
                 });
             }
         }
