@@ -258,7 +258,146 @@ document.addEventListener('DOMContentLoaded', () => {
         optionBtns.appendChild(speedWeaponBtn);
         optionBtns.appendChild(damageWeaponBtn);
     }
-    
+    // Function to display weapon choice buttons for the Mage class
+function showWeaponChoices() {
+    // Hide the next button because we want the player to make a choice
+    nextBtn.style.display = 'none';
+
+    // Ensure the optionBtns container is visible
+    optionBtns.style.display = 'block';
+
+    // Clear any previous options if they exist
+    optionBtns.innerHTML = '';
+
+    // Create two buttons dynamically for the choices
+    const staffBtn = document.createElement('button');
+    staffBtn.textContent = 'Choose the Staff';
+    staffBtn.classList.add('weapon-choice-btn'); // Optional: Add a class for styling
+    staffBtn.addEventListener('click', () => {
+        // Handle staff choice here
+        typeText('You chose the Staff!', () => {
+            // Continue the game after the choice
+            currentBranch = 'mage_staff'; // Set the branch for Mage with Staff
+            currentDialogueIndex = 0; // Reset the dialogue index for the next part
+            optionBtns.style.display = 'none'; // Hide weapon choice buttons
+            nextBtn.style.display = 'block'; // Show next button to continue the story
+        });
+    });
+
+    const wandBtn = document.createElement('button');
+    wandBtn.textContent = 'Choose the Wand';
+    wandBtn.classList.add('weapon-choice-btn'); // Optional: Add a class for styling
+    wandBtn.addEventListener('click', () => {
+        // Handle wand choice here
+        typeText('You chose the Wand!', () => {
+            // Continue the game after the choice
+            currentBranch = 'mage_wand'; // Set the branch for Mage with Wand
+            currentDialogueIndex = 0; // Reset the dialogue index for the next part
+            optionBtns.style.display = 'none'; // Hide weapon choice buttons
+            nextBtn.style.display = 'block'; // Show next button to continue the story
+        });
+    });
+
+    // Append the buttons to the option buttons container
+    optionBtns.appendChild(staffBtn);
+    optionBtns.appendChild(wandBtn);
+}
+
+// Function to continue the Mage's story after weapon choice (staff or wand)
+nextBtn.addEventListener('click', () => {
+    if (isTyping) return; // Prevent skipping while typing
+
+    if (currentBranch === 'mage_staff' || currentBranch === 'mage_wand') {
+        // Check the current branch for Mage and proceed with more dialogue
+        if (currentBranch === 'mage_staff') {
+            // Mage with Staff continues
+            if (currentDialogueIndex === 0) {
+                typeText("You feel the power of the Staff coursing through you!", () => {
+                    currentDialogueIndex++;
+                    nextBtn.style.display = 'block'; // Allow next to continue
+                });
+            } else if (currentDialogueIndex === 1) {
+                typeText("Your mentor brings you to an academy for magic",() => {
+                    currentDialogueIndex++;
+                    nextBtn.style.display = 'none'; // Hide next button after the final dialogue
+                });
+            }
+        } else if (currentBranch === 'mage_wand') {
+            // Mage with Wand continues
+            if (currentDialogueIndex === 0) {
+                typeText("The Wand feels light in your hand, a perfect tool for quick magic!", () => {
+                    currentDialogueIndex++;
+                    nextBtn.style.display = 'block'; // Allow next to continue
+                });
+            } else if (currentDialogueIndex === 1) {
+                typeText("Your mentor brings you to an academy for magic.", () => {
+                    currentDialogueIndex++;
+                    nextBtn.style.display = 'none'; // Hide next button after the final dialogue
+                });
+            }
+        }
+    } else {
+        // If you're not in a weapon branch (not Mage path yet), go through main dialogues
+        currentDialogueIndex++;
+
+        if (currentBranch) {
+            // Handle branch dialogues
+            if (currentDialogueIndex >= branchDialogues[currentBranch].length) {
+                nextBtn.style.display = 'none';
+                typeText("You're done", () => {
+                    imageContainer.style.display = 'none';
+                });
+            } else {
+                typeText(branchDialogues[currentBranch][currentDialogueIndex]);
+            }
+        } else {
+            // Handle main dialogues
+            if (currentDialogueIndex >= dialogues.length) {
+                nextBtn.style.display = 'none';
+                typeText("Choose your path:", () => {
+                    optionBtns.style.display = 'block'; // Show branching options
+                    imageContainer.style.display = 'none';
+                });
+            } else {
+                typeText(dialogues[currentDialogueIndex]);
+            }
+        }
+    }
+});
+    function typeText(texts, callback) {
+    isTyping = true;
+    dialogueElement.textContent = ''; // Clear current dialogue
+
+    // If texts is a single string, convert it into an array to simplify the logic
+    if (typeof texts === 'string') texts = [texts];
+
+    let textIndex = 0;
+    let charIndex = 0;
+
+    typingAudio.loop = true;
+    typingAudio.play();
+
+    const interval = setInterval(() => {
+        if (charIndex < texts[textIndex].length) {
+            dialogueElement.textContent += texts[textIndex][charIndex];
+            charIndex++;
+        } else {
+            // Move to next text in the array
+            textIndex++;
+            charIndex = 0;
+
+            // If there are no more texts, stop the typing effect
+            if (textIndex >= texts.length) {
+                clearInterval(interval);
+                typingAudio.pause();
+                typingAudio.currentTime = 0;
+                isTyping = false;
+                if (callback) callback();
+            }
+        }
+    }, typingSpeed);
+}
+
     // Debugging: Log to ensure the next button is initialized
     console.log("Next button initialized:", nextBtn);
 });
