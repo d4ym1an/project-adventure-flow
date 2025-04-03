@@ -332,7 +332,12 @@ nextBtn.addEventListener('click', () => {
             } else if (currentDialogueIndex === 1) {
                 typeText("Your mentor brings you to an academy for magic.", () => {
                     currentDialogueIndex++;
-                    nextBtn.style.display = 'none'; // Hide next button after the final dialogue
+                    nextBtn.style.display = 'block'; // Hide next button after the final dialogue
+                });
+            }else if (currentDialogueIndex === 2) {
+                typeText("You begin practicing the art of quick and precise spellcasting.", () => {
+                    currentDialogueIndex++;
+                    nextBtn.style.display = 'block'; 
                 });
             }
         }
