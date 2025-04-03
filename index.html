@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,61 +9,50 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
+
 <body>
-    <div id="homepage-container">
+    <div id="cube-container" style="width: 100%; height: 30vh;"></div>
+
+    <div id="homepage-container" style="width: 100%; height: 60vh;">
         <h1>Welcome to Divine Treasure Hunt</h1>
         <p>Embark on an epic adventure to uncover hidden treasures!</p>
-        <a id="start-game-btn" href="game.html">Start Game</a>
+        <a id="start-game-btn" href="/game.html">Start Game</a>
     </div>
 
-    <div id="cube-container" style="width: 100%; height: 100vh; display: none;"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const startGameBtn = document.getElementById('start-game-btn');
-            const homepageContainer = document.getElementById('homepage-container');
             const cubeContainer = document.getElementById('cube-container');
-
-            startGameBtn.addEventListener('click', () => {
-                homepageContainer.style.display = 'none';
-                cubeContainer.style.display = 'block';
-                init3DCube();
-            });
 
             function init3DCube() {
                 const scene = new THREE.Scene();
                 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                const renderer = new THREE.WebGLRenderer();75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer();
                 renderer.setSize(window.innerWidth, window.innerHeight);
-                cubeContainer.appendChild(renderer.domElement);rHeight);
                 cubeContainer.appendChild(renderer.domElement);
+
                 const geometry = new THREE.BoxGeometry();
-                const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // Green cube
-                const cube = new THREE.Mesh(geometry, material);hedevinetresurehunt1x1.png');
-                scene.add(cube);ap: texture });
- THREE.Mesh(geometry, material);ns/thedevinetresurehunt1x1.png',
-                camera.position.z = 5;                scene.add(cube);                    (texture) => {
-texture });
-                function animate() {                camera.position.z = 5;                        const cube = new THREE.Mesh(geometry, material);
+                const textureLoader = new THREE.TextureLoader();
+                const texture = textureLoader.load('/assets/icons/thedevinetresurehunt1x1.png'); // Load the texture
+                const material = new THREE.MeshBasicMaterial({ map: texture }); // Apply the texture
+                const cube = new THREE.Mesh(geometry, material);
+                scene.add(cube);
+
+                camera.position.z = 5;
+
+                function animate() {
                     requestAnimationFrame(animate);
                     cube.rotation.x += 0.01;
-                    cube.rotation.y += 0.01;imate);5;
+                    cube.rotation.y += 0.01;
                     renderer.render(scene, camera);
                 }
-   renderer.render(scene, camera);           requestAnimationFrame(animate);
-                animate();                }                            cube.rotation.x += 0.01;
+
+                animate();
             }
-        });   animate();               renderer.render(scene, camera);
-    </script> }             }
-</body>
-</html>
-</html>                    undefined,
-                    (error) => {
-                        console.error('Error loading texture:', error);
-                    }
-                );
-            }
+
+            init3DCube(); // Initialize the cube immediately
         });
     </script>
 </body>
+
 </html>

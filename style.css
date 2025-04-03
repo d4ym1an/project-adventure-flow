@@ -140,7 +140,7 @@ body {
 #start-game-btn:hover {
     background-color: black;
     color: lime;
-    border: 2px solid black;
+    border: 2px solid lime;
 }
 
 #game-container {
@@ -148,10 +148,13 @@ body {
 }
 
 #cube-container {
+    position: relative; /* Position it relative to its normal flow */
+
+    width: 100%; /* Full width */
+    height: 50vh; /* Half viewport height */
     display: flex; /* Ensure it uses flexbox for proper alignment */
     justify-content: center; /* Center the cube horizontally */
     align-items: center; /* Center the cube vertically */
-    width: 100%; /* Full width */
-    height: 100vh; /* Full viewport height */
     background-color: black; /* Match the background color */
+    z-index: -1;
 }
