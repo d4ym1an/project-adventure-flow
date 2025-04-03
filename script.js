@@ -11,80 +11,75 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const branchDialogues = {
         mage: [
-            "You chose to fight!",
-            "You encounter your first enemy.",
-            "Prepare for battle!"
+            "The class of mage has strong long ranged abilities",
+            "But you will not be able to use every type of magic",
+            "You must choose between two weapons"
         ],
         swordsman: [
-            "You chose to train!",
-            "You start lifting weights.",
-            "Your strength increases!"
+            "The class of swordsman has very powerful close range abilities",
+            "But depending on your weapon you will have to choose speed or damage",
+            "You must choose between two weapons"
         ],
         evil: [
             "Go away old dude!",
             "He gets sad and runs away crying.",
             "You continue your training."
-        ],
+        ]
     };
 
     let currentDialogueIndex = 0;
     let currentBranch = null;
-    let isTyping = false; // Track if typing is in progress
-    const typingSpeed = 50; // Speed of typing in milliseconds
-    const typingAudio = new Audio('/assets/sounds/talking-three.mp3'); // Path to typing sound effect
+    let isTyping = false;
+    const typingSpeed = 0;
+    const typingAudio = new Audio('/assets/sounds/talking-three.mp3');
 
     const dialogueElement = document.getElementById('dialogue');
     const nextBtn = document.getElementById('next-btn');
     const optionBtns = document.getElementById('option-btns');
-    const imageContainer = document.getElementById('image-container'); // Reference to the image container
+    const imageContainer = document.getElementById('image-container');
 
-    const moistImagePath = '/assets/images/moist.png'; // Path to the moist image
-    const defaultImagePath = '/assets/images/default.png'; // Path to the default image
+    const moistImagePath = '/assets/images/moist.png';
     const moistMageImagePath = '/assets/char/moistWizard.png';
     const moistSwordImagePath = '/assets/char/moistSwords.png';
     const moistSadImagePath = '/assets/char/moistSad.png';
 
-    // Add hover functionality to show moist.png
+    // Hover functionality for the character buttons
     document.getElementById('mage-btn').addEventListener('mouseover', () => {
-        imageContainer.style.display = 'block'; // Ensure the image container is visible
+        imageContainer.style.display = 'block';
         imageContainer.src = moistMageImagePath;
+    });
+    document.getElementById('swordsman-btn').addEventListener('mouseover', () => {
+        imageContainer.style.display = 'block';
+        imageContainer.src = moistSwordImagePath;
+    });
+    document.getElementById('evil-btn').addEventListener('mouseover', () => {
+        imageContainer.style.display = 'block';
+        imageContainer.src = moistSadImagePath;
     });
     document.getElementById('mage-btn').addEventListener('mouseout', () => {
         imageContainer.src = moistMageImagePath;
     });
-
-    document.getElementById('swordsman-btn').addEventListener('mouseover', () => {
-        imageContainer.style.display = 'block'; // Ensure the image container is visible
-        imageContainer.src = moistSwordImagePath;
-    });
     document.getElementById('swordsman-btn').addEventListener('mouseout', () => {
         imageContainer.src = moistSwordImagePath;
-    });
-
-    document.getElementById('evil-btn').addEventListener('mouseover', () => {
-        imageContainer.style.display = 'block'; // Ensure the image container is visible
-        imageContainer.src = moistSadImagePath;
     });
     document.getElementById('evil-btn').addEventListener('mouseout', () => {
         imageContainer.src = moistSadImagePath;
     });
 
-    // Add hover functionality for the dialogue text box
     dialogueElement.addEventListener('mouseover', () => {
-        imageContainer.style.display = 'block'; // Ensure the image container is visible
-        imageContainer.src = moistImagePath; // Show the default moist image
+        imageContainer.style.display = 'block';
+        imageContainer.src = moistImagePath;
     });
     dialogueElement.addEventListener('mouseout', () => {
-        imageContainer.style.display = 'none'; // Hide the image container when not hovering
+        imageContainer.style.display = 'none';
     });
 
-    // Function to type out text
     function typeText(text, callback) {
         isTyping = true;
         dialogueElement.textContent = '';
         let charIndex = 0;
 
-        typingAudio.loop = true; // Ensure the typing sound loops
+        typingAudio.loop = true;
         typingAudio.play();
 
         const interval = setInterval(() => {
@@ -93,36 +88,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 charIndex++;
             } else {
                 clearInterval(interval);
-                typingAudio.pause(); // Stop the typing sound
-                typingAudio.currentTime = 0; // Reset the audio
+                typingAudio.pause();
+                typingAudio.currentTime = 0;
                 isTyping = false;
                 if (callback) callback();
             }
         }, typingSpeed);
-
-        // Ensure the typing sound restarts if it ends while typing is still in progress
-        typingAudio.addEventListener('timeupdate', () => {
-            if (isTyping && typingAudio.currentTime >= typingAudio.duration - 0.1) {
-                typingAudio.currentTime = 0;
-                typingAudio.play();
-            }
-        });
     }
 
     nextBtn.addEventListener('click', () => {
         if (isTyping) return; // Prevent skipping while typing
-
+    
         currentDialogueIndex++;
-
+    
         if (currentBranch) {
             // Handle branch dialogues
             if (currentDialogueIndex >= branchDialogues[currentBranch].length) {
                 nextBtn.style.display = 'none';
-                typeText("The cutscene has ended!", () => {
-                    imageContainer.style.display = 'none'; // Hide image container after branch ends
+                typeText("You're done", () => {
+                    imageContainer.style.display = 'none';
                 });
             } else {
-                typeText(branchDialogues[currentBranch][currentDialogueIndex]);
+                typeText(branchDialogues[currentBranch][currentDialogueIndex], () => {
+                    if (currentBranch === 'mage' && currentDialogueIndex === 2) {
+                        // When player reaches the choice point (Mage branch)
+                        showWeaponChoices(); // Show weapon choice buttons for mage
+                    } else if (currentBranch === 'swordsman' && currentDialogueIndex === 2) {
+                        // When player reaches the choice point (Swordsman branch)
+                        showSwordsmanWeaponChoices(); // Show weapon choice buttons for swordsman
+                    }
+                });
             }
         } else {
             // Handle main dialogues
@@ -130,51 +125,140 @@ document.addEventListener('DOMContentLoaded', () => {
                 nextBtn.style.display = 'none';
                 typeText("Choose your path:", () => {
                     optionBtns.style.display = 'block'; // Show branching options
-                    imageContainer.style.display = 'none'; // Ensure image is hidden before branching
+                    imageContainer.style.display = 'none';
                 });
             } else {
                 typeText(dialogues[currentDialogueIndex]);
             }
         }
     });
-
+    
     // Add event listeners for branching options
     document.getElementById('mage-btn').addEventListener('click', () => {
-        if (isTyping) return; // Prevent interaction while typing
+        if (isTyping) return;
 
         currentBranch = 'mage';
         currentDialogueIndex = 0;
         optionBtns.style.display = 'none';
         nextBtn.style.display = 'block';
-        imageContainer.style.display = 'block'; // Ensure the image container is visible
-        imageContainer.src = moistImagePath; // Persist moist.png
+        imageContainer.style.display = 'block';
+        imageContainer.src = moistMageImagePath;
         typeText(branchDialogues.mage[currentDialogueIndex]);
     });
 
     document.getElementById('swordsman-btn').addEventListener('click', () => {
-        if (isTyping) return; // Prevent interaction while typing
+        if (isTyping) return;
 
         currentBranch = 'swordsman';
         currentDialogueIndex = 0;
         optionBtns.style.display = 'none';
         nextBtn.style.display = 'block';
-        imageContainer.style.display = 'block'; // Ensure the image container is visible
-        imageContainer.src = moistImagePath; // Persist moist.png
+        imageContainer.style.display = 'block';
+        imageContainer.src = moistSwordImagePath;
         typeText(branchDialogues.swordsman[currentDialogueIndex]);
     });
 
     document.getElementById('evil-btn').addEventListener('click', () => {
-        if (isTyping) return; // Prevent interaction while typing
+        if (isTyping) return;
 
         currentBranch = 'evil';
         currentDialogueIndex = 0;
         optionBtns.style.display = 'none';
         nextBtn.style.display = 'block';
-        imageContainer.style.display = 'block'; // Ensure the image container is visible
-        imageContainer.src = moistImagePath; // Persist moist.png
+        imageContainer.style.display = 'block';
+        imageContainer.src = moistSadImagePath;
         typeText(branchDialogues.evil[currentDialogueIndex]);
     });
 
+    // Function to display weapon choice buttons
+    function showWeaponChoices() {
+        // Hide the next button because we want the player to make a choice
+        nextBtn.style.display = 'none';
+    
+        // Ensure the optionBtns container is visible
+        optionBtns.style.display = 'block';
+    
+        // Clear any previous options if they exist
+        optionBtns.innerHTML = '';
+    
+        // Create two buttons dynamically for the choices
+        const staffBtn = document.createElement('button');
+        staffBtn.textContent = 'Choose the Staff';
+        staffBtn.classList.add('weapon-choice-btn'); // Optional: Add a class for styling
+        staffBtn.addEventListener('click', () => {
+            // Handle staff choice here
+            typeText('You chose the Staff!', () => {
+                // Continue the game after the choice
+                currentBranch = null;
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none'; // Hide options
+                nextBtn.style.display = 'block'; // Show next button to continue the game
+            });
+        });
+    
+        const wandBtn = document.createElement('button');
+        wandBtn.textContent = 'Choose the Wand';
+        wandBtn.classList.add('weapon-choice-btn'); // Optional: Add a class for styling
+        wandBtn.addEventListener('click', () => {
+            // Handle wand choice here
+            typeText('You chose the Wand!', () => {
+                // Continue the game after the choice
+                currentBranch = null;
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none'; // Hide options
+                nextBtn.style.display = 'block'; // Show next button to continue the game
+            });
+        });
+    
+        // Append the buttons to the option buttons container
+        optionBtns.appendChild(staffBtn);
+        optionBtns.appendChild(wandBtn);
+    }
+    
+    function showSwordsmanWeaponChoices() {
+        // Hide the next button because we want the player to make a choice
+        nextBtn.style.display = 'none';
+    
+        // Ensure the optionBtns container is visible
+        optionBtns.style.display = 'block';
+    
+        // Clear any previous options if they exist
+        optionBtns.innerHTML = '';
+    
+        // Create two buttons dynamically for the choices
+        const speedWeaponBtn = document.createElement('button');
+        speedWeaponBtn.textContent = 'Short Sword';
+        speedWeaponBtn.classList.add('weapon-choice-btn'); // Optional: Add a class for styling
+        speedWeaponBtn.addEventListener('click', () => {
+            // Handle speed weapon choice here
+            typeText(' You choose the Short Sword!', () => {
+                // Continue the game after the choice
+                currentBranch = null;
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none'; // Hide options
+                nextBtn.style.display = 'block'; // Show next button to continue the game
+            });
+        });
+    
+        const damageWeaponBtn = document.createElement('button');
+        damageWeaponBtn.textContent = 'Great Sword';
+        damageWeaponBtn.classList.add('weapon-choice-btn'); // Optional: Add a class for styling
+        damageWeaponBtn.addEventListener('click', () => {
+            // Handle damage weapon choice here
+            typeText('You chose the Great Sword!', () => {
+                // Continue the game after the choice
+                currentBranch = null;
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none'; // Hide options
+                nextBtn.style.display = 'block'; // Show next button to continue the game
+            });
+        });
+    
+        // Append the buttons to the option buttons container
+        optionBtns.appendChild(speedWeaponBtn);
+        optionBtns.appendChild(damageWeaponBtn);
+    }
+    
     // Debugging: Log to ensure the next button is initialized
     console.log("Next button initialized:", nextBtn);
 });
