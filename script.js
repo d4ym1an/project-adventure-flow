@@ -24,6 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
             "Go away old dude!",
             "He gets sad and runs away crying.",
             "You continue your training."
+        ],
+        mage_wand: [
+            "The Wand feels light in your hand, a perfect tool for quick magic!",
+            "Your mentor brings you to an academy for magic.",
+            "You begin practicing the art of quick and precise spellcasting."
+        ],
+        mage_staff: [
+            "You feel the power of the Staff coursing through you!",
+            "Your mentor brings you to an academy for magic."
         ]
     };
 
@@ -75,6 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function typeText(text, callback) {
+        if (!text || typeof text !== 'string') {
+            console.error("Invalid text provided to typeText:", text);
+            return; // Exit the function if text is invalid
+        }
         isTyping = true;
         dialogueElement.textContent = '';
         let charIndex = 0;
@@ -102,6 +115,12 @@ document.addEventListener('DOMContentLoaded', () => {
         currentDialogueIndex++;
     
         if (currentBranch) {
+            // Ensure the branch dialogues exist for the current branch
+            if (!branchDialogues[currentBranch]) {
+                console.error(`Invalid branch: ${currentBranch}`);
+                return; // Exit if the branch is invalid
+            }
+
             // Handle branch dialogues
             if (currentDialogueIndex >= branchDialogues[currentBranch].length) {
                 nextBtn.style.display = 'none';
