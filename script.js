@@ -32,7 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
         mage_wand: [
             "The Wand feels light in your hand, a perfect tool for quick magic!",
             "Your mentor brings you to an academy for magic.",
-            "You begin practicing the art of quick and precise spellcasting."
+            "You begin practicing the art of quick and precise spellcasting.",
+        
         ],
         mage_staff: [
             "You feel the power of the Staff coursing through you!",
