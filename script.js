@@ -20,25 +20,84 @@ document.addEventListener('DOMContentLoaded', () => {
             "But depending on your weapon you will have to choose speed or damage",
             "You must choose between two weapons"
         ],
+        short_sword: [
+            "filler",//skips first line
+            "Great choice",
+            "I shall now lead you to a place to advance your skills",
+            "Your mentor leads you to an academy to train you",
+            "You practice the art of quick and agile attacks",
+            "While your their you find a fellow classmate named Link",
+            "You become friends and start to train together",
+            "Epic training montage",
+            "You are ready your mentor says",
+            "There is nothing more I can teach you",
+            "I'm afraid to leave though",
+            "The world outside of what I know i don't know if I can handle it",
+            "At that moment you see someone walking towards you",
+            "Dad?",
+            "Yo we need the money man go and leave us you'll be fine cuh",
+            "Filled with motivation you set out with your friend saying goodbye to your mentor and family"
+        ],
+        great_sword: [
+            "filler",//skips first line
+            "Fantastic choice",
+            "I shall now lead you to a place to advance your skills",
+            "Your mentor leads you to an academy to train you",
+            "You practice the art of huge devastating attacks",
+            "While your their you find a fellow classmate named Link",
+            "You become friends and start to train together",
+            "Epic training montage",
+            "You are ready your mentor says",
+            "There is nothing more I can teach you",
+            "I'm afraid to leave though",
+            "The world outside of what I know i don't know if I can handle it",
+            "At that moment you see someone walking towards you",
+            "Dad?",
+            "Yo we need the money man go and leave us you'll be fine cuh",
+            "Filled with motivation you set out with your friend saying goodbye to your mentor and family"
+
+        ],
         evil: [
             "Go away old dude, or else ima give you a freaking packet yo!",
             "He gets sad and runs away crying.",
-            "<i>You continue your training, and an evil man apears!</i>",
+            "You continue your training, and an evil man apears!",
             "I see that you're heart is evil.",
             "Work for me, I can help you become stronger.",
             "You agree to work for him.",
-            "You chose two different weapons.",
+            "You chose two different weapons."
         ],
         mage_wand: [
-            "The Wand feels light in your hand, a perfect tool for quick magic!",
+            "filler",//skips this line
             "Your mentor brings you to an academy for magic.",
             "You begin practicing the art of quick and precise spellcasting.",
-        
+            "You meet a fellow mage in practice named Tessa Gray",
+            "You start talking and become friends",
+            "Epic training montage together",
+            "You are ready your mentor says",
+            "There is nothing more I can teach you",
+            "I'm afraid to leave though",
+            "The world outside of what I know i don't know if I can handle it",
+            "At that moment you see someone walking towards you",
+            "Dad?",
+            "Yo we need the money man go and leave us you'll be fine cuh",
+            "Filled with motivation you set out with your friend saying goodbye to your mentor and family"
+
         ],
         mage_staff: [
-            "You feel the power of the Staff coursing through you!",
+            "filler",//skips this line
             "Your mentor brings you to an academy for magic.",
-            "You begin practicing the art of powerful and devastating spells."
+            "You begin practicing the art of powerful and devastating spells.",
+            "You meet a fellow mage in practice named Tessa Gray",
+            "You start talking and become friends",
+            "Epic training montage together",
+            "You are ready your mentor says",
+            "There is nothing more I can teach you",
+            "I'm afraid to leave though",
+            "The world outside of what I know i don't know if I can handle it",
+            "At that moment you see someone walking towards you",
+            "Dad?",
+            "Yo we need the money man go and leave us you'll be fine cuh",
+            "Filled with motivation you set out with your friend saying goodbye to your mentor and family"
         ]
     };
 
@@ -224,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
         speedWeaponBtn.textContent = 'Short Sword';
         speedWeaponBtn.addEventListener('click', () => {
             typeText('You chose the Short Sword!', () => {
-                currentBranch = null;
+                currentBranch = 'short_sword';
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
@@ -235,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
         damageWeaponBtn.textContent = 'Great Sword';
         damageWeaponBtn.addEventListener('click', () => {
             typeText('You chose the Great Sword!', () => {
-                currentBranch = null;
+                currentBranch = 'great_sword';
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
