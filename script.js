@@ -8,7 +8,33 @@ document.addEventListener('DOMContentLoaded', () => {
         "I will train every day",
         "You see an old man walking the streets"
     ];
-
+    class Character {
+        constructor(name, health, attack, defense) {
+          this.name = name;
+          this.health = health;
+          this.attack = attack;
+          this.defense = defense;
+        }
+        
+        takeDamage(damage) {
+            const actualDamage = Math.max(0, damage - this.defense); // Damage can't go below 0
+            this.health -= actualDamage;
+            return actualDamage;
+        }
+        
+        // Method to perform an attack on another character
+        attackOpponent(opponent) {
+            const damage = this.attack; // Base damage from the character
+            const damageDealt = opponent.takeDamage(damage);
+            return damageDealt;
+        }
+    }
+    const player1 = new Character("Swordsman-great", 100, 25, 10);
+    const player2 = new Character("Swordsman-short", 100, 15, 5);
+    const player3 = new Character("mage-wand", 80, 25, 5);
+    const player4 = new Character("mage-staff", 80, 30, 5);
+    const enemy1 = new Character('Goblin', 50, 5, 5);
+    
     const branchDialogues = {
         mage: [
             "The class of mage has strong long ranged abilities",
@@ -335,4 +361,5 @@ document.addEventListener('DOMContentLoaded', () => {
         optionBtns.appendChild(poisonDaggerBtn);
         optionBtns.appendChild(cursedSwordBtn);
     }
+    
 });
