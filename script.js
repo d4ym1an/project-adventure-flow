@@ -134,16 +134,14 @@ function showCombatOptions() {
     nextBtn.style.display = 'none';
     optionBtns.style.display = 'block';
     optionBtns.innerHTML = 'Start fight';
+    
+    if (currentBranch === 'mage_wand' && currentDialogueIndex === 2) {
+        typeText('A goblin appears! Prepare to fight!', () => {
+            showCombatOptions(); // Only call once
+        });
+    }
+    
 
-
-    // function showCombatOptions () {
-    //     typeText(branchDialogues[currentBranch][currentDialogueIndex], () => {
-    //         if (currentBranch === 'mage_wand' && currentDialogueIndex === 2) {
-    //                 showCombatOptions();
-            
-    //              }
-    //       });
-    // }
     const attack1Btn = document.createElement('button');
     attack1Btn.textContent = 'Basic Attack';
     attack1Btn.addEventListener('click', () => {
