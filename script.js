@@ -92,6 +92,20 @@ document.addEventListener('DOMContentLoaded', () => {
             "You agree to work for him.",
             "You chose two different weapons."
         ],
+        evil_magic: [
+            "filler",//skip
+            "Great choice",
+            "You can now destroy people from long range",
+            "Training time",
+            "Evil training montage"
+        ],
+        evil_scythe: [
+            "filler",//skip
+            "Great choice",
+            "You can now demolish people from close-mid range",
+            "Training time",
+            "Evil training montage"
+        ],
         mage_wand: [
             "filler",//skips this line
             "Your mentor brings you to an academy for magic.",
@@ -304,7 +318,7 @@ function performAttack(attackType) {
                         image.src = "/assets/char/moistSword.png"; // Set the image to one specific image
                     } else if (currentBranch === 'evil' && currentDialogueIndex === branchDialogues.evil.length - 1) {
                         showEvilWeaponChoices();
-                        image.src = "/assets/char/moistSad.png"; // Set the image to one specific image
+                        image.src = "/assets/char/moistEvil.png"; // Set the image to one specific image
                     } else if (currentBranch === "mage_wand" && currentDialogueIndex === 3) {
                         image.src = "assets/char/Tessa.png";
                     }else if (currentBranch === "mage_staff" && currentDialogueIndex === 3) {
@@ -313,6 +327,8 @@ function performAttack(attackType) {
                         image.src = "assets/char/link.png";
                     }else if (currentBranch === "short_sword" && currentDialogueIndex === 5) {
                         image.src = "assets/char/link.png";
+                    }else if (currentBranch === "evil" && currentDialogueIndex === 2) {
+                        image.src = "assets/char/moistEvil.png";
                     }
                 });
             }
@@ -439,7 +455,7 @@ function performAttack(attackType) {
         poisonDaggerBtn.textContent = 'Dark Magic';
         poisonDaggerBtn.addEventListener('click', () => {
             typeText('You chose the Dark Magic!', () => {
-                currentBranch = null;
+                currentBranch = 'evil_magic';
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
@@ -447,10 +463,10 @@ function performAttack(attackType) {
         });
 
         const cursedSwordBtn = document.createElement('button');
-        cursedSwordBtn.textContent = 'Sythe';
+        cursedSwordBtn.textContent = 'Scythe';
         cursedSwordBtn.addEventListener('click', () => {
-            typeText('You chose the Sythe!', () => {
-                currentBranch = null;
+            typeText('You chose the Scythe!', () => {
+                currentBranch = 'evil_scythe';
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
