@@ -146,7 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
             "You set off for the treasure with you ally saying goodbye to your mentor and Dad",  
             "You are at seas for a while with no problems",
             "The captain approaches you and says",
-            "We are running out of food we need more is their any way you can help us"
+            "We are running out of food we need more is their any way you can help us",
+            "If your a mage you are able to conjure food right if not we can just hunt"
 
         ],
         landTravel: [
@@ -396,14 +397,14 @@ function performAttack(attackType) {
                         showTravelChoices();
                     }else if (currentBranch === 'mage_staff' && currentDialogueIndex === 13) {
                         showTravelChoices();
-                    }else if (currentBranch === 'seaTravel' && currentDialogueIndex === 6) {
+                    }else if (currentBranch === 'seaTravel' && currentDialogueIndex === 7) {
                         showFoodChoices();
                     }else if (currentBranch === 'islandFood' && currentDialogueIndex === 7) {
                         showHuntChoices();
                     }else if (currentBranch === "monkeyBoss" && currentDialogueIndex === 1) {
                         image.src = "assets/char/monke.png";
                     }else if (currentBranch === "berries" && currentDialogueIndex === 1) {
-                        image.src = "assets/icons/berries.png";
+                        image.src = "assets/icons/berries.webp";
                     }else if (currentBranch === "monkey" && currentDialogueIndex === 1) {
                         image.src = "assets/char/monkeFood.png";
                     }
