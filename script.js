@@ -138,6 +138,65 @@ document.addEventListener('DOMContentLoaded', () => {
             "Dad?",
             "Yo we need the money man go and leave us you'll be fine cuh",
             "Filled with motivation you set out with your friend saying goodbye to your mentor and family"
+        ],
+        seaTravel: [
+            "filler",
+            "You are introduced to some pirates who will help you to the treasure",
+            "They only request that you help on the ship when needed",
+            "You set off for the treasure with you ally saying goodbye to your mentor and Dad",  
+            "You are at seas for a while with no problems",
+            "The captain approaches you and says",
+            "We are running out of food we need more is their any way you can help us"
+
+        ],
+        landTravel: [
+            "filler",
+            "",
+            "",  
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        conjure: [
+            "filler",
+            "Wow thats incredible we don't even have to stop for food now",
+            "You make sure everyone is fed and no stops are necessary",  
+            "We're going to make it to the treasure by tomorrow at this rate"
+        ],
+        islandFood: [
+            "filler",
+            "Theres an island nearby we can get there before nightfall",
+            "After 2 hours you arrive at the island",  
+            "You realize you and Link are the only people strong enough to hunt",
+            "You two set out on the island to search for food",
+            "On your search you find three things",
+            "Berries, monkeys, or a huge monkey boss",
+            "You think about it and realize that you have to choose its a higher risk higher reward situation"
+        ],
+        berries: [
+            "filler",
+            "You and Link pick berries for everyone",
+            "You head back with enough berries for everyone",  
+            "You give everyone there share",
+            "Uh Oh",
+            "These berries are deadly and kill half the crew who ate first"
+        ],
+        monkey: [
+            "filler",
+            "Battle",
+            "Head back with monkey meat",  
+            "Some get sick from it everyones okay though",
+            "",
+        ],
+        monkeyBoss: [
+            "filler",
+            "Battle",
+            "Head back with huge dead monkey",  
+            "Feed everyone with some extra",
+            "It was delicous and you had no problems",
         ]
     };
 
@@ -329,6 +388,24 @@ function performAttack(attackType) {
                         image.src = "assets/char/link.png";
                     }else if (currentBranch === "evil" && currentDialogueIndex === 2) {
                         image.src = "assets/char/moistEvil.png";
+                    }else if (currentBranch === 'great_sword' && currentDialogueIndex === 15) {
+                        showTravelChoices();
+                    }else if (currentBranch === 'short_sword' && currentDialogueIndex === 15) {
+                        showTravelChoices();
+                    }else if (currentBranch === 'mage_wand' && currentDialogueIndex === 13) {
+                        showTravelChoices();
+                    }else if (currentBranch === 'mage_staff' && currentDialogueIndex === 13) {
+                        showTravelChoices();
+                    }else if (currentBranch === 'seaTravel' && currentDialogueIndex === 6) {
+                        showFoodChoices();
+                    }else if (currentBranch === 'islandFood' && currentDialogueIndex === 7) {
+                        showHuntChoices();
+                    }else if (currentBranch === "monkeyBoss" && currentDialogueIndex === 1) {
+                        image.src = "assets/char/monke.png";
+                    }else if (currentBranch === "berries" && currentDialogueIndex === 1) {
+                        image.src = "assets/icons/berries.png";
+                    }else if (currentBranch === "monkey" && currentDialogueIndex === 1) {
+                        image.src = "assets/char/monkeFood.png";
                     }
                 });
             }
@@ -414,7 +491,107 @@ function performAttack(attackType) {
         optionBtns.appendChild(staffBtn);
         optionBtns.appendChild(wandBtn);
     }
+    function showTravelChoices () {
+        nextBtn.style.display = 'none';
+        optionBtns.style.display = 'block';
+        optionBtns.innerHTML = '';
 
+        const landBtn = document.createElement('button');
+        landBtn.textContent = 'Land';
+        landBtn.addEventListener('click', () => {
+            typeText('You chose to travel by land!', () => {
+                currentBranch = 'landTravel';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+
+        const seaBtn = document.createElement('button');
+        seaBtn.textContent = 'Sea';
+        seaBtn.addEventListener('click', () => {
+            typeText('You chose to travel by sea!', () => {
+                currentBranch = 'seaTravel';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+
+        optionBtns.appendChild(landBtn);
+        optionBtns.appendChild(seaBtn);
+    }
+    function showHuntChoices () {
+        nextBtn.style.display = 'none';
+        optionBtns.style.display = 'block';
+        optionBtns.innerHTML = '';
+
+        const berriesBtn = document.createElement('button');
+        berriesBtn.textContent = 'Berries';
+        berriesBtn.addEventListener('click', () => {
+            typeText('You chose pick berries for everyone!', () => {
+                currentBranch = 'berries';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+
+        const monkeyBtn = document.createElement('button');
+        monkeyBtn.textContent = 'Monkey';
+        monkeyBtn.addEventListener('click', () => {
+            typeText('You chose to fight a bunch of monkeys for food!', () => {
+                currentBranch = 'monkey';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+        const monkeyBossBtn = document.createElement('button');
+        monkeyBossBtn.textContent = 'Monkey Boss';
+        monkeyBossBtn.addEventListener('click', () => {
+            typeText('You chose to fight one big moneky for food!', () => {
+                currentBranch = 'monkeyBoss';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+
+        optionBtns.appendChild(berriesBtn);
+        optionBtns.appendChild(monkeyBtn);
+        optionBtns.appendChild(monkeyBossBtn);
+    }
+    function showFoodChoices () {
+        nextBtn.style.display = 'none';
+        optionBtns.style.display = 'block';
+        optionBtns.innerHTML = '';
+
+        const huntBtn = document.createElement('button');
+        huntBtn.textContent = 'Hunt';
+        huntBtn.addEventListener('click', () => {
+            typeText('You chose to find an island and hunt or food!', () => {
+                currentBranch = 'islandFood';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+
+        const conjureBtn = document.createElement('button');
+        conjureBtn.textContent = 'conjure';
+        conjureBtn.addEventListener('click', () => {
+            typeText('You conjure food for everyone!', () => {
+                currentBranch = 'conjure';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+
+        optionBtns.appendChild(huntBtn);
+        optionBtns.appendChild(conjureBtn);
+    }
     function showSwordsmanWeaponChoices() {
         nextBtn.style.display = 'none';
         optionBtns.style.display = 'block';
