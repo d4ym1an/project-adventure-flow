@@ -130,16 +130,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
     // Add combat options after the Mage Wand choice
-function showCombatOptions() {
-    nextBtn.style.display = 'none';
-    optionBtns.style.display = 'block';
-    optionBtns.innerHTML = 'Start fight';
-    
-    if (currentBranch === 'mage_wand' && currentDialogueIndex === 2) {
-        typeText('A goblin appears! Prepare to fight!', () => {
-            showCombatOptions(); // Only call once
-        });
-    }
+    function showCombatOptions() {
+        nextBtn.style.display = 'none';
+        optionBtns.style.display = 'block';
+        optionBtns.innerHTML = 'Start fight';
+        
+        if (currentBranch === 'mage_wand' && currentDialogueIndex === 2) {
+            typeText('A goblin appears! Prepare to fight!', () => {
+                showCombatOptions(); // Only call once
+            });
+        }
     
 
     const attack1Btn = document.createElement('button');
@@ -301,10 +301,18 @@ function performAttack(attackType) {
                         image.src = "/assets/char/moistWizard.png"; // Set the image to one specific image
                     } else if (currentBranch === 'swordsman' && currentDialogueIndex === 2) {
                         showSwordsmanWeaponChoices();
-                        image.src = "/assets/char/moistSwordsman.png"; // Set the image to one specific image
+                        image.src = "/assets/char/moistSword.png"; // Set the image to one specific image
                     } else if (currentBranch === 'evil' && currentDialogueIndex === branchDialogues.evil.length - 1) {
                         showEvilWeaponChoices();
                         image.src = "/assets/char/moistSad.png"; // Set the image to one specific image
+                    } else if (currentBranch === "mage_wand" && currentDialogueIndex === 3) {
+                        image.src = "assets/char/Tessa.png";
+                    }else if (currentBranch === "mage_staff" && currentDialogueIndex === 3) {
+                        image.src = "assets/char/Tessa.png"; 
+                    }else if (currentBranch === "great_sword" && currentDialogueIndex === 5) {
+                        image.src = "assets/char/link.png";
+                    }else if (currentBranch === "short_sword" && currentDialogueIndex === 5) {
+                        image.src = "assets/char/link.png";
                     }
                 });
             }
@@ -338,7 +346,7 @@ function performAttack(attackType) {
     });
 
     document.getElementById('swordsman-btn').addEventListener('mouseout', () => {
-        imageContainer.src = "/assets/char/moist.png";
+        imageContainer.src = "/assets/char/moistSword.png";
     });
     document.getElementById('evil-btn').addEventListener('click', () => {
         if (isTyping) return;
@@ -357,7 +365,7 @@ function performAttack(attackType) {
     });
 
     document.getElementById('evil-btn').addEventListener('mouseout', () => {
-        imageContainer.src = "/assets/char/moist.png";
+        imageContainer.src = "/assets/char/moistSad.png";
     });
 
     function showWeaponChoices() {
