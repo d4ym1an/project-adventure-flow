@@ -165,7 +165,26 @@ document.addEventListener('DOMContentLoaded', () => {
             "filler",
             "Wow thats incredible we don't even have to stop for food now",
             "You make sure everyone is fed and no stops are necessary",  
-            "We're going to make it to the treasure by tomorrow at this rate"
+            "We're going to make it to the treasure by tomorrow at this rate",
+            "You start to hear a rumbling below you",
+            "Everyone starts freaking out",
+            "A Kraken appears next to the ship and starts crushing the ship with its tentacles",
+            "What do you do"
+        ],
+        weakKraken: [
+            "filler",
+            "You are able to defeat the Kraken after a barrage of attacks",
+            "Many people on the ship are dead but the ship has not sustained much damage",  
+            "You talk to the captain and he is still determined to get you to the treasure"
+        ],
+        powerKraken: [
+            "filler",
+            "You defeat the Kraken in one huge blow",
+            "It took a while to charge up that attack during that time the Kraken destroyed most the ship",
+            "No one died though",
+            "You talk to the captain",
+            "We can reapir it but it will take time",
+            "You are forced to pause your adventure and wait for the ship to be repaired"
         ],
         islandFood: [
             "filler",
@@ -407,6 +426,20 @@ function performAttack(attackType) {
                         image.src = "assets/icons/berries.webp";
                     }else if (currentBranch === "monkey" && currentDialogueIndex === 1) {
                         image.src = "assets/char/monkeFood.png";
+                    }else if (currentBranch === 'conjure' && currentDialogueIndex === 7) {
+                        showBattleKrakenChoices();
+                    }else if (currentBranch === "seaTravel" && currentDialogueIndex === 5) {
+                        image.src = "assets/char/capbob.png";
+                    }else if (currentBranch === "conjure" && currentDialogueIndex === 6) {
+                        image.src = "assets/char/kraken.png";
+                    }else if (currentBranch === "mage_staff" && currentDialogueIndex === 11) {
+                        image.src = "assets/char/kermit.png";
+                    }else if (currentBranch === "mage_wand" && currentDialogueIndex === 11) {
+                        image.src = "assets/char/kermit.png";
+                    }else if (currentBranch === "great_sword" && currentDialogueIndex === 13) {
+                        image.src = "assets/char/kermit.png";
+                    }else if (currentBranch === "short_sword" && currentDialogueIndex === 13) {
+                        image.src = "assets/char/kermit.png";
                     }
                 });
             }
@@ -491,6 +524,36 @@ function performAttack(attackType) {
 
         optionBtns.appendChild(staffBtn);
         optionBtns.appendChild(wandBtn);
+    }
+    function showBattleKrakenChoices() {
+        nextBtn.style.display = 'none';
+        optionBtns.style.display = 'block';
+        optionBtns.innerHTML = '';
+
+        const powerBtn = document.createElement('button');
+        powerBtn.textContent = 'You chose to charge up a big attack';
+        powerBtn.addEventListener('click', () => {
+            typeText('You chose to charge up a big attack', () => {
+                currentBranch = 'powerKraken';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+
+        const weakBtn = document.createElement('button');
+        weakBtn.textContent = 'You chose to spam weak attacks';
+        weakBtn.addEventListener('click', () => {
+            typeText('You chose to spam weak attacks', () => {
+                currentBranch = 'weakKraken';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+
+        optionBtns.appendChild(powerBtn);
+        optionBtns.appendChild(weakBtn);
     }
     function showTravelChoices () {
         nextBtn.style.display = 'none';
