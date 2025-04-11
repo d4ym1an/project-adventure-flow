@@ -729,9 +729,3 @@ function performAttack(attackType) {
     }
     
 });
-// In the dialogue sequence, call the combat function at the right time
-if (currentBranch === 'mage_wand' && currentDialogueIndex === 10) {
-    typeText('A goblin appears! Prepare to fight!', () => {
-        showCombatOptions();
-    });
-}
