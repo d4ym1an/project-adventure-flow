@@ -408,15 +408,6 @@ function performAttack(attackType) {
                         image.src = "assets/char/link.png";
                     }else if (currentBranch === "evil" && currentDialogueIndex === 2) {
                         image.src = "assets/char/moistEvil.png";
-                    }else if (currentBranch === "mage_wand" && currentDialogueIndex === 1) {
-                        document.getElementById('backgroundCity').src = "assets/bg/mageSchool.png";
-                    }else if (currentBranch === "mage_staff" && currentDialogueIndex === 1) {
-                        document.getElementById('backgroundCity').src = "assets/bg/mageSchool.png";
-                    }else if (currentBranch === "great_sword" && currentDialogueIndex === 3) {
-                        document.getElementById('backgroundCity').src = "assets/bg/swordSchool.png";
-                    }else if (currentBranch === "short_sword" && currentDialogueIndex === 3) {
-                        document.getElementById('backgroundCity').src = "assets/bg/swordSchool.png";
-                    }else if (currentBranch === 'great_sword' && currentDialogueIndex === 15) {
                         showTravelChoices();
                     }else if (currentBranch === 'short_sword' && currentDialogueIndex === 15) {
                         showTravelChoices();
@@ -450,6 +441,16 @@ function performAttack(attackType) {
                         image.src = "assets/char/kermit.png";
                     }else if (currentBranch === "seaTravel" && currentDialogueIndex === 1) {
                         image.src = "assets/char/pirate.png";
+                    }
+                        //bg imgs
+                    else if (currentBranch === "mage_wand" && currentDialogueIndex === 1) {
+                        document.getElementById('backgroundCity').src = "assets/bg/mageSchool.png";
+                    }else if (currentBranch === "mage_staff" && currentDialogueIndex === 1) {
+                        document.getElementById('backgroundCity').src = "assets/bg/mageSchool.png";
+                    }else if (currentBranch === "great_sword" && currentDialogueIndex === 3) {
+                        document.getElementById('backgroundCity').src = "assets/bg/swordSchool.png";
+                    }else if (currentBranch === "short_sword" && currentDialogueIndex === 3) {
+                        document.getElementById('backgroundCity').src = "assets/bg/swordSchool.png";
                     }
                 });
             }
