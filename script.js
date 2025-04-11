@@ -440,6 +440,8 @@ function performAttack(attackType) {
                         image.src = "assets/char/kermit.png";
                     }else if (currentBranch === "short_sword" && currentDialogueIndex === 13) {
                         image.src = "assets/char/kermit.png";
+                    }else if (currentBranch === "seaTravel" && currentDialogueIndex === 1) {
+                        image.src = "assets/char/pirate.png";
                     }
                 });
             }
@@ -643,7 +645,7 @@ function performAttack(attackType) {
         });
 
         const conjureBtn = document.createElement('button');
-        conjureBtn.textContent = 'conjure';
+        conjureBtn.textContent = 'Conjure';
         conjureBtn.addEventListener('click', () => {
             typeText('You conjure food for everyone!', () => {
                 currentBranch = 'conjure';
