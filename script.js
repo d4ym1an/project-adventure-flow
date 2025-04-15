@@ -152,14 +152,14 @@ document.addEventListener('DOMContentLoaded', () => {
         ],
         landTravel: [
             "filler",
-            "",
-            "",  
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
+            "You find some people who look like they know wat their doing and approach them",
+            "Yu find out that these people are land pirtes and are willing to help you traverse the mountains to get to the treasure",  
+            "You set off with them and start to make your way to the treasure",
+            "fight somewhere here",
+            "more fighting",
+            "eat the people you fought since your low on food",
+            "get over the mountains",
+            "shop for goods at the town shop"
         ],
         conjure: [
             "filler",
