@@ -172,3 +172,35 @@ button:hover{
     margin: 5px; /* Add spacing between buttons */
 }
 
+#board {
+    width: 403px;
+    height: 405px;
+    border: 2px solid purple;
+
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#board img {
+    width: 79px;
+    height: 79px;
+    border: 0.5px solid lightblue;
+}
+
+
+#pieces {
+    width: 1048px;
+    height: 160px;
+    border: 2px solid purple;
+
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#pieces img {
+    width: 79px;
+    height: 79px;
+    border: 0.5px solid lightblue;
+}
