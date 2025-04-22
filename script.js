@@ -192,7 +192,10 @@ document.addEventListener('DOMContentLoaded', () => {
             "filler",
             "You are able to defeat the Kraken after a barrage of attacks",
             "Many people on the ship are dead but the ship has not sustained much damage",  
-            "You talk to the captain and he is still determined to get you to the treasure"
+            "You talk to the captain and he is still determined to get you to the treasure",
+            "You set sail and head for the treasure",
+            "You arrive and say bye to your pirate friends",
+            "You walk towards the vault and see its defended by a puzzle"
         ],
         powerKraken: [
             "filler",
@@ -201,7 +204,15 @@ document.addEventListener('DOMContentLoaded', () => {
             "No one died though",
             "You talk to the captain",
             "We can reapir it but it will take time",
-            "You are forced to pause your adventure and wait for the ship to be repaired"
+            "You are forced to pause your adventure and wait for the ship to be repaired",
+            "Once the ship is repaired you head towards the treasure",
+            "You arrive with no problems along the way you say goodbye to the pirates who helped you and head for the vault",
+            "You arrive at the vault and see someone standing infront of it",
+            "You aqpproach him",
+            "I am the guard for this treasure you must pass me before you get what you desire",
+            "Boss fight",
+            "once defeated puzzle to solve",
+            "Enter the vault"
         ],
         islandFood: [
             "filler",
@@ -219,14 +230,27 @@ document.addEventListener('DOMContentLoaded', () => {
             "You head back with enough berries for everyone",  
             "You give everyone there share",
             "Uh Oh",
-            "These berries are deadly and kill half the crew who ate first"
+            "These berries are deadly and kill half the crew who ate first",
+            "You realize that someone is on the island and standing infront of a door",
+            "You ask them what their doing",
+            "Defending the treasure of course",
+            "Can you give it to me",
+            "No",
+            "battle",
+            "puzzle"
         ],
         monkey: [
             "filler",
             "Battle",
             "Head back with monkey meat",  
             "Some get sick from it everyones okay though",
-            "",
+            "You realize that someone is on the island and standing infront of a door",
+            "You ask them what their doing",
+            "Defending the treasure of course",
+            "Can you give it to me",
+            "No",
+            "battle",
+            "puzzle"
         ],
         monkeyBoss: [
             "filler",
@@ -234,6 +258,13 @@ document.addEventListener('DOMContentLoaded', () => {
             "Head back with huge dead monkey",  
             "Feed everyone with some extra",
             "It was delicous and you had no problems",
+            "You realize that someone is on the island and standing infront of a door",
+            "You ask them what their doing",
+            "Defending the treasure of course",
+            "Can you give it to me",
+            "No",
+            "battle",
+            "puzzle"
         ]
     };
 
@@ -428,6 +459,8 @@ function performAttack(attackType) {
                         showTravelChoices();
                     }else if (currentBranch === 'short_sword' && currentDialogueIndex === 15) {
                         showTravelChoices();
+                    }else if (currentBranch === 'great_sword' && currentDialogueIndex === 15) {
+                        showTravelChoices();
                     }else if (currentBranch === 'mage_wand' && currentDialogueIndex === 13) {
                         showTravelChoices();
                     }else if (currentBranch === 'mage_staff' && currentDialogueIndex === 13) {
@@ -458,6 +491,8 @@ function performAttack(attackType) {
                         image.src = "assets/char/kermit.png";
                     }else if (currentBranch === "seaTravel" && currentDialogueIndex === 1) {
                         image.src = "assets/char/pirate.png";
+                    }else if (currentBranch === 'mokey_Boss' && currentDialogueIndex === 11) {
+                        showPuzzle();
                     }
                         //bg imgs
                     else if (currentBranch === "mage_wand" && currentDialogueIndex === 1) {
@@ -798,5 +833,98 @@ function performAttack(attackType) {
         optionBtns.appendChild(darkMagicBtn);
         optionBtns.appendChild(cursedSwordBtn);
     }
-    
+    function showPuzzle() {
+        var rows = 5;
+        var columns = 5;
+        
+        var currTile;
+        var otherTile;
+        
+        var turns = 0;
+        
+        window.onload = function() {
+            //initialize the 5x5 board
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < columns; c++) {
+                    //<img>
+                    let tile = document.createElement("img");
+                    tile.src = "./icons/blank2.jpg";
+        
+                    //DRAG FUNCTIONALITY
+                    tile.addEventListener("dragstart", dragStart); //click on image to drag
+                    tile.addEventListener("dragover", dragOver);   //drag an image
+                    tile.addEventListener("dragenter", dragEnter); //dragging an image into another one
+                    tile.addEventListener("dragleave", dragLeave); //dragging an image away from another one
+                    tile.addEventListener("drop", dragDrop);       //drop an image onto another one
+                    tile.addEventListener("dragend", dragEnd);      //after you completed dragDrop
+        
+                    document.getElementById("board").append(tile);
+                }
+            }
+        
+            //pieces
+            let pieces = [];
+            for (let i=1; i <= rows*columns; i++) {
+                pieces.push(i.toString()); //put "1" to "25" into the array (puzzle images names)
+            }
+            pieces.reverse();
+            for (let i =0; i < pieces.length; i++) {
+                let j = Math.floor(Math.random() * pieces.length);
+        
+                //swap
+                let tmp = pieces[i];
+                pieces[i] = pieces[j];
+                pieces[j] = tmp;
+            }
+        
+            for (let i = 0; i < pieces.length; i++) {
+                let tile = document.createElement("img");
+                tile.src = "./images/" + pieces[i] + ".jpg";
+        
+                //DRAG FUNCTIONALITY
+                tile.addEventListener("dragstart", dragStart); //click on image to drag
+                tile.addEventListener("dragover", dragOver);   //drag an image
+                tile.addEventListener("dragenter", dragEnter); //dragging an image into another one
+                tile.addEventListener("dragleave", dragLeave); //dragging an image away from another one
+                tile.addEventListener("drop", dragDrop);       //drop an image onto another one
+                tile.addEventListener("dragend", dragEnd);      //after you completed dragDrop
+        
+                document.getElementById("pieces").append(tile);
+            }
+        }
+        
+        //DRAG TILES
+        function dragStart() {
+            currTile = this; //this refers to image that was clicked on for dragging
+        }
+        
+        function dragOver(e) {
+            e.preventDefault();
+        }
+        
+        function dragEnter(e) {
+            e.preventDefault();
+        }
+        
+        function dragLeave() {
+        
+        }
+        
+        function dragDrop() {
+            otherTile = this; //this refers to image that is being dropped on
+        }
+        
+        function dragEnd() {
+            if (currTile.src.includes("blank")) {
+                return;
+            }
+            let currImg = currTile.src;
+            let otherImg = otherTile.src;
+            currTile.src = otherImg;
+            otherTile.src = currImg;
+        
+            turns += 1;
+            document.getElementById("turns").innerText = turns;
+        }
+    }
 });
