@@ -27,12 +27,22 @@ body {
 #next-btn {
     display: flex;
     position: absolute;
-    margin-top: 4%;
-    margin-left: 90%;
+    margin-top: 3%;
+    margin-left: 93%;
     background-color: lime;
     color: black;
     border: 2px solid lime;
     font-family: 'Pixelmax', cursive; /* Use Pixelmax font */
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: large;
+}
+
+#next-btn:hover{
+    background-color: black;
+    color: lime;
+    border: 2px solid lime;
+    font-family: 'Pixelmax', cursive;
     padding: 5px 10px;
     cursor: pointer;
 }
@@ -172,3 +182,17 @@ button:hover{
     margin: 5px; /* Add spacing between buttons */
 }
 
+p{
+    margin-left: 10px;
+}
+
+#back-btn{
+    display: flex;
+    position: absolute;
+    background-color: lime;
+    color: black;
+    border: 2px solid lime;
+    font-family: 'Pixelmax', cursive;
+    padding: 5px 10px;
+    cursor: pointer;
+}

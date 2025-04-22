@@ -90,18 +90,38 @@ document.addEventListener('DOMContentLoaded', () => {
         ],
 
         evil_magic: [
-            "filler",//skip
             "Great choice",
             "You can now destroy people from long range",
             "Training time",
             "Evil training montage"
         ],
         evil_scythe: [
-            "filler",//skip
             "Great choice",
             "You can now demolish people from close-mid range",
             "Training time",
             "Evil training montage"
+        ],
+        evil_trainingOne: [
+            "You start to train by killing criminals",
+            "You get praised as a hero",
+            "Still committed murder so police are called",
+            "Police are called on you and they find you",
+            "You gotta find a place to hide!"
+        ],
+        evil_trainingTwo: [
+            "You decide to kill poor homeless people 🔥",
+            "No one really cares",
+            "You go out and find mentor",
+            "He tells you, Good stuff young blood",
+            "The mentor introduces you to his other student",
+            "Sat Ann",
+            "You will have my pupil accompany you to the treasure"
+        ],
+        evil_trainingThree: [
+            "You decide to train by fighting anyone who crosses your path.",
+            "Your mentor warns you about losing control.",
+            "You feel your power growing but at a cost.",
+            "You are now feared by everyone around you."
         ],
         mage_wand: [
             "filler",//skips this line
@@ -448,6 +468,10 @@ function performAttack(attackType) {
                         document.getElementById('backgroundCity').src = "assets/bg/swordSchool.png";
                     }else if (currentBranch === "short_sword" && currentDialogueIndex === 3) {
                         document.getElementById('backgroundCity').src = "assets/bg/swordSchool.png";
+                    }else if (currentBranch === "evil_magic" && currentDialogueIndex === 1) {
+                        document.getElementById('backgroundCity').src = "assets/bg/evilSchool.png";
+                    }else if (currentBranch === "evil_scythe" && currentDialogueIndex === 1) {
+                        document.getElementById('backgroundCity').src = "assets/bg/evilSchool.png";
                     }
                 });
             }
@@ -563,6 +587,49 @@ function performAttack(attackType) {
         optionBtns.appendChild(powerBtn);
         optionBtns.appendChild(weakBtn);
     }
+    function showEvilTrainingChoices() {
+        nextBtn.style.display = 'none';
+        optionBtns.style.display = 'block';
+        optionBtns.innerHTML = '';
+
+        const evilTrainOne = document.createElement('button');
+        evilTrainOne.textContent = 'Kill criminals for practice';
+        evilTrainOne.addEventListener('click', () => {
+            typeText('You chose to kill criminals for practice!', () => {
+                currentBranch = 'evil_trainingOne';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+
+        const evilTrainTwo = document.createElement('button');
+        evilTrainTwo.textContent = 'Kill poor helpless people 🔥';
+        evilTrainTwo.addEventListener('click', () => {
+            typeText('You chose to kill poor homless people! (Thats pretty evil dude)', () => {
+                currentBranch = 'evil_trainingTwo';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+
+        const evilTrainThree = document.createElement('button');
+        evilTrainThree.textContent = 'Kill anyone you see';
+        evilTrainThree.addEventListener('click', () => {
+            typeText('You chose to kill anyone you see!', () => {
+                currentBranch = 'evil_trainingThree';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+
+        optionBtns.appendChild(evilTrainOne);
+        optionBtns.appendChild(evilTrainTwo);
+        optionBtns.appendChild(evilTrainThree);
+    }
+
     function showTravelChoices () {
         nextBtn.style.display = 'none';
         optionBtns.style.display = 'block';
@@ -700,14 +767,17 @@ function performAttack(attackType) {
         optionBtns.style.display = 'block';
         optionBtns.innerHTML = '';
 
-        const poisonDaggerBtn = document.createElement('button');
-        poisonDaggerBtn.textContent = 'Dark Magic';
-        poisonDaggerBtn.addEventListener('click', () => {
+        const darkMagicBtn = document.createElement('button');
+        darkMagicBtn.textContent = 'Dark Magic';
+        darkMagicBtn.addEventListener('click', () => {
             typeText('You chose the Dark Magic!', () => {
                 currentBranch = 'evil_magic';
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
+                typeText(branchDialogues.evil_magic[currentDialogueIndex], () => {
+                    showEvilTrainingChoices();
+                });
             });
         });
 
@@ -719,10 +789,13 @@ function performAttack(attackType) {
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
+                typeText(branchDialogues.evil_scythe[currentDialogueIndex], () => {
+                    showEvilTrainingChoices(); // Show training choices after selecting Scythe
+                });
             });
         });
 
-        optionBtns.appendChild(poisonDaggerBtn);
+        optionBtns.appendChild(darkMagicBtn);
         optionBtns.appendChild(cursedSwordBtn);
     }
     
