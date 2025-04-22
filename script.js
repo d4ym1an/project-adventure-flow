@@ -46,6 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
             "But depending on your weapon you will have to choose speed or damage",
             "You must choose between two weapons"
         ],
+        evil: [
+            "Go away old dude, or else ima give you a freaking packet yo! He gets sad and runs away crying.",
+            "You continue your training, and an evil man apears! I see that you're heart is evil. Work for me, I can help you become stronger.",
+            "You agree to work for him. You chose two different weapons."
+        ],
         short_sword: [
             "filler",//skips first line
             "Great choice",
@@ -83,15 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "Filled with motivation you set out with your friend saying goodbye to your mentor and family"
 
         ],
-        evil: [
-            "Go away old dude, or else ima give you a freaking packet yo!",
-            "He gets sad and runs away crying.",
-            "You continue your training, and an evil man apears!",
-            "I see that you're heart is evil.",
-            "Work for me, I can help you become stronger.",
-            "You agree to work for him.",
-            "You chose two different weapons."
-        ],
+
         evil_magic: [
             "filler",//skip
             "Great choice",
