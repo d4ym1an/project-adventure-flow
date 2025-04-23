@@ -123,6 +123,49 @@ document.addEventListener('DOMContentLoaded', () => {
             "You feel your power growing but at a cost.",
             "You are now feared by everyone around you."
         ],
+        evil_hidingSewers: [
+            "You run back to the saftey of the sewers",
+            "You hide in"
+        ],
+        evil_hidingSewersDrink: [
+            "Why would you drink that?",
+            "You really drank sewer water?",
+            "I MIGHT have to kill you now",
+            "Naaaaaaaaaaaaaaaah"
+        ],
+        evil_hidingSewersRun: [
+            "As you start to run away, you find your mentor!",
+            "Good stuff young blud",
+            "The mentor introduces you to his other student",
+            "Sat Ann",
+            "You will have my pupil accompany you to the treasure",
+            "Its time to go off and find the tresure!",
+            "Now you have to pick how to get there...",
+            "While you are in the air..."
+        ],
+        evil_hidingCorpse:[
+            "You decide to hide under the all the Corpse that you have killed",
+            "You wait there all day and night",
+
+        ],
+        evil_travelFlight: [
+            "you see this sea monster, the Kraken...",
+            "He is trying to shoot you guys down from the sky.",
+            "If you are specialized in dark magic, you are easily able to take him down due to your range",
+            "...but if you picked the scythe... you’re gonna have a bad time."
+        ],
+        evil_travelFlightMagic: [
+            "You defeat the boss with ease", 
+        ],
+        evil_travelFlightScythe: [
+            "You have defeated boss!",
+            "You are very much hurt though..",
+            "You decide to rest up for the night and head to the treasure in the morning",
+            "As you travel by land, you are going through the forest...",
+            "...and you encounter a group of heavily armored, and geared up bandits.",
+            "As you inspect their armor, you realize that they have the treasure!",
+            "You realize, that you must fight them for this treasure.",
+        ],
         mage_wand: [
             "filler",//skips this line
             "Your mentor brings you to an academy for magic.",
@@ -810,9 +853,7 @@ function performAttack(attackType) {
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
-                typeText(branchDialogues.evil_magic[currentDialogueIndex], () => {
-                    showEvilTrainingChoices();
-                });
+                nextBtn.onclick = handleEvilMagicDialogue; // Attach dialogue handler
             });
         });
 
@@ -824,15 +865,36 @@ function performAttack(attackType) {
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
-                typeText(branchDialogues.evil_scythe[currentDialogueIndex], () => {
-                    showEvilTrainingChoices(); // Show training choices after selecting Scythe
-                });
+                nextBtn.onclick = handleEvilScytheDialogue; // Attach dialogue handler
             });
         });
 
         optionBtns.appendChild(darkMagicBtn);
         optionBtns.appendChild(cursedSwordBtn);
     }
+
+    function handleEvilMagicDialogue() {
+        if (currentDialogueIndex < branchDialogues.evil_magic.length) {
+            const text = branchDialogues.evil_magic[currentDialogueIndex];
+            currentDialogueIndex++; // Increment index before calling typeText to avoid duplication
+            typeText(text);
+        } else {
+            nextBtn.onclick = null; // Remove handler
+            showEvilTrainingChoices(); // Show training choices after dialogue
+        }
+    }
+
+    function handleEvilScytheDialogue() {
+        if (currentDialogueIndex < branchDialogues.evil_scythe.length) {
+            const text = branchDialogues.evil_scythe[currentDialogueIndex];
+            currentDialogueIndex++; // Increment index before calling typeText to avoid duplication
+            typeText(text);
+        } else {
+            nextBtn.onclick = null; // Remove handler
+            showEvilTrainingChoices(); // Show training choices after dialogue
+        }
+    }
+
     function showPuzzle() {
         var rows = 5;
         var columns = 5;

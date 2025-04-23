@@ -90,7 +90,7 @@ body {
     height: 300px;
     background-size: cover;
     background-position: center;
-    border: 2px solid lime;
+    border: 5px solid lime;
     z-index: 2; /* Ensure it appears on top of other elements */
 }
 
