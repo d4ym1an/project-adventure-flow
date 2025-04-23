@@ -1,5 +1,13 @@
 @import url(/font/font.css);
 
+body {
+    cursor: url('/assets/cursors/Cursor_15.cur'), auto;
+}
+
+button, #next-btn, #swordsman-btn, #mage-btn, #evil-btn, #start-game-btn, #back-btn {
+    cursor: url('/assets/cursors/arrow.cur'), pointer;
+}
+
 ::selection{
     background: lime;
     color: rgb(0, 0, 0);

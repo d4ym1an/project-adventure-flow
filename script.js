@@ -536,8 +536,14 @@ function performAttack(attackType) {
                         image.src = "assets/char/pirate.png";
                     }else if (currentBranch === 'mokey_Boss' && currentDialogueIndex === 11) {
                         showPuzzle();
+                    }else if (currentBranch === "evil_scythe" && currentDialogueIndex === 1) {
+                        image.src = "assets/icons/evilChar.png";
+                    }else if (currentBranch === "evil_magic" && currentDialogueIndex === 1) {
+                        image.src = "assets/icons/evilChar.png";
+                    }else if (currentBranch === "evil_trainingTwo" && currentDialogueIndex === 5) {
+                        image.src = "assets/char/satAnn.png";
                     }
-                        //bg imgs
+                    //BG Images
                     else if (currentBranch === "mage_wand" && currentDialogueIndex === 1) {
                         document.getElementById('backgroundCity').src = "assets/bg/mageSchool.png";
                     }else if (currentBranch === "mage_staff" && currentDialogueIndex === 1) {
