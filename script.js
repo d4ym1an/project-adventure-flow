@@ -8,32 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "I will train every day",
         "You see an old man walking the streets"
     ];
-    class Character {
-        constructor(name, health, attack, defense) {
-          this.name = name;
-          this.health = health;
-          this.attack = attack;
-          this.defense = defense;
-        }
-        
-        takeDamage(damage) {
-            const actualDamage = Math.max(0, damage - this.defense); // Damage can't go below 0
-            this.health -= actualDamage;
-            return actualDamage;
-        }
-        
-        // Method to perform an attack on another character
-        attackOpponent(opponent) {
-            const damage = this.attack; // Base damage from the character
-            const damageDealt = opponent.takeDamage(damage);
-            return damageDealt;
-        }
-    }
-    const player1 = new Character("Swordsman-great", 100, 25, 10);
-    const player2 = new Character("Swordsman-short", 100, 15, 5);
-    const player3 = new Character("mage-wand", 80, 25, 5);
-    const player4 = new Character("mage-staff", 80, 30, 5);
-    const enemy1 = new Character('Goblin', 50, 5, 5);
+
     
     const branchDialogues = {
         mage: [
@@ -169,14 +144,26 @@ document.addEventListener('DOMContentLoaded', () => {
         ],
         landTravel: [
             "filler",
-            "You find some people who look like they know wat their doing and approach them",
-            "Yu find out that these people are land pirtes and are willing to help you traverse the mountains to get to the treasure",  
+            "You find some people who look like they know what their doing and approach them",
+            "Yu find out that these people are land pirates and are willing to help you traverse the mountains to get to the treasure",  
             "You set off with them and start to make your way to the treasure",
             "fight somewhere here",
             "more fighting",
             "eat the people you fought since your low on food",
             "get over the mountains",
-            "shop for goods at the town shop"
+            "shop for goods at the town shop",
+            "Make your way to the vault",
+            "puzzle",
+            "You make your way into the vault",
+            "You see the treasure infront of you",
+            "You see a human shaped figure standing infront of the treasure",
+            "Its the old man who died the same old man whos treasure you were after",
+            "He starts explaining how he has to make sure you are worthy of his fortune",
+            "You notice hundreds of bodies around the vault",
+            "You fight",
+            "He is giving you trouble and is about to kill you",
+            "But then Link comes in and saves you at the last second",
+            "2v1 ez"
         ],
         conjure: [
             "filler",
@@ -208,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "Once the ship is repaired you head towards the treasure",
             "You arrive with no problems along the way you say goodbye to the pirates who helped you and head for the vault",
             "You arrive at the vault and see someone standing infront of it",
-            "You aqpproach him",
+            "You approach him",
             "I am the guard for this treasure you must pass me before you get what you desire",
             "Boss fight",
             "once defeated puzzle to solve",
@@ -237,7 +224,17 @@ document.addEventListener('DOMContentLoaded', () => {
             "Can you give it to me",
             "No",
             "battle",
-            "puzzle"
+            "puzzle",
+            "You make your way into the vault",
+            "You see the treasure infront of you",
+            "You see a human shaped figure standing infront of the treasure",
+            "Its the old man who died the same old man whos treasure you were after",
+            "He starts explaining how he has to make sure you are worthy of his fortune",
+            "You notice hundreds of bodies around the vault",
+            "You fight",
+            "He is giving you trouble and is about to kill you",
+            "But then Link comes in and saves you at the last second",
+            "2v1 ez"
         ],
         monkey: [
             "filler",
@@ -250,13 +247,23 @@ document.addEventListener('DOMContentLoaded', () => {
             "Can you give it to me",
             "No",
             "battle",
-            "puzzle"
+            "puzzle",
+            "You make your way into the vault",
+            "You see the treasure infront of you",
+            "You see a human shaped figure standing infront of the treasure",
+            "Its the old man who died the same old man whos treasure you were after",
+            "He starts explaining how he has to make sure you are worthy of his fortune",
+            "You notice hundreds of bodies around the vault",
+            "You fight",
+            "He is giving you trouble and is about to kill you",
+            "But then Link comes in and saves you at the last second",
+            "2v1 ez"
         ],
         monkeyBoss: [
             "filler",
             "Battle",
             "Head back with huge dead monkey",  
-            "Feed everyone with some extra",
+            "Feed everyone with some extra monkey meat",
             "It was delicous and you had no problems",
             "You realize that someone is on the island and standing infront of a door",
             "You ask them what their doing",
@@ -264,131 +271,57 @@ document.addEventListener('DOMContentLoaded', () => {
             "Can you give it to me",
             "No",
             "battle",
-            "puzzle"
+            "puzzle",
+            "You make your way into the vault",
+            "You see the treasure infront of you",
+            "You see a human shaped figure standing infront of the treasure",
+            "Its the old man who died the same old man whos treasure you were after",
+            "He starts explaining how he has to make sure you are worthy of his fortune",
+            "You notice hundreds of bodies around the vault",
+            "You fight",
+            "He is giving you trouble and is about to kill you",
+            "But then Link comes in and saves you at the last second",
+            "2v1 ez"
         ]
     };
 
 
     
-    // Add combat options after the Mage Wand choice
-    function showCombatOptions() {
-        nextBtn.style.display = 'none';
-        optionBtns.style.display = 'block';
-        optionBtns.innerHTML = 'Start fight';
-        
-        if (currentBranch === 'mage_wand' && currentDialogueIndex === 2) {
-            typeText('A goblin appears! Prepare to fight!', () => {
-                showCombatOptions(); // Only call once
-            });
-        }
     
-
-    const attack1Btn = document.createElement('button');
-    attack1Btn.textContent = 'Basic Attack';
-    attack1Btn.addEventListener('click', () => {
-        performAttack('Basic Attack');
-    });
-
-    const attack2Btn = document.createElement('button');
-    attack2Btn.textContent = 'Fireball';
-    attack2Btn.addEventListener('click', () => {
-        performAttack('Fireball');
-    });
-
-    const attack3Btn = document.createElement('button');
-    attack3Btn.textContent = 'Lightning Strike';
-    attack3Btn.addEventListener('click', () => {
-        performAttack('Lightning Strike');
-    });
-
-    const attack4Btn = document.createElement('button');
-    attack4Btn.textContent = 'Ice Blast';
-    attack4Btn.addEventListener('click', () => {
-        performAttack('Ice Blast');
-    });
-
-    // Append the buttons to the options container
-    optionBtns.appendChild(attack1Btn);
-    optionBtns.appendChild(attack2Btn);
-    optionBtns.appendChild(attack3Btn);
-    optionBtns.appendChild(attack4Btn);
-}
-
-// Function to handle the player's attack
-function performAttack(attackType) {
-    const enemy = enemy1; // Using Goblin as the enemy for now
-    
-    let damage = 0;
-    
-    switch (attackType) {
-        case 'Basic Attack':
-            damage = player3.attack; // Basic attack damage
-            break;
-        case 'Fireball':
-            damage = player3.attack + 10; // Fireball is stronger
-            break;
-        case 'Lightning Strike':
-            damage = player3.attack + 15; // Lightning is the strongest
-            break;
-        case 'Ice Blast':
-            damage = player3.attack + 5; // Ice blast is average
-            break;
-        default:
-            break;
-    }
-    
-    const damageDealt = enemy.takeDamage(damage);
-    
-    typeText(`You used ${attackType} and dealt ${damageDealt} damage to the enemy!`, () => {
-        if (enemy.health <= 0) {
-            typeText('You have defeated the Goblin!', () => {
-                // Optionally add logic to end the combat or move to the next part
-                optionBtns.style.display = 'none';
-                nextBtn.style.display = 'block';
-            });
-        } else {
-            typeText(`The Goblin has ${enemy.health} health left.`, () => {
-                showCombatOptions(); // Allow the player to choose again
-            });
-        }
-    });
-}
-
-
     let currentDialogueIndex = 0;
     let currentBranch = null;
     let isTyping = false;
     const typingSpeed = 0;
     const typingAudio = new Audio('/assets/sounds/talking-three.mp3');
-
-    const dialogueElement = document.getElementById('dialogue');
-    const nextBtn = document.getElementById('next-btn');
-    const optionBtns = document.getElementById('option-btns');
-    const imageContainer = document.getElementById('image-container');
-
-    const button = document.getElementById("mage-btn");
-    const image = document.getElementById("image-container");
-
-    document.getElementById('mage-btn').addEventListener('click', () => {
-        if (isTyping) return;
-
-        currentBranch = 'mage';
-        currentDialogueIndex = 0;
-        optionBtns.style.display = 'none';
-        nextBtn.style.display = 'block';
-        imageContainer.style.display = 'block'; // Ensure the image is visible
-        imageContainer.src = "/assets/char/moistWizard.png"; // Set the mage image
-        typeText(branchDialogues.mage[currentDialogueIndex]);
+    
+        const dialogueElement = document.getElementById('dialogue');
+        const nextBtn = document.getElementById('next-btn');
+        const optionBtns = document.getElementById('option-btns');
+        const imageContainer = document.getElementById('image-container');
+        
+        const button = document.getElementById("mage-btn");
+        const image = document.getElementById("image-container");
+        
+        document.getElementById('mage-btn').addEventListener('click', () => {
+            if (isTyping) return;
+            
+            currentBranch = 'mage';
+            currentDialogueIndex = 0;
+            optionBtns.style.display = 'none';
+            nextBtn.style.display = 'block';
+            imageContainer.style.display = 'block'; // Ensure the image is visible
+            imageContainer.src = "/assets/char/moistWizard.png"; // Set the mage image
+            typeText(branchDialogues.mage[currentDialogueIndex]);
     });
-
+    
     document.getElementById('mage-btn').addEventListener('mouseover', () => {
         imageContainer.src = "/assets/char/moistWizard.png"; // Change image on hover
     });
-
+    
     document.getElementById('mage-btn').addEventListener('mouseout', () => {
         imageContainer.src = "/assets/char/moist.png";
     });
-
+    
     function typeText(text, callback) {
         if (!text || typeof text !== 'string') {
             console.error("Invalid text provided to typeText:", text);
@@ -397,10 +330,10 @@ function performAttack(attackType) {
         isTyping = true;
         dialogueElement.innerHTML = ''; // Use innerHTML to support HTML tags
         let charIndex = 0;
-
+        
         typingAudio.loop = true;
         typingAudio.play();
-
+        
         const interval = setInterval(() => {
             if (charIndex < text.length) {
                 dialogueElement.innerHTML += text[charIndex]; // Append characters with HTML support
@@ -414,18 +347,18 @@ function performAttack(attackType) {
             }
         }, typingSpeed);
     }
-
+    
     nextBtn.addEventListener('click', () => {
         if (isTyping) return;
-
+        
         currentDialogueIndex++;
-
+        
         if (currentBranch) {
             if (!branchDialogues[currentBranch]) {
                 console.error(`Invalid branch: ${currentBranch}`);
                 return;
             }
-
+            
             if (currentDialogueIndex >= branchDialogues[currentBranch].length) {
                 nextBtn.style.display = 'none';
                 typeText("You're done", () => {
@@ -494,7 +427,7 @@ function performAttack(attackType) {
                     }else if (currentBranch === 'mokey_Boss' && currentDialogueIndex === 11) {
                         showPuzzle();
                     }
-                        //bg imgs
+                    //bg imgs
                     else if (currentBranch === "mage_wand" && currentDialogueIndex === 1) {
                         document.getElementById('backgroundCity').src = "assets/bg/mageSchool.png";
                     }else if (currentBranch === "mage_staff" && currentDialogueIndex === 1) {
@@ -522,10 +455,10 @@ function performAttack(attackType) {
             }
         }
     });
-
+    
     document.getElementById('swordsman-btn').addEventListener('click', () => {
         if (isTyping) return;
-
+        
         currentBranch = 'swordsman';
         currentDialogueIndex = 0;
         optionBtns.style.display = 'none';
@@ -534,17 +467,17 @@ function performAttack(attackType) {
         imageContainer.src = "/assets/char/moistSword.png"; // Set the swordsman image
         typeText(branchDialogues.swordsman[currentDialogueIndex]);
     });
-
+    
     document.getElementById('swordsman-btn').addEventListener('mouseover', () => {
         imageContainer.src = "/assets/char/moistSword.png"; // Change image on hover
     });
-
+    
     document.getElementById('swordsman-btn').addEventListener('mouseout', () => {
         imageContainer.src = "/assets/char/moistSword.png";
     });
     document.getElementById('evil-btn').addEventListener('click', () => {
         if (isTyping) return;
-
+        
         currentBranch = 'evil';
         currentDialogueIndex = 0;
         optionBtns.style.display = 'none';
@@ -553,20 +486,20 @@ function performAttack(attackType) {
         imageContainer.src = "/assets/char/moistSad.png"; // Set the evil path image
         typeText(branchDialogues.evil[currentDialogueIndex]);
     });
-
+    
     document.getElementById('evil-btn').addEventListener('mouseover', () => {
         imageContainer.src = "/assets/char/moistSad.png"; // Change image on hover
     });
-
+    
     document.getElementById('evil-btn').addEventListener('mouseout', () => {
         imageContainer.src = "/assets/char/moistSad.png";
     });
-
+    
     function showWeaponChoices() {
         nextBtn.style.display = 'none';
         optionBtns.style.display = 'block';
         optionBtns.innerHTML = '';
-
+        
         const staffBtn = document.createElement('button');
         staffBtn.textContent = 'Choose the Staff';
         staffBtn.addEventListener('click', () => {
@@ -577,7 +510,7 @@ function performAttack(attackType) {
                 nextBtn.style.display = 'block';
             });
         });
-
+        
         const wandBtn = document.createElement('button');
         wandBtn.textContent = 'Choose the Wand';
         wandBtn.addEventListener('click', () => {
@@ -588,7 +521,7 @@ function performAttack(attackType) {
                 nextBtn.style.display = 'block';
             });
         });
-
+        
         optionBtns.appendChild(staffBtn);
         optionBtns.appendChild(wandBtn);
     }
@@ -596,7 +529,7 @@ function performAttack(attackType) {
         nextBtn.style.display = 'none';
         optionBtns.style.display = 'block';
         optionBtns.innerHTML = '';
-
+        
         const powerBtn = document.createElement('button');
         powerBtn.textContent = 'You chose to charge up a big attack';
         powerBtn.addEventListener('click', () => {
@@ -607,7 +540,7 @@ function performAttack(attackType) {
                 nextBtn.style.display = 'block';
             });
         });
-
+        
         const weakBtn = document.createElement('button');
         weakBtn.textContent = 'You chose to spam weak attacks';
         weakBtn.addEventListener('click', () => {
@@ -618,7 +551,7 @@ function performAttack(attackType) {
                 nextBtn.style.display = 'block';
             });
         });
-
+        
         optionBtns.appendChild(powerBtn);
         optionBtns.appendChild(weakBtn);
     }
@@ -626,7 +559,7 @@ function performAttack(attackType) {
         nextBtn.style.display = 'none';
         optionBtns.style.display = 'block';
         optionBtns.innerHTML = '';
-
+        
         const evilTrainOne = document.createElement('button');
         evilTrainOne.textContent = 'Kill criminals for practice';
         evilTrainOne.addEventListener('click', () => {
@@ -637,7 +570,7 @@ function performAttack(attackType) {
                 nextBtn.style.display = 'block';
             });
         });
-
+        
         const evilTrainTwo = document.createElement('button');
         evilTrainTwo.textContent = 'Kill poor helpless people 🔥';
         evilTrainTwo.addEventListener('click', () => {
@@ -648,7 +581,7 @@ function performAttack(attackType) {
                 nextBtn.style.display = 'block';
             });
         });
-
+        
         const evilTrainThree = document.createElement('button');
         evilTrainThree.textContent = 'Kill anyone you see';
         evilTrainThree.addEventListener('click', () => {
@@ -659,17 +592,17 @@ function performAttack(attackType) {
                 nextBtn.style.display = 'block';
             });
         });
-
+        
         optionBtns.appendChild(evilTrainOne);
         optionBtns.appendChild(evilTrainTwo);
         optionBtns.appendChild(evilTrainThree);
     }
-
+    
     function showTravelChoices () {
         nextBtn.style.display = 'none';
         optionBtns.style.display = 'block';
         optionBtns.innerHTML = '';
-
+        
         const landBtn = document.createElement('button');
         landBtn.textContent = 'Land';
         landBtn.addEventListener('click', () => {
@@ -680,7 +613,7 @@ function performAttack(attackType) {
                 nextBtn.style.display = 'block';
             });
         });
-
+        
         const seaBtn = document.createElement('button');
         seaBtn.textContent = 'Sea';
         seaBtn.addEventListener('click', () => {
@@ -691,7 +624,7 @@ function performAttack(attackType) {
                 nextBtn.style.display = 'block';
             });
         });
-
+        
         optionBtns.appendChild(landBtn);
         optionBtns.appendChild(seaBtn);
     }
@@ -699,7 +632,7 @@ function performAttack(attackType) {
         nextBtn.style.display = 'none';
         optionBtns.style.display = 'block';
         optionBtns.innerHTML = '';
-
+        
         const berriesBtn = document.createElement('button');
         berriesBtn.textContent = 'Berries';
         berriesBtn.addEventListener('click', () => {
@@ -710,7 +643,7 @@ function performAttack(attackType) {
                 nextBtn.style.display = 'block';
             });
         });
-
+        
         const monkeyBtn = document.createElement('button');
         monkeyBtn.textContent = 'Monkey';
         monkeyBtn.addEventListener('click', () => {
@@ -731,7 +664,7 @@ function performAttack(attackType) {
                 nextBtn.style.display = 'block';
             });
         });
-
+        
         optionBtns.appendChild(berriesBtn);
         optionBtns.appendChild(monkeyBtn);
         optionBtns.appendChild(monkeyBossBtn);
@@ -740,7 +673,7 @@ function performAttack(attackType) {
         nextBtn.style.display = 'none';
         optionBtns.style.display = 'block';
         optionBtns.innerHTML = '';
-
+        
         const huntBtn = document.createElement('button');
         huntBtn.textContent = 'Hunt';
         huntBtn.addEventListener('click', () => {
@@ -751,7 +684,7 @@ function performAttack(attackType) {
                 nextBtn.style.display = 'block';
             });
         });
-
+        
         const conjureBtn = document.createElement('button');
         conjureBtn.textContent = 'Conjure';
         conjureBtn.addEventListener('click', () => {
@@ -762,7 +695,7 @@ function performAttack(attackType) {
                 nextBtn.style.display = 'block';
             });
         });
-
+        
         optionBtns.appendChild(huntBtn);
         optionBtns.appendChild(conjureBtn);
     }
@@ -770,7 +703,7 @@ function performAttack(attackType) {
         nextBtn.style.display = 'none';
         optionBtns.style.display = 'block';
         optionBtns.innerHTML = '';
-
+        
         const speedWeaponBtn = document.createElement('button');
         speedWeaponBtn.textContent = 'Short Sword';
         speedWeaponBtn.addEventListener('click', () => {
@@ -781,7 +714,7 @@ function performAttack(attackType) {
                 nextBtn.style.display = 'block';
             });
         });
-
+        
         const damageWeaponBtn = document.createElement('button');
         damageWeaponBtn.textContent = 'Great Sword';
         damageWeaponBtn.addEventListener('click', () => {
@@ -792,16 +725,16 @@ function performAttack(attackType) {
                 nextBtn.style.display = 'block';
             });
         });
-
+        
         optionBtns.appendChild(speedWeaponBtn);
         optionBtns.appendChild(damageWeaponBtn);
     }
-
+    
     function showEvilWeaponChoices() {
         nextBtn.style.display = 'none';
         optionBtns.style.display = 'block';
         optionBtns.innerHTML = '';
-
+        
         const darkMagicBtn = document.createElement('button');
         darkMagicBtn.textContent = 'Dark Magic';
         darkMagicBtn.addEventListener('click', () => {
@@ -832,99 +765,6 @@ function performAttack(attackType) {
 
         optionBtns.appendChild(darkMagicBtn);
         optionBtns.appendChild(cursedSwordBtn);
-    }
-    function showPuzzle() {
-        var rows = 5;
-        var columns = 5;
-        
-        var currTile;
-        var otherTile;
-        
-        var turns = 0;
-        
-        window.onload = function() {
-            //initialize the 5x5 board
-            for (let r = 0; r < rows; r++) {
-                for (let c = 0; c < columns; c++) {
-                    //<img>
-                    let tile = document.createElement("img");
-                    tile.src = "./icons/blank2.jpg";
-        
-                    //DRAG FUNCTIONALITY
-                    tile.addEventListener("dragstart", dragStart); //click on image to drag
-                    tile.addEventListener("dragover", dragOver);   //drag an image
-                    tile.addEventListener("dragenter", dragEnter); //dragging an image into another one
-                    tile.addEventListener("dragleave", dragLeave); //dragging an image away from another one
-                    tile.addEventListener("drop", dragDrop);       //drop an image onto another one
-                    tile.addEventListener("dragend", dragEnd);      //after you completed dragDrop
-        
-                    document.getElementById("board").append(tile);
-                }
-            }
-        
-            //pieces
-            let pieces = [];
-            for (let i=1; i <= rows*columns; i++) {
-                pieces.push(i.toString()); //put "1" to "25" into the array (puzzle images names)
-            }
-            pieces.reverse();
-            for (let i =0; i < pieces.length; i++) {
-                let j = Math.floor(Math.random() * pieces.length);
-        
-                //swap
-                let tmp = pieces[i];
-                pieces[i] = pieces[j];
-                pieces[j] = tmp;
-            }
-        
-            for (let i = 0; i < pieces.length; i++) {
-                let tile = document.createElement("img");
-                tile.src = "./images/" + pieces[i] + ".jpg";
-        
-                //DRAG FUNCTIONALITY
-                tile.addEventListener("dragstart", dragStart); //click on image to drag
-                tile.addEventListener("dragover", dragOver);   //drag an image
-                tile.addEventListener("dragenter", dragEnter); //dragging an image into another one
-                tile.addEventListener("dragleave", dragLeave); //dragging an image away from another one
-                tile.addEventListener("drop", dragDrop);       //drop an image onto another one
-                tile.addEventListener("dragend", dragEnd);      //after you completed dragDrop
-        
-                document.getElementById("pieces").append(tile);
-            }
-        }
-        
-        //DRAG TILES
-        function dragStart() {
-            currTile = this; //this refers to image that was clicked on for dragging
-        }
-        
-        function dragOver(e) {
-            e.preventDefault();
-        }
-        
-        function dragEnter(e) {
-            e.preventDefault();
-        }
-        
-        function dragLeave() {
-        
-        }
-        
-        function dragDrop() {
-            otherTile = this; //this refers to image that is being dropped on
-        }
-        
-        function dragEnd() {
-            if (currTile.src.includes("blank")) {
-                return;
-            }
-            let currImg = currTile.src;
-            let otherImg = otherTile.src;
-            currTile.src = otherImg;
-            otherTile.src = currImg;
-        
-            turns += 1;
-            document.getElementById("turns").innerText = turns;
-        }
-    }
+    }  
+    
 });

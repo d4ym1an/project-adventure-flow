@@ -3,11 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/assets/icons/charNormal.png">
     <title>Divine Treasure Hunt - Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Button to show the puzzle -->
+    <button id="showPuzzleBtn">Show Puzzle</button>
+
+    <!-- Other content -->
+    <div id="otherContent">
+        <p>This is some other content on the page.</p>
+    </div>
+
+    <!-- Puzzle container -->
+    <div class="puzzle1" style="display: none;">
+        <div id="board"></div>
+        <h2>Turns: <span id="turns">0</span></h2>
+        <div id="pieces"></div>
+        <p>This is the puzzle!</p>
+    </div>
+
     <a href="/index.html" id="back-btn">Home</a>
     <img id="backgroundCity" class="background-city" src="/assets/bg/town.png" alt="Background Image">
     <img id="image-container" src="/assets/icons/charNormal.png" alt="Character Image">
@@ -25,8 +40,117 @@
             <button id="evil-btn">Go away old dude!</button>
         </div>
     </div>
-    <script src="script.js"></script>
 
+    <script>
+        // JavaScript to handle the "Show Puzzle" button click
+        document.getElementById("showPuzzleBtn").addEventListener("click", function () {
+            // Hide all elements except the puzzle container
+            const allElements = document.body.children;
+            const puzzle = document.querySelector(".puzzle1");
+
+            // Loop through all elements and hide them except the puzzle
+            for (let i = 0; i < allElements.length; i++) {
+                if (allElements[i] !== puzzle) {
+                    allElements[i].style.display = "none";
+                }
+            }
+
+            // Show the puzzle container
+            puzzle.style.display = "block";
+        });
     </script>
+
+    <script>
+        // JavaScript to handle button click
+        document.getElementById("showPuzzleBtn").addEventListener("click", function () {
+            // Get references to elements
+            const otherContent = document.getElementById("otherContent");
+            const puzzle = document.querySelector(".puzzle1");
+
+            // Hide other content and show the puzzle
+            otherContent.style.display = "none";
+            puzzle.style.display = "block";
+        });
+    </script>
+</body>
+</html>
+<script>
+    // JavaScript to handle button click
+    document.getElementById("showPuzzleBtn").addEventListener("click", function () {
+        // Get references to elements
+        const otherContent = document.getElementById("otherContent");
+        const puzzle = document.querySelector(".puzzle1");
+
+        // Hide other content and show the puzzle
+        otherContent.style.display = "none";
+        puzzle.style.display = "block";
+    });
+</script>
+
+<script>
+window.onload = function () {
+    const piecesContainer = document.getElementById("pieces");
+    const boardContainer = document.getElementById("board");
+
+    if (!piecesContainer || !boardContainer) {
+        console.error("The #pieces or #board container is missing in the HTML.");
+        return;
+    }
+
+    // Clear the containers in case there are any existing elements
+    piecesContainer.innerHTML = "";
+    boardContainer.innerHTML = "";
+
+    // Create 25 slots in the board
+    for (let i = 0; i < 25; i++) {
+        const slot = document.createElement("div");
+        slot.classList.add("board-slot");
+        slot.addEventListener("dragover", dragOver);
+        slot.addEventListener("drop", dragDrop);
+        boardContainer.appendChild(slot);
+    }
+
+    // Create 25 draggable images in the pieces container
+    for (let i = 1; i <= 25; i++) {
+        const img = document.createElement("img");
+        img.src = `${i}.jpg`; // Reference images directly in the same directory
+        img.alt = `Puzzle Piece ${i}`;
+        img.draggable = true; // Enable drag-and-drop
+        img.classList.add("puzzle-piece"); // Add a class for styling
+        img.addEventListener("dragstart", dragStart); // Add dragstart event
+        piecesContainer.appendChild(img); // Add the image to the pieces container
+    }
+
+    console.log("25 images and 25 board slots have been added.");
+};
+
+// Variable to store the currently dragged image
+let draggedImage = null;
+
+// Drag-and-drop event handlers
+function dragStart(event) {
+    draggedImage = event.target; // Store the dragged image
+    event.dataTransfer.setData("text/plain", event.target.id); // Set data for the drag event
+    console.log(`Dragging: ${draggedImage.alt}`);
+}
+
+function dragOver(event) {
+    event.preventDefault(); // Allow the drop
+}
+
+function dragDrop(event) {
+    event.preventDefault(); // Prevent default behavior
+    if (draggedImage) {
+        // Check if the drop target is empty
+        if (event.target.classList.contains("board-slot") && event.target.children.length === 0) {
+            event.target.appendChild(draggedImage); // Move the image to the slot
+            console.log(`Dropped: ${draggedImage.alt}`);
+            draggedImage = null; // Clear the reference to the dragged image
+        }
+    }
+}
+</script>
+  
+    <script src="script.js"></script>
 </body>
 </html>
