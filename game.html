@@ -88,66 +88,94 @@
 </script>
 
 <script>
-window.onload = function () {
-    const piecesContainer = document.getElementById("pieces");
-    const boardContainer = document.getElementById("board");
+var rows = 5;
+var columns = 5;
 
-    if (!piecesContainer || !boardContainer) {
-        console.error("The #pieces or #board container is missing in the HTML.");
-        return;
-    }
+var currTile;
+var otherTile;
 
-    // Clear the containers in case there are any existing elements
-    piecesContainer.innerHTML = "";
-    boardContainer.innerHTML = "";
+var turns = 0;
 
-    // Create 25 slots in the board
-    for (let i = 0; i < 25; i++) {
-        const slot = document.createElement("div");
-        slot.classList.add("board-slot");
-        slot.addEventListener("dragover", dragOver);
-        slot.addEventListener("drop", dragDrop);
-        boardContainer.appendChild(slot);
-    }
+window.onload = function() {
+    // Initialize the 5x5 board
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < columns; c++) {
+            let tile = document.createElement("img");
+            tile.src = "./blank.jpg";
 
-    // Create 25 draggable images in the pieces container
-    for (let i = 1; i <= 25; i++) {
-        const img = document.createElement("img");
-        img.src = `${i}.jpg`; // Reference images directly in the same directory
-        img.alt = `Puzzle Piece ${i}`;
-        img.draggable = true; // Enable drag-and-drop
-        img.classList.add("puzzle-piece"); // Add a class for styling
-        img.addEventListener("dragstart", dragStart); // Add dragstart event
-        piecesContainer.appendChild(img); // Add the image to the pieces container
-    }
+            // Drag functionality
+            tile.addEventListener("dragstart", dragStart); // Click on image to drag
+            tile.addEventListener("dragover", dragOver);   // Drag an image
+            tile.addEventListener("dragenter", dragEnter); // Dragging an image into another one
+            tile.addEventListener("dragleave", dragLeave); // Dragging an image away from another one
+            tile.addEventListener("drop", dragDrop);       // Drop an image onto another one
+            tile.addEventListener("dragend", dragEnd);     // After you completed dragDrop
 
-    console.log("25 images and 25 board slots have been added.");
-};
-
-// Variable to store the currently dragged image
-let draggedImage = null;
-
-// Drag-and-drop event handlers
-function dragStart(event) {
-    draggedImage = event.target; // Store the dragged image
-    event.dataTransfer.setData("text/plain", event.target.id); // Set data for the drag event
-    console.log(`Dragging: ${draggedImage.alt}`);
-}
-
-function dragOver(event) {
-    event.preventDefault(); // Allow the drop
-}
-
-function dragDrop(event) {
-    event.preventDefault(); // Prevent default behavior
-    if (draggedImage) {
-        // Check if the drop target is empty
-        if (event.target.classList.contains("board-slot") && event.target.children.length === 0) {
-            event.target.appendChild(draggedImage); // Move the image to the slot
-            console.log(`Dropped: ${draggedImage.alt}`);
-            draggedImage = null; // Clear the reference to the dragged image
+            document.getElementById("board").append(tile);
         }
     }
+
+    // Pieces
+    let pieces = [];
+    for (let i = 1; i <= rows * columns; i++) {
+        pieces.push(i.toString()); // Put "1" to "25" into the array (puzzle image names)
+    }
+    pieces.reverse();
+    for (let i = 0; i < pieces.length; i++) {
+        let j = Math.floor(Math.random() * pieces.length);
+
+        // Swap
+        let tmp = pieces[i];
+        pieces[i] = pieces[j];
+        pieces[j] = tmp;
+    }
+
+    for (let i = 0; i < pieces.length; i++) {
+        let tile = document.createElement("img");
+        tile.src =  pieces[i] + ".jpg";
+
+        // Drag functionality
+        tile.addEventListener("dragstart", dragStart); // Click on image to drag
+        tile.addEventListener("dragover", dragOver);   // Drag an image
+        tile.addEventListener("dragenter", dragEnter); // Dragging an image into another one
+        tile.addEventListener("dragleave", dragLeave); // Dragging an image away from another one
+        tile.addEventListener("drop", dragDrop);       // Drop an image onto another one
+        tile.addEventListener("dragend", dragEnd);     // After you completed dragDrop
+
+        document.getElementById("pieces").append(tile);
+    }
+};
+
+// Drag tiles
+function dragStart() {
+    currTile = this; // This refers to the image that was clicked on for dragging
+}
+
+function dragOver(e) {
+    e.preventDefault();
+}
+
+function dragEnter(e) {
+    e.preventDefault();
+}
+
+function dragLeave() {}
+
+function dragDrop() {
+    otherTile = this; // This refers to the image that is being dropped on
+}
+
+function dragEnd() {
+    if (currTile.src.includes("blank")) {
+        return;
+    }
+    let currImg = currTile.src;
+    let otherImg = otherTile.src;
+    currTile.src = otherImg;
+    otherTile.src = currImg;
+
+    turns += 1;
+    document.getElementById("turns").innerText = turns;
 }
 </script>
   

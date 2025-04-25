@@ -930,4 +930,103 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById("turns").innerText = turns;
         }
     }
+
+
+
+function performAttack(attackType, player, enemy) {
+    let playerDamage = 0;
+
+    // Calculate player's damage based on attack type
+    switch (attackType) {
+        case 'Slash':
+            playerDamage = player.attack;
+            break;
+        case 'Heavy Strike':
+            playerDamage = player.attack + 5;
+            break;
+        case 'Quick Jab':
+            playerDamage = player.attack - 2;
+            break;
+        case 'Defensive Stance':
+            playerDamage = 0; // No damage, defensive move
+            break;
+        default:
+            break;
+    }
+
+    // Deal damage to the enemy
+    enemy.health -= playerDamage;
+
+    // Show dialogue for player's attack
+    typeText(`You used ${attackType} and dealt ${playerDamage} damage!`, () => {
+        if (enemy.health <= 0) {
+            typeText('You defeated the enemy!', () => {
+                optionBtns.style.display = 'none'; // Hide combat buttons
+                nextBtn.style.display = 'block'; // Show next button
+            });
+        } else {
+            // Enemy's turn
+            performEnemyAttack(player, enemy);
+        }
+    });
+}
+
+// Function to handle enemy's attack
+function performEnemyAttack(player, enemy) {
+    const enemyDamage = enemy.attack;
+
+    // Deal damage to the player
+    player.health -= enemyDamage;
+
+    // Show dialogue for enemy's attack
+    typeText(`The enemy attacked and dealt ${enemyDamage} damage to you!`, () => {
+        if (player.health <= 0) {
+            typeText('You have been defeated!', () => {
+                optionBtns.style.display = 'none'; // Hide combat buttons
+                nextBtn.style.display = 'block'; // Show next button
+            });
+        } else {
+            // Player's turn again
+            typeText('Your turn!', () => {
+                optionBtns.style.display = 'block'; // Show combat buttons
+            });
+        }
+    });
+}
+nextBtn.addEventListener('click', () => {
+    if (isTyping) return;
+
+    currentDialogueIndex++;
+
+    if (currentBranch) {
+        if (!branchDialogues[currentBranch]) {
+            console.error(`Invalid branch: ${currentBranch}`);
+            return;
+        }
+
+        if (currentDialogueIndex >= branchDialogues[currentBranch].length) {
+            nextBtn.style.display = 'none';
+            typeText("You're done", () => {
+                imageContainer.style.display = 'none';
+            });
+        } else {
+            typeText(branchDialogues[currentBranch][currentDialogueIndex], () => {
+                // Trigger combat when currentBranch is 'swordsman' and currentDialogueIndex is 3
+                if (currentBranch === 'swordsman' && currentDialogueIndex === 3) {
+                    preformAttack(); // Start combat
+                }
+            });
+        }
+    } else {
+        if (currentDialogueIndex >= dialogues.length) {
+            nextBtn.style.display = 'none';
+            typeText("Choose your path:", () => {
+                optionBtns.style.display = 'block';
+                image.src = "/assets/char/moist.png"; // Set the image to one specific image
+            });
+        } else {
+            typeText(dialogues[currentDialogueIndex]);
+        }
+    }
+});
 });
