@@ -98,6 +98,49 @@ document.addEventListener('DOMContentLoaded', () => {
             "You feel your power growing but at a cost.",
             "You are now feared by everyone around you."
         ],
+        evil_hidingSewers: [
+            "You run back to the saftey of the sewers",
+            "You hide in"
+        ],
+        evil_hidingSewersDrink: [
+            "Why would you drink that?",
+            "You really drank sewer water?",
+            "I MIGHT have to kill you now",
+            "Naaaaaaaaaaaaaaaah"
+        ],
+        evil_hidingSewersRun: [
+            "As you start to run away, you find your mentor!",
+            "Good stuff young blud",
+            "The mentor introduces you to his other student",
+            "Sat Ann",
+            "You will have my pupil accompany you to the treasure",
+            "Its time to go off and find the tresure!",
+            "Now you have to pick how to get there...",
+            "While you are in the air..."
+        ],
+        evil_hidingCorpse:[
+            "You decide to hide under the all the Corpse that you have killed",
+            "You wait there all day and night",
+
+        ],
+        evil_travelFlight: [
+            "you see this sea monster, the Kraken...",
+            "He is trying to shoot you guys down from the sky.",
+            "If you are specialized in dark magic, you are easily able to take him down due to your range",
+            "...but if you picked the scythe... you’re gonna have a bad time."
+        ],
+        evil_travelFlightMagic: [
+            "You defeat the boss with ease", 
+        ],
+        evil_travelFlightScythe: [
+            "You have defeated boss!",
+            "You are very much hurt though..",
+            "You decide to rest up for the night and head to the treasure in the morning",
+            "As you travel by land, you are going through the forest...",
+            "...and you encounter a group of heavily armored, and geared up bandits.",
+            "As you inspect their armor, you realize that they have the treasure!",
+            "You realize, that you must fight them for this treasure.",
+        ],
         mage_wand: [
             "filler",//skips this line
             "Your mentor brings you to an academy for magic.",
@@ -426,8 +469,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         image.src = "assets/char/pirate.png";
                     }else if (currentBranch === 'mokey_Boss' && currentDialogueIndex === 11) {
                         showPuzzle();
+                    }else if (currentBranch === "evil_scythe" && currentDialogueIndex === 1) {
+                        image.src = "assets/icons/evilChar.png";
+                    }else if (currentBranch === "evil_magic" && currentDialogueIndex === 1) {
+                        image.src = "assets/icons/evilChar.png";
+                    }else if (currentBranch === "evil_trainingTwo" && currentDialogueIndex === 5) {
+                        image.src = "assets/char/satAnn.png";
                     }
-                    //bg imgs
+                    //BG Images
                     else if (currentBranch === "mage_wand" && currentDialogueIndex === 1) {
                         document.getElementById('backgroundCity').src = "assets/bg/mageSchool.png";
                     }else if (currentBranch === "mage_staff" && currentDialogueIndex === 1) {
@@ -743,9 +792,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
-                typeText(branchDialogues.evil_magic[currentDialogueIndex], () => {
-                    showEvilTrainingChoices();
-                });
+                nextBtn.onclick = handleEvilMagicDialogue; // Attach dialogue handler
             });
         });
 
@@ -757,14 +804,128 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
-                typeText(branchDialogues.evil_scythe[currentDialogueIndex], () => {
-                    showEvilTrainingChoices(); // Show training choices after selecting Scythe
-                });
+                nextBtn.onclick = handleEvilScytheDialogue; // Attach dialogue handler
             });
         });
 
         optionBtns.appendChild(darkMagicBtn);
         optionBtns.appendChild(cursedSwordBtn);
-    }  
-    
+    }
+
+    function handleEvilMagicDialogue() {
+        if (currentDialogueIndex < branchDialogues.evil_magic.length) {
+            const text = branchDialogues.evil_magic[currentDialogueIndex];
+            currentDialogueIndex++; // Increment index before calling typeText to avoid duplication
+            typeText(text);
+        } else {
+            nextBtn.onclick = null; // Remove handler
+            showEvilTrainingChoices(); // Show training choices after dialogue
+        }
+    }
+
+    function handleEvilScytheDialogue() {
+        if (currentDialogueIndex < branchDialogues.evil_scythe.length) {
+            const text = branchDialogues.evil_scythe[currentDialogueIndex];
+            currentDialogueIndex++; // Increment index before calling typeText to avoid duplication
+            typeText(text);
+        } else {
+            nextBtn.onclick = null; // Remove handler
+            showEvilTrainingChoices(); // Show training choices after dialogue
+        }
+    }
+
+    function showPuzzle() {
+        var rows = 5;
+        var columns = 5;
+        
+        var currTile;
+        var otherTile;
+        
+        var turns = 0;
+        
+        window.onload = function() {
+            //initialize the 5x5 board
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < columns; c++) {
+                    //<img>
+                    let tile = document.createElement("img");
+                    tile.src = "./icons/blank2.jpg";
+        
+                    //DRAG FUNCTIONALITY
+                    tile.addEventListener("dragstart", dragStart); //click on image to drag
+                    tile.addEventListener("dragover", dragOver);   //drag an image
+                    tile.addEventListener("dragenter", dragEnter); //dragging an image into another one
+                    tile.addEventListener("dragleave", dragLeave); //dragging an image away from another one
+                    tile.addEventListener("drop", dragDrop);       //drop an image onto another one
+                    tile.addEventListener("dragend", dragEnd);      //after you completed dragDrop
+        
+                    document.getElementById("board").append(tile);
+                }
+            }
+        
+            //pieces
+            let pieces = [];
+            for (let i=1; i <= rows*columns; i++) {
+                pieces.push(i.toString()); //put "1" to "25" into the array (puzzle images names)
+            }
+            pieces.reverse();
+            for (let i =0; i < pieces.length; i++) {
+                let j = Math.floor(Math.random() * pieces.length);
+        
+                //swap
+                let tmp = pieces[i];
+                pieces[i] = pieces[j];
+                pieces[j] = tmp;
+            }
+        
+            for (let i = 0; i < pieces.length; i++) {
+                let tile = document.createElement("img");
+                tile.src = "./images/" + pieces[i] + ".jpg";
+        
+                //DRAG FUNCTIONALITY
+                tile.addEventListener("dragstart", dragStart); //click on image to drag
+                tile.addEventListener("dragover", dragOver);   //drag an image
+                tile.addEventListener("dragenter", dragEnter); //dragging an image into another one
+                tile.addEventListener("dragleave", dragLeave); //dragging an image away from another one
+                tile.addEventListener("drop", dragDrop);       //drop an image onto another one
+                tile.addEventListener("dragend", dragEnd);      //after you completed dragDrop
+        
+                document.getElementById("pieces").append(tile);
+            }
+        }
+        
+        //DRAG TILES
+        function dragStart() {
+            currTile = this; //this refers to image that was clicked on for dragging
+        }
+        
+        function dragOver(e) {
+            e.preventDefault();
+        }
+        
+        function dragEnter(e) {
+            e.preventDefault();
+        }
+        
+        function dragLeave() {
+        
+        }
+        
+        function dragDrop() {
+            otherTile = this; //this refers to image that is being dropped on
+        }
+        
+        function dragEnd() {
+            if (currTile.src.includes("blank")) {
+                return;
+            }
+            let currImg = currTile.src;
+            let otherImg = otherTile.src;
+            currTile.src = otherImg;
+            otherTile.src = currImg;
+        
+            turns += 1;
+            document.getElementById("turns").innerText = turns;
+        }
+    }
 });
