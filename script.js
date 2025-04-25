@@ -475,8 +475,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         image.src = "assets/icons/evilChar.png";
                     }else if (currentBranch === "evil_trainingTwo" && currentDialogueIndex === 5) {
                         image.src = "assets/char/satAnn.png";
+                    }else if (currentBranch === "evil_travelFlight" && currentDialogueIndex === 0) {
+                        image.src = "assets/char/kraken.png";
                     }
-                    //BG Images
+                    //bg images
                     else if (currentBranch === "mage_wand" && currentDialogueIndex === 1) {
                         document.getElementById('backgroundCity').src = "assets/bg/mageSchool.png";
                     }else if (currentBranch === "mage_staff" && currentDialogueIndex === 1) {
@@ -522,7 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     document.getElementById('swordsman-btn').addEventListener('mouseout', () => {
-        imageContainer.src = "/assets/char/moistSword.png";
+        imageContainer.src = "/assets/char/moist.png";
     });
     document.getElementById('evil-btn').addEventListener('click', () => {
         if (isTyping) return;
@@ -541,7 +543,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     document.getElementById('evil-btn').addEventListener('mouseout', () => {
-        imageContainer.src = "/assets/char/moistSad.png";
+        imageContainer.src = "/assets/char/moist.png";
     });
     
     function showWeaponChoices() {
