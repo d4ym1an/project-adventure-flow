@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "more fighting",
             "eat the people you fought since your low on food",
             "get over the mountains",
-            "shop for goods at the town shop",
+            "Find cool weapon",
             "Make your way to the vault",
             "puzzle",
             "You make your way into the vault",
@@ -205,8 +205,13 @@ document.addEventListener('DOMContentLoaded', () => {
             "You notice hundreds of bodies around the vault",
             "You fight",
             "He is giving you trouble and is about to kill you",
-            "But then Link comes in and saves you at the last second",
-            "2v1 ez"
+            "But then your mentor comes in and saves you at the last second",
+            "2v1 ez",
+            "You two grab your treasure and start heading home",
+            "You've made it home with little to no problems but you realize that there is someone standing outside of your house",
+            "You and your mentor approach him",
+            "Battle",
+            "Now that you have defeated the final challenge what will you do with the treasure"
         ],
         conjure: [
             "filler",
@@ -225,7 +230,22 @@ document.addEventListener('DOMContentLoaded', () => {
             "You talk to the captain and he is still determined to get you to the treasure",
             "You set sail and head for the treasure",
             "You arrive and say bye to your pirate friends",
-            "You walk towards the vault and see its defended by a puzzle"
+            "You walk towards the vault and see its defended by a puzzle",
+            "Good job you now enter the vault",
+            "You see the treasure infront of you",
+            "You see a human shaped figure standing infront of the treasure",
+            "Its the old man who died the same old man whos treasure you were after",
+            "He starts explaining how he has to make sure you are worthy of his fortune",
+            "You notice hundreds of bodies around the vault",
+            "You fight",
+            "He is giving you trouble and is about to kill you",
+            "But then Tessa comes in and saves you at the last second",
+            "2v1 ez",
+            "You two grab your treasure and start heading home",
+            "You've made it home with little to no problems but you realize that there is someone standing outside of your house",
+            "You and Tessa approach him",
+            "Battle",
+            "Now that you have defeated the final challenge what will you do with the treasure"
         ],
         powerKraken: [
             "filler",
@@ -242,7 +262,21 @@ document.addEventListener('DOMContentLoaded', () => {
             "I am the guard for this treasure you must pass me before you get what you desire",
             "Boss fight",
             "once defeated puzzle to solve",
-            "Enter the vault"
+            "Enter the vault",
+            "You see the treasure infront of you",
+            "You see a human shaped figure standing infront of the treasure",
+            "Its the old man who died the same old man whos treasure you were after",
+            "He starts explaining how he has to make sure you are worthy of his fortune",
+            "You notice hundreds of bodies around the vault",
+            "You fight",
+            "He is giving you trouble and is about to kill you",
+            "But then Tessa comes in and saves you at the last second",
+            "2v1 ez",
+            "You two grab your treasure and start heading home",
+            "You've made it home with little to no problems but you realize that there is someone standing outside of your house",
+            "You and Tessa approach him",
+            "Battle",
+            "Now that you have defeated the final challenge what will you do with the treasure"
         ],
         islandFood: [
             "filler",
@@ -277,7 +311,12 @@ document.addEventListener('DOMContentLoaded', () => {
             "You fight",
             "He is giving you trouble and is about to kill you",
             "But then Link comes in and saves you at the last second",
-            "2v1 ez"
+            "2v1 ez",
+            "You two grab your treasure and start heading home",
+            "You've made it home with little to no problems but you realize that there is someone standing outside of your house",
+            "You and link approach him",
+            "Battle",
+            "Now that you have defeated the final challenge what will you do with the treasure"
         ],
         monkey: [
             "filler",
@@ -300,7 +339,12 @@ document.addEventListener('DOMContentLoaded', () => {
             "You fight",
             "He is giving you trouble and is about to kill you",
             "But then Link comes in and saves you at the last second",
-            "2v1 ez"
+            "2v1 ez",
+            "You two grab your treasure and start heading home",
+            "You've made it home with little to no problems but you realize that there is someone standing outside of your house",
+            "You and link approach him",
+            "Battle",
+            "Now that you have defeated the final challenge what will you do with the treasure"
         ],
         monkeyBoss: [
             "filler",
@@ -324,7 +368,12 @@ document.addEventListener('DOMContentLoaded', () => {
             "You fight",
             "He is giving you trouble and is about to kill you",
             "But then Link comes in and saves you at the last second",
-            "2v1 ez"
+            "2v1 ez",
+            "You two grab your treasure and start heading home",
+            "You've made it home with little to no problems but you realize that there is someone standing outside of your house",
+            "You and link approach him",
+            "Battle",
+            "Now that you have defeated the final challenge what will you do with the treasure"
         ]
     };
 
@@ -467,8 +516,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         image.src = "assets/char/kermit.png";
                     }else if (currentBranch === "seaTravel" && currentDialogueIndex === 1) {
                         image.src = "assets/char/pirate.png";
-                    }else if (currentBranch === 'mokey_Boss' && currentDialogueIndex === 11) {
-                        showPuzzle();
+                    }else if (currentBranch === 'powerKraken' && currentDialogueIndex === 27) {
+                        showEndings();
+                    }else if (currentBranch === 'weakKraken' && currentDialogueIndex === 20) {
+                        showEndings();
+                    }else if (currentBranch === 'landTravel' && currentDialogueIndex === 24) {
+                        showEndings();
+                    }else if (currentBranch === 'monkey' && currentDialogueIndex === 26) {
+                        showEndings();
+                    }else if (currentBranch === 'berries' && currentDialogueIndex === 26) {
+                        showEndings();
+                    }else if (currentBranch === 'monkeyBoss' && currentDialogueIndex === 25) {
+                        showEndings();
                     }else if (currentBranch === "evil_scythe" && currentDialogueIndex === 1) {
                         image.src = "assets/icons/evilChar.png";
                     }else if (currentBranch === "evil_magic" && currentDialogueIndex === 1) {
@@ -605,6 +664,48 @@ document.addEventListener('DOMContentLoaded', () => {
         
         optionBtns.appendChild(powerBtn);
         optionBtns.appendChild(weakBtn);
+    }
+    function showEndings() {
+        nextBtn.style.display = 'none';
+        optionBtns.style.display = 'block';
+        optionBtns.innerHTML = '';
+        
+        const selfishBtn = document.createElement('button');
+        selfishBtn.textContent = 'You chose to take the money all for yourself';
+        selfishBtn.addEventListener('click', () => {
+            typeText('You chose to take the money all for yourself', () => {
+                currentBranch = 'end1';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+        
+        const familyBtn = document.createElement('button');
+        familyBtn.textContent = 'You chose to share with your family';
+        familyBtn.addEventListener('click', () => {
+            typeText('You chose to share with your family', () => {
+                currentBranch = 'end2';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+       
+        const everyoneBtn = document.createElement('button');
+        everyoneBtn.textContent = 'You chose to share with everyone you know';
+        everyoneBtn.addEventListener('click', () => {
+            typeText('You chose to share with everyone you know', () => {
+                currentBranch = 'end3';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+        
+        optionBtns.appendChild(selfishBtn);
+        optionBtns.appendChild(familyBtn);
+        optionBtns.appendChild(everyoneBtn);
     }
     function showEvilTrainingChoices() {
         nextBtn.style.display = 'none';
