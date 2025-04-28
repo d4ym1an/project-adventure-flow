@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const dialogues = [
-        "Rich dude ded",
+        "Rich dude dies",
         "He left his treasure to whoever finds it",
-        "I need money",
+        "My family is poor and I need money",
         "I am dedicated to fight my way to the money",
         "I am too weak and must train first",
         "I will train every day",
