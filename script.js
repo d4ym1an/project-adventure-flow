@@ -68,23 +68,25 @@ document.addEventListener('DOMContentLoaded', () => {
             "Great choice",
             "You can now destroy people from long range",
             "Training time",
-            "Evil training montage"
+            "Evil training montage",
+            "You now need to pick a way to get to train"
         ],
         evil_scythe: [
             "Great choice",
             "You can now demolish people from close-mid range",
             "Training time",
-            "Evil training montage"
+            "Evil training montage",
+            "You now need to pick a way to get to train"
         ],
         evil_trainingOne: [
-            "You start to train by killing criminals",
+            "You start to train by beating up criminals",
             "You get praised as a hero",
             "Still committed murder so police are called",
             "Police are called on you and they find you",
             "You gotta find a place to hide!"
         ],
         evil_trainingTwo: [
-            "You decide to kill poor homeless people 🔥",
+            "You decide to beating up poor homeless people 🔥",
             "No one really cares",
             "You go out and find mentor",
             "He tells you, Good stuff young blood",
@@ -93,10 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
             "You will have my pupil accompany you to the treasure"
         ],
         evil_trainingThree: [
+            //skip
             "You decide to train by fighting anyone who crosses your path.",
-            "Your mentor warns you about losing control.",
-            "You feel your power growing but at a cost.",
-            "You are now feared by everyone around you."
+            "The cops are being called on you.",
+            "You start to notice an alarming amount of cops.",
+            "They now chase you."
         ],
         evil_hidingSewers: [
             "You run back to the saftey of the sewers",
@@ -119,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "While you are in the air..."
         ],
         evil_hidingCorpse:[
-            "You decide to hide under the all the Corpse that you have killed",
+            "You decide to hide under the all the people you have defeated",
             "You wait there all day and night",
 
         ],
@@ -404,14 +407,13 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (currentDialogueIndex >= branchDialogues[currentBranch].length) {
                 nextBtn.style.display = 'none';
-                typeText("You're done", () => {
-                    imageContainer.style.display = 'none';
-                });
-            } 
-            
-            
-            
-            else {
+                optionBtns.style.display = 'block'; // Show options for the next step
+
+                // Show runaway choices after completing evil training branches
+                if (['evil_trainingOne', 'evil_trainingTwo', 'evil_trainingThree'].includes(currentBranch)) {
+                    showRunawayChoices();
+                }
+            } else {
                 typeText(branchDialogues[currentBranch][currentDialogueIndex], () => {
                     if (currentBranch === 'mage' && currentDialogueIndex === 2) {
                         showWeaponChoices();
@@ -432,7 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         image.src = "assets/char/link.png";
                     }else if (currentBranch === "evil" && currentDialogueIndex === 2) {
                         image.src = "assets/char/moistEvil.png";
-                        showTravelChoices();
+                         showTravelChoices();
                     }else if (currentBranch === 'short_sword' && currentDialogueIndex === 15) {
                         showTravelChoices();
                     }else if (currentBranch === 'great_sword' && currentDialogueIndex === 15) {
@@ -471,12 +473,22 @@ document.addEventListener('DOMContentLoaded', () => {
                         showPuzzle();
                     }else if (currentBranch === "evil_scythe" && currentDialogueIndex === 1) {
                         image.src = "assets/icons/evilChar.png";
+                        document.getElementById('backgroundCity').src = "assets/bg/evilSchool.png"; // Fix background change
                     }else if (currentBranch === "evil_magic" && currentDialogueIndex === 1) {
                         image.src = "assets/icons/evilChar.png";
+                        document.getElementById('backgroundCity').src = "assets/bg/evilSchool.png"; // Fix background change
                     }else if (currentBranch === "evil_trainingTwo" && currentDialogueIndex === 5) {
                         image.src = "assets/char/satAnn.png";
                     }else if (currentBranch === "evil_travelFlight" && currentDialogueIndex === 0) {
                         image.src = "assets/char/kraken.png";
+                    }else if (currentBranch === "evil_trainingOne" && currentDialogueIndex === 2) {
+                        image.src = "assets/char/police.gif";
+                    }else if (currentBranch === "evil_trainingTwo" && currentDialogueIndex === 0) {
+                        image.src = "assets/char/homeless.png";
+                    }else if (currentBranch === "evil_trainingTwo" && currentDialogueIndex === 2) {
+                        image.src = "assets/icons/evilChar.png";
+                    }else if (currentBranch === "evil_trainingThree" && currentDialogueIndex === 2) {
+                        image.src = "assets/char/police.gif";
                     }
                     //bg images
                     else if (currentBranch === "mage_wand" && currentDialogueIndex === 1) {
@@ -612,9 +624,9 @@ document.addEventListener('DOMContentLoaded', () => {
         optionBtns.innerHTML = '';
         
         const evilTrainOne = document.createElement('button');
-        evilTrainOne.textContent = 'Kill criminals for practice';
+        evilTrainOne.textContent = 'defeat criminals for practice';
         evilTrainOne.addEventListener('click', () => {
-            typeText('You chose to kill criminals for practice!', () => {
+            typeText('You chose to defeat criminals for practice!', () => {
                 currentBranch = 'evil_trainingOne';
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
@@ -623,9 +635,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         const evilTrainTwo = document.createElement('button');
-        evilTrainTwo.textContent = 'Kill poor helpless people 🔥';
+        evilTrainTwo.textContent = 'Distroy poor helpless people 🔥';
         evilTrainTwo.addEventListener('click', () => {
-            typeText('You chose to kill poor homless people! (Thats pretty evil dude)', () => {
+            typeText('You chose to distroy poor helpless people! (Thats pretty evil dude)', () => {
                 currentBranch = 'evil_trainingTwo';
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
@@ -634,9 +646,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         const evilTrainThree = document.createElement('button');
-        evilTrainThree.textContent = 'Kill anyone you see';
+        evilTrainThree.textContent = 'Defeat anyone you see';
         evilTrainThree.addEventListener('click', () => {
-            typeText('You chose to kill anyone you see!', () => {
+            typeText('You chose to Defeat anyone you see!', () => {
                 currentBranch = 'evil_trainingThree';
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
@@ -648,7 +660,38 @@ document.addEventListener('DOMContentLoaded', () => {
         optionBtns.appendChild(evilTrainTwo);
         optionBtns.appendChild(evilTrainThree);
     }
-    
+
+    function showRunawayChoices() {
+        nextBtn.style.display = 'none';
+        optionBtns.style.display = 'block';
+        optionBtns.innerHTML = '';
+
+        const runSewersBtn = document.createElement('button');
+        runSewersBtn.textContent = 'Run to the sewers';
+        runSewersBtn.addEventListener('click', () => {
+            typeText('You chose to run to the sewers!', () => {
+                currentBranch = 'evil_hidingSewers';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+
+        const runCorpseBtn = document.createElement('button');
+        runCorpseBtn.textContent = 'Hide under the corps';
+        runCorpseBtn.addEventListener('click', () => {
+            typeText('You chose to hide under the corps!', () => {
+                currentBranch = 'evil_hidingCorpse';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+
+        optionBtns.appendChild(runSewersBtn);
+        optionBtns.appendChild(runCorpseBtn);
+    }
+
     function showTravelChoices () {
         nextBtn.style.display = 'none';
         optionBtns.style.display = 'block';
@@ -818,6 +861,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentDialogueIndex < branchDialogues.evil_magic.length) {
             const text = branchDialogues.evil_magic[currentDialogueIndex];
             currentDialogueIndex++; // Increment index before calling typeText to avoid duplication
+            document.getElementById('backgroundCity').src = "assets/bg/evilSchool.png"; // Ensure background changes
             typeText(text);
         } else {
             nextBtn.onclick = null; // Remove handler
@@ -829,6 +873,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentDialogueIndex < branchDialogues.evil_scythe.length) {
             const text = branchDialogues.evil_scythe[currentDialogueIndex];
             currentDialogueIndex++; // Increment index before calling typeText to avoid duplication
+            document.getElementById('backgroundCity').src = "assets/bg/evilSchool.png"; // Ensure background changes
             typeText(text);
         } else {
             nextBtn.onclick = null; // Remove handler
