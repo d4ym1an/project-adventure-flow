@@ -11,20 +11,41 @@
 </head>
 
 <body>
-  
+
+    <button id="creds">Credits</button>
+    
     <div id="cube-container" style="width: 100%; height: 30vh;"></div>
+
+    <div style="display: none;" class="credsBox">
+        <button id="close-creds-btn" style="position: absolute; top: 10px; right: 10px;">Close</button>
+        <div class="credsText">
+        <h1>Credits</h1>
+        <h2>Game by: <a href="https://github.com/daymianjmv" target="_blank">Daymian J. Madrigal Vasquez</a> and <a href="https://github.com/benpock" target="_blank">Ben Pock</a></h2>
+        <h2>Images: Chat GPT (Background Art), Google Images, and Daymian J. Madrigal Vasquez (Moistcritical's)</h2>
+    </div>
+    </div>
 
     <div id="homepage-container" style="width: 100%; height: 60vh;">
         <h1>Welcome to Divine Treasure Hunt</h1>
         <p>Embark on an epic adventure to uncover hidden treasures!</p>
         <a id="start-game-btn" href="/game.html">Start Game</a>
     </div>
-
     
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const cubeContainer = document.getElementById('cube-container');
+            const credsButton = document.getElementById('creds');
+            const credsBox = document.querySelector('.credsBox');
+            const closeCredsButton = document.getElementById('close-creds-btn');
+
+            credsButton.addEventListener('click', () => {
+                credsBox.style.display = credsBox.style.display === 'none' ? 'flex' : 'none';
+            });
+
+            closeCredsButton.addEventListener('click', () => {
+                credsBox.style.display = 'none';
+            });
 
             function init3DCube() {
                 const scene = new THREE.Scene();

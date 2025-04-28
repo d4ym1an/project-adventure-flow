@@ -1,16 +1,68 @@
 @import url(/font/font.css);
 
 body {
-    cursor: url('/assets/cursors/Cursor_15.cur'), auto;
+    cursor: url('/assets/cursors/Normal.cur'), auto;
 }
 
 button, #next-btn, #swordsman-btn, #mage-btn, #evil-btn, #start-game-btn, #back-btn {
-    cursor: url('/assets/cursors/arrow.cur'), pointer;
+    cursor: url('/assets/cursors/Normal.cur'), pointer !important;
 }
 
 ::selection{
     background: lime;
     color: rgb(0, 0, 0);
+}
+
+.credsBox {
+    position: fixed;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    border: lime 4px solid;
+}
+
+.credsText{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    h1{
+        color: lime;
+    }
+    h2{
+        font-family: 'Pixlemax' cursive;
+    }
+    a{
+        color: lime;
+        cursor: url('/assets/cursors/link.cur'), auto;
+    }
+}
+
+
+.credsBox h1, .credsBox h2 {
+    text-align: center;
+}
+
+#close-creds-btn {
+    background-color: lime;
+    color: black;
+    border: 2px solid lime;
+    font-family: 'Pixelmax', cursive;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#close-creds-btn:hover {
+    background-color: black;
+    color: lime;
+    border: 2px solid black;
 }
 
 #cutscene-container {
@@ -236,6 +288,15 @@ p{
     cursor: pointer;
 }
 
+#back-btn:hover{
+    background-color: black;
+    color: lime;
+    border: 2px solid lime;
+    font-family: 'Pixelmax', cursive;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
 .puzzle1 {
     display: none;
 }
@@ -253,4 +314,13 @@ p{
 
 #otherContent {
     display: none;
+}
+
+#dialogue-container::selection{
+    background-color: black !important;
+    color: lime !important;
+}
+
+a, button, #start-game-btn, #back-btn, #next-btn, #swordsman-btn, #mage-btn, #evil-btn, #showPuzzleBtn {
+    cursor: url('/assets/cursors/link.cur'), auto !important;
 }
