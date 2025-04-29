@@ -12,11 +12,11 @@
 
     <!-- Other content -->
     <div id="otherContent">
-        <p>This is some other content on the page.</p>
     </div>
 
     <!-- Puzzle container -->
     <div class="puzzle1" style="display: none;">
+        <button id="goBackBtn">Go Back</button>
         <div id="board"></div>
         <h2>Turns: <span id="turns">0</span></h2>
         <div id="pieces"></div>
@@ -44,19 +44,30 @@
     <script>
         // JavaScript to handle the "Show Puzzle" button click
         document.getElementById("showPuzzleBtn").addEventListener("click", function () {
-            // Hide all elements except the puzzle container
-            const allElements = document.body.children;
+            const allElements = document.querySelectorAll("body > *:not(.puzzle1):not(script)");
             const puzzle = document.querySelector(".puzzle1");
 
-            // Loop through all elements and hide them except the puzzle
-            for (let i = 0; i < allElements.length; i++) {
-                if (allElements[i] !== puzzle) {
-                    allElements[i].style.display = "none";
+            allElements.forEach(element => {
+                if (element.tagName !== "SCRIPT") {
+                    element.style.display = "none";
                 }
-            }
+            });
 
-            // Show the puzzle container
             puzzle.style.display = "block";
+        });
+
+        // JavaScript to handle the "Go Back" button click
+        document.getElementById("goBackBtn").addEventListener("click", function () {
+            const allElements = document.querySelectorAll("body > *:not(.puzzle1):not(script)");
+            const puzzle = document.querySelector(".puzzle1");
+
+            allElements.forEach(element => {
+                if (element.tagName !== "SCRIPT") {
+                    element.style.display = "block";
+                }
+            });
+
+            puzzle.style.display = "none";
         });
     </script>
 

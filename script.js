@@ -144,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
             "You will have my pupil accompany you to the treasure",
             "Its time to go off and find the tresure!",
             "Now you have to pick how to get there...",
-            "While you are in the air..."
         ],
         evil_hidingCorpse:[
             "You decide to hide under all the people you have defeated",
@@ -168,6 +167,16 @@ document.addEventListener('DOMContentLoaded', () => {
             "...and you encounter a group of heavily armored, and geared up bandits.",
             "As you inspect their armor, you realize that they have the treasure!",
             "You realize, that you must fight them for this treasure.",
+        ],
+        evil_travelLand: [
+            "As you travel by land",
+            "you make your way through the forest.",
+            "Suddenly, a group of bandits appears.",
+            "They're heavily armored and fully geared up",
+            "You take a closer look...",
+            "...and realize—they have the treasure",
+            "There's no way around it.",
+            "You'll have to fight them for it."
         ],
         mage_wand: [
             "filler",//skips this line
@@ -656,7 +665,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         image.src = "assets/char/police.gif";
                     }else if (currentBranch === "evil_trainingOne" && currentDialogueIndex === 1) {
                         image.src = "assets/icons/charNormal.png";
-                    } //bg images
+                    } else if (currentBranch === "evil_hidingSewers" && currentDialogueIndex === 2) {
+                        image.src = "assets/icons/evilChar.png";
+                    } else if (currentBranch === "evil_hidingSewersRun" && currentDialogueIndex === 1) {
+                        image.src = "assets/char/moistEvil.png";
+                    } else if (currentBranch === "evil_hidingSewersRun" && currentDialogueIndex === 3) {
+                        image.src = "assets/char/satann.png";
+                    }
+                    //bg images
                     else if (currentBranch === "mage_wand" && currentDialogueIndex === 1) {
                         document.getElementById('backgroundCity').src = "assets/bg/mageSchool.png";
                     }else if (currentBranch === "mage_staff" && currentDialogueIndex === 1) {
@@ -671,6 +687,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.getElementById('backgroundCity').src = "assets/bg/evilSchool.png";
                     }else if (currentBranch === "evil_trainingOne" && currentDialogueIndex === 1) {
                         document.getElementById('backgroundCity').src = "assets/bg/townNight.jpg";
+                    }else if (currentBranch === "evil_trainingThree" && currentDialogueIndex === 1) {
+                        document.getElementById('backgroundCity').src = "assets/bg/townNight.jpg";
+                    }else if (currentBranch === "evil_hidingSewers" && currentDialogueIndex === 1) {
+                        document.getElementById('backgroundCity').src = "assets/bg/sewers.png";
+                    } else if (currentBranch === "evil_hidingSewersRun" && currentDialogueIndex === 2) {
+                        document.getElementById('backgroundCity').src = "assets/bg/evilSchool.png";
                     }
                 });
             }
@@ -1130,15 +1152,31 @@ document.addEventListener('DOMContentLoaded', () => {
         var otherTile;
         
         var turns = 0;
-        
+
+        // Create a close button for the puzzle menu
+        const closePuzzleBtn = document.createElement('button');
+        closePuzzleBtn.textContent = 'Close Puzzle';
+        closePuzzleBtn.style.position = 'absolute';
+        closePuzzleBtn.style.top = '10px';
+        closePuzzleBtn.style.right = '10px';
+        closePuzzleBtn.addEventListener('click', () => {
+            document.getElementById('board').style.display = 'none'; // Hide the puzzle board
+            closePuzzleBtn.style.display = 'none'; // Hide the close button
+        });
+
+        document.body.appendChild(closePuzzleBtn); // Add the button to the document
+
         window.onload = function() {
+            document.getElementById('board').style.display = 'block'; // Ensure the board is visible
+            closePuzzleBtn.style.display = 'block'; // Ensure the close button is visible
+
             //initialize the 5x5 board
             for (let r = 0; r < rows; r++) {
                 for (let c = 0; c < columns; c++) {
                     //<img>
                     let tile = document.createElement("img");
                     tile.src = "./icons/blank2.jpg";
-        
+
                     //DRAG FUNCTIONALITY
                     tile.addEventListener("dragstart", dragStart); //click on image to drag
                     tile.addEventListener("dragover", dragOver);   //drag an image
@@ -1146,11 +1184,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     tile.addEventListener("dragleave", dragLeave); //dragging an image away from another one
                     tile.addEventListener("drop", dragDrop);       //drop an image onto another one
                     tile.addEventListener("dragend", dragEnd);      //after you completed dragDrop
-        
+
                     document.getElementById("board").append(tile);
                 }
             }
-        
+
             //pieces
             let pieces = [];
             for (let i=1; i <= rows*columns; i++) {
@@ -1159,17 +1197,17 @@ document.addEventListener('DOMContentLoaded', () => {
             pieces.reverse();
             for (let i =0; i < pieces.length; i++) {
                 let j = Math.floor(Math.random() * pieces.length);
-        
+
                 //swap
                 let tmp = pieces[i];
                 pieces[i] = pieces[j];
                 pieces[j] = tmp;
             }
-        
+
             for (let i = 0; i < pieces.length; i++) {
                 let tile = document.createElement("img");
                 tile.src = "./images/" + pieces[i] + ".jpg";
-        
+
                 //DRAG FUNCTIONALITY
                 tile.addEventListener("dragstart", dragStart); //click on image to drag
                 tile.addEventListener("dragover", dragOver);   //drag an image
@@ -1177,32 +1215,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 tile.addEventListener("dragleave", dragLeave); //dragging an image away from another one
                 tile.addEventListener("drop", dragDrop);       //drop an image onto another one
                 tile.addEventListener("dragend", dragEnd);      //after you completed dragDrop
-        
+
                 document.getElementById("pieces").append(tile);
             }
         }
-        
+
         //DRAG TILES
         function dragStart() {
             currTile = this; //this refers to image that was clicked on for dragging
         }
-        
+
         function dragOver(e) {
             e.preventDefault();
         }
-        
+
         function dragEnter(e) {
             e.preventDefault();
         }
-        
+
         function dragLeave() {
-        
+
         }
-        
+
         function dragDrop() {
             otherTile = this; //this refers to image that is being dropped on
         }
-        
+
         function dragEnd() {
             if (currTile.src.includes("blank")) {
                 return;
@@ -1211,7 +1249,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let otherImg = otherTile.src;
             currTile.src = otherImg;
             otherTile.src = currImg;
-        
+
             turns += 1;
             document.getElementById("turns").innerText = turns;
         }
