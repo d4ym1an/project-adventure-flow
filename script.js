@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
         landTravel: [
             "filler",
             "You find some people who look like they know wat their doing and approach them",
-            "Yu find out that these people are land pirtes and are willing to help you traverse the mountains to get to the treasure",  
+            "You find out that these people are land pirates and are willing to help you traverse the mountains to get to the treasure",  
             "You set off with them and start to make your way to the treasure",
             "fight somewhere here",
             "more fighting",
@@ -665,16 +665,25 @@ document.addEventListener('DOMContentLoaded', () => {
                         image.src = "assets/char/police.gif";
                     }else if (currentBranch === "evil_trainingOne" && currentDialogueIndex === 1) {
                         image.src = "assets/icons/charNormal.png";
-                    } else if (currentBranch === "evil_hidingSewers" && currentDialogueIndex === 2) {
-                        image.src = "assets/icons/evilChar.png";
-                    } else if (currentBranch === "evil_hidingSewersRun" && currentDialogueIndex === 1) {
-                        image.src = "assets/char/moistEvil.png";
-                    } else if (currentBranch === "evil_hidingSewersRun" && currentDialogueIndex === 3) {
-                        image.src = "assets/char/satann.png";
-                    }
-                    //bg images
-                    else if (currentBranch === "mage_wand" && currentDialogueIndex === 1) {
+                     }else if (currentBranch === "landTravel" && currentDialogueIndex === 3) {
+                        image.src = "assets/char/landPirates.png";
+                    }else if (currentBranch === "berries" && currentDialogueIndex === 6) {
+                        image.src = "assets/char/shrek.png";
+                    }else if (currentBranch === "monkey" && currentDialogueIndex === 4) {
+                        image.src = "assets/char/shrek.png";
+                    }else if (currentBranch === "monkeyBoss" && currentDialogueIndex === 5) {
+                        image.src = "assets/char/shrek.png";
+                    }else if (currentBranch === "powerKraken" && currentDialogueIndex === 10) {
+                        image.src = "assets/char/shrek.png";
+                     //bg images
+                    }else if (currentBranch === "mage_wand" && currentDialogueIndex === 1) {
                         document.getElementById('backgroundCity').src = "assets/bg/mageSchool.png";
+                    }else if (currentBranch === "seaTravel" && currentDialogueIndex === 2) {
+                        document.getElementById('backgroundCity').src = "assets/bg/ocean.png";
+                    }else if (currentBranch === "islandFood" && currentDialogueIndex === 2) {
+                        document.getElementById('backgroundCity').src = "assets/bg/jungle.png";
+                    }else if (currentBranch === "conjure" && currentDialogueIndex === 1) {
+                        document.getElementById('backgroundCity').src = "assets/bg/ship.png";
                     }else if (currentBranch === "mage_staff" && currentDialogueIndex === 1) {
                         document.getElementById('backgroundCity').src = "assets/bg/mageSchool.png";
                     }else if (currentBranch === "great_sword" && currentDialogueIndex === 3) {
@@ -687,12 +696,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.getElementById('backgroundCity').src = "assets/bg/evilSchool.png";
                     }else if (currentBranch === "evil_trainingOne" && currentDialogueIndex === 1) {
                         document.getElementById('backgroundCity').src = "assets/bg/townNight.jpg";
-                    }else if (currentBranch === "evil_trainingThree" && currentDialogueIndex === 1) {
-                        document.getElementById('backgroundCity').src = "assets/bg/townNight.jpg";
-                    }else if (currentBranch === "evil_hidingSewers" && currentDialogueIndex === 1) {
-                        document.getElementById('backgroundCity').src = "assets/bg/sewers.png";
-                    } else if (currentBranch === "evil_hidingSewersRun" && currentDialogueIndex === 2) {
-                        document.getElementById('backgroundCity').src = "assets/bg/evilSchool.png";
                     }
                 });
             }
