@@ -98,6 +98,10 @@ body {
     font-size: large;
 }
 
+#choices-sidebar{
+display: flex;
+max-height: 710px;
+}
 #next-btn:hover{
     background-color: black;
     color: lime;

@@ -10,18 +10,18 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
     class Character {
         constructor(name, health, attack, defense) {
-          this.name = name;
-          this.health = health;
-          this.attack = attack;
-          this.defense = defense;
+            this.name = name;
+            this.health = health;
+            this.attack = attack;
+            this.defense = defense;
         }
-        
+
         takeDamage(damage) {
             const actualDamage = Math.max(0, damage - this.defense); // Damage can't go below 0
             this.health -= actualDamage;
             return actualDamage;
         }
-        
+
         // Method to perform an attack on another character
         attackOpponent(opponent) {
             const damage = this.attack; // Base damage from the character
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const player3 = new Character("mage-wand", 80, 25, 5);
     const player4 = new Character("mage-staff", 80, 30, 5);
     const enemy1 = new Character('Goblin', 50, 5, 5);
-    
+
     const branchDialogues = {
         mage: [
             "The class of mage has strong long ranged abilities",
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "Its time to go off and find the tresure!",
             "Now you have to pick how to get there...",
         ],
-        evil_hidingCorpse:[
+        evil_hidingCorpse: [
             "You decide to hide under all the people you have defeated",
             "You wait there all day and night",
 
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "...but if you picked the scythe... you’re gonna have a bad time."
         ],
         evil_travelFlightMagic: [
-            "You defeat the boss with ease", 
+            "You defeat the boss with ease",
         ],
         evil_travelFlightScythe: [
             "You have defeated boss!",
@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "filler",
             "You are introduced to some pirates who will help you to the treasure",
             "They only request that you help on the ship when needed",
-            "You set off for the treasure with you ally saying goodbye to your mentor and Dad",  
+            "You set off for the treasure with you ally saying goodbye to your mentor and Dad",
             "You are at seas for a while with no problems",
             "The captain approaches you and says",
             "We are running out of food we need more is their any way you can help us",
@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
         landTravel: [
             "filler",
             "You find some people who look like they know wat their doing and approach them",
-            "You find out that these people are land pirates and are willing to help you traverse the mountains to get to the treasure",  
+            "You find out that these people are land pirates and are willing to help you traverse the mountains to get to the treasure",
             "You set off with them and start to make your way to the treasure",
             "fight somewhere here",
             "more fighting",
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
         conjure: [
             "filler",
             "Wow thats incredible we don't even have to stop for food now",
-            "You make sure everyone is fed and no stops are necessary",  
+            "You make sure everyone is fed and no stops are necessary",
             "We're going to make it to the treasure by tomorrow at this rate",
             "You start to hear a rumbling below you",
             "Everyone starts freaking out",
@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
         weakKraken: [
             "filler",
             "You are able to defeat the Kraken after a barrage of attacks",
-            "Many people on the ship are dead but the ship has not sustained much damage",  
+            "Many people on the ship are dead but the ship has not sustained much damage",
             "You talk to the captain and he is still determined to get you to the treasure",
             "You set sail and head for the treasure",
             "You arrive and say bye to your pirate friends",
@@ -318,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
         islandFood: [
             "filler",
             "Theres an island nearby we can get there before nightfall",
-            "After 2 hours you arrive at the island",  
+            "After 2 hours you arrive at the island",
             "You realize you and Link are the only people strong enough to hunt",
             "You two set out on the island to search for food",
             "On your search you find three things",
@@ -328,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
         berries: [
             "filler",
             "You and Link pick berries for everyone",
-            "You head back with enough berries for everyone",  
+            "You head back with enough berries for everyone",
             "You give everyone there share",
             "Uh Oh",
             "These berries are deadly and kill half the crew who ate first",
@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
         monkey: [
             "filler",
             "Battle",
-            "Head back with monkey meat",  
+            "Head back with monkey meat",
             "Some get sick from it everyones okay though",
             "You realize that someone is on the island and standing infront of a door",
             "You ask them what their doing",
@@ -386,7 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
         monkeyBoss: [
             "filler",
             "Battle",
-            "Head back with huge dead monkey",  
+            "Head back with huge dead monkey",
             "Feed everyone with some extra",
             "It was delicous and you had no problems",
             "You realize that someone is on the island and standing infront of a door",
@@ -414,86 +414,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
     };
 
-
-    
-    // Add combat options after the Mage Wand choice
-    function showCombatOptions() {
-        nextBtn.style.display = 'none';
-        optionBtns.style.display = 'block';
-        optionBtns.innerHTML = ''; // Clear previous options
-
-        const attack1Btn = document.createElement('button');
-        attack1Btn.textContent = 'Basic Attack';
-        attack1Btn.addEventListener('click', () => {
-            performAttack('Basic Attack');
-        });
-
-        const attack2Btn = document.createElement('button');
-        attack2Btn.textContent = 'Fireball';
-        attack2Btn.addEventListener('click', () => {
-            performAttack('Fireball');
-        });
-
-        const attack3Btn = document.createElement('button');
-        attack3Btn.textContent = 'Lightning Strike';
-        attack3Btn.addEventListener('click', () => {
-            performAttack('Lightning Strike');
-        });
-
-        const attack4Btn = document.createElement('button');
-        attack4Btn.textContent = 'Ice Blast';
-        attack4Btn.addEventListener('click', () => {
-            performAttack('Ice Blast');
-        });
-
-        // Append the buttons to the options container
-        optionBtns.appendChild(attack1Btn);
-        optionBtns.appendChild(attack2Btn);
-        optionBtns.appendChild(attack3Btn);
-        optionBtns.appendChild(attack4Btn);
-    }
-
-    // Function to handle the player's attack
-    function performAttack(attackType) {
-        const enemy = enemy1; // Using Goblin as the enemy for now
-        
-        let damage = 0;
-        
-        switch (attackType) {
-            case 'Basic Attack':
-                damage = player3.attack; // Basic attack damage
-                break;
-            case 'Fireball':
-                damage = player3.attack + 10; // Fireball is stronger
-                break;
-            case 'Lightning Strike':
-                damage = player3.attack + 15; // Lightning is the strongest
-                break;
-            case 'Ice Blast':
-                damage = player3.attack + 5; // Ice blast is average
-                break;
-            default:
-                break;
-        }
-        
-        const damageDealt = enemy.takeDamage(damage);
-        
-        typeText(`You used ${attackType} and dealt ${damageDealt} damage to the enemy!`, () => {
-            if (enemy.health <= 0) {
-                typeText('You have defeated the Goblin!', () => {
-                    // Optionally add logic to end the combat or move to the next part
-                    optionBtns.style.display = 'none';
-                    nextBtn.style.display = 'block';
-                });
-            } else {
-                typeText(`The Goblin has ${enemy.health} health left.`, () => {
-                    showCombatOptions(); // Allow the player to choose again
-                });
-            }
-        });
-    }
-
-
     let currentDialogueIndex = 0;
     let currentBranch = null;
     let isTyping = false;
@@ -512,6 +432,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isTyping) return;
 
         currentBranch = 'mage';
+        updateChoicesSidebar('Mage yay!');
         currentDialogueIndex = 0;
         optionBtns.style.display = 'none';
         nextBtn.style.display = 'block';
@@ -575,11 +496,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (currentBranch === 'evil_hidingSewers') {
                     showSewerChoices(); // Show sewer choices at the end of evil_hidingSewers
                 }
+                
             } else {
+                // if (currentBranch === 'mage' && currentDialogueIndex === 2) {
+                //     startCombat(player3, enemy1, (playerWon) => {
+                //         if (playerWon) {
+                //             typeText('You defeated the enemy and can continue your journey!', () => {
+                //                 nextBtn.style.display = 'block';
+                //             });
+                //         } else {
+                //             typeText('You were defeated. Game over.');
+                //         }
+                //     });
+                // } failed combat attempt
                 typeText(branchDialogues[currentBranch][currentDialogueIndex], () => {
                     if (currentBranch === 'mage' && currentDialogueIndex === 2) {
                         showWeaponChoices();
                         image.src = "/assets/char/moistWizard.png"; // Set the image to one specific image
+                        
                     } else if (currentBranch === 'swordsman' && currentDialogueIndex === 2) {
                         showSwordsmanWeaponChoices();
                         image.src = "/assets/char/moistSword.png"; // Set the image to one specific image
@@ -588,113 +522,138 @@ document.addEventListener('DOMContentLoaded', () => {
                         image.src = "/assets/char/moistEvil.png"; // Set the image to one specific image
                     } else if (currentBranch === "mage_wand" && currentDialogueIndex === 3) {
                         image.src = "assets/char/Tessa.png";
-                    }else if (currentBranch === "mage_staff" && currentDialogueIndex === 3) {
-                        image.src = "assets/char/Tessa.png"; 
-                    }else if (currentBranch === "great_sword" && currentDialogueIndex === 5) {
+                    } else if (currentBranch === "mage_staff" && currentDialogueIndex === 3) {
+                        image.src = "assets/char/Tessa.png";
+                    } else if (currentBranch === "great_sword" && currentDialogueIndex === 5) {
                         image.src = "assets/char/link.png";
-                    }else if (currentBranch === "short_sword" && currentDialogueIndex === 5) {
+                    } else if (currentBranch === "short_sword" && currentDialogueIndex === 5) {
                         image.src = "assets/char/link.png";
-                    }else if (currentBranch === "evil" && currentDialogueIndex === 2) {
+                    } else if (currentBranch === "evil" && currentDialogueIndex === 2) {
                         image.src = "assets/char/moistEvil.png";
-                         showTravelChoices();
-                    }else if (currentBranch === 'short_sword' && currentDialogueIndex === 15) {
                         showTravelChoices();
-                    }else if (currentBranch === 'great_sword' && currentDialogueIndex === 15) {
+                    } else if (currentBranch === 'short_sword' && currentDialogueIndex === 15) {
                         showTravelChoices();
-                    }else if (currentBranch === 'mage_wand' && currentDialogueIndex === 13) {
+                    } else if (currentBranch === 'great_sword' && currentDialogueIndex === 15) {
                         showTravelChoices();
-                    }else if (currentBranch === 'mage_staff' && currentDialogueIndex === 13) {
+                    } else if (currentBranch === 'mage_wand' && currentDialogueIndex === 13) {
                         showTravelChoices();
-                    }else if (currentBranch === 'seaTravel' && currentDialogueIndex === 7) {
+                    } else if (currentBranch === 'mage_staff' && currentDialogueIndex === 13) {
+                        showTravelChoices();
+                    } else if (currentBranch === 'seaTravel' && currentDialogueIndex === 7) {
                         showFoodChoices();
-                    }else if (currentBranch === 'islandFood' && currentDialogueIndex === 7) {
+                    } else if (currentBranch === 'islandFood' && currentDialogueIndex === 7) {
                         showHuntChoices();
-                    }else if (currentBranch === 'showSewerChoices' && currentDialogueIndex === 2) {
+                    } else if (currentBranch === 'showSewerChoices' && currentDialogueIndex === 2) {
                         showSewerChoices();
-                    }else if (currentBranch === "monkeyBoss" && currentDialogueIndex === 1) {
+                    } else if (currentBranch === "monkeyBoss" && currentDialogueIndex === 1) {
                         image.src = "assets/char/monke.png";
-                    }else if (currentBranch === "berries" && currentDialogueIndex === 1) {
+                    } else if (currentBranch === "berries" && currentDialogueIndex === 1) {
                         image.src = "assets/icons/berries.webp";
-                    }else if (currentBranch === "monkey" && currentDialogueIndex === 1) {
+                    } else if (currentBranch === "monkey" && currentDialogueIndex === 1) {
                         image.src = "assets/char/monkeFood.png";
-                    }else if (currentBranch === 'conjure' && currentDialogueIndex === 7) {
+                    } else if (currentBranch === 'conjure' && currentDialogueIndex === 7) {
                         showBattleKrakenChoices();
-                    }else if (currentBranch === "seaTravel" && currentDialogueIndex === 5) {
+                    } else if (currentBranch === "seaTravel" && currentDialogueIndex === 5) {
                         image.src = "assets/char/capbob.png";
-                    }else if (currentBranch === "conjure" && currentDialogueIndex === 6) {
+                    } else if (currentBranch === "conjure" && currentDialogueIndex === 6) {
                         image.src = "assets/char/kraken.png";
-                    }else if (currentBranch === "mage_staff" && currentDialogueIndex === 11) {
+                    } else if (currentBranch === "mage_staff" && currentDialogueIndex === 11) {
                         image.src = "assets/char/kermit.png";
-                    }else if (currentBranch === "mage_wand" && currentDialogueIndex === 11) {
+                    } else if (currentBranch === "mage_wand" && currentDialogueIndex === 11) {
                         image.src = "assets/char/kermit.png";
-                    }else if (currentBranch === "great_sword" && currentDialogueIndex === 13) {
+                    } else if (currentBranch === "great_sword" && currentDialogueIndex === 13) {
                         image.src = "assets/char/kermit.png";
-                    }else if (currentBranch === "short_sword" && currentDialogueIndex === 13) {
+                    } else if (currentBranch === "short_sword" && currentDialogueIndex === 13) {
                         image.src = "assets/char/kermit.png";
-                    }else if (currentBranch === "seaTravel" && currentDialogueIndex === 1) {
+                    } else if (currentBranch === "seaTravel" && currentDialogueIndex === 1) {
                         image.src = "assets/char/pirate.png";
-                    }else if (currentBranch === 'powerKraken' && currentDialogueIndex === 27) {
+                    } else if (currentBranch === 'powerKraken' && currentDialogueIndex === 28) {
                         showEndings();
-                    }else if (currentBranch === 'weakKraken' && currentDialogueIndex === 20) {
+                    } else if (currentBranch === 'weakKraken' && currentDialogueIndex === 21) {
                         showEndings();
-                    }else if (currentBranch === 'landTravel' && currentDialogueIndex === 24) {
+                    } else if (currentBranch === 'landTravel' && currentDialogueIndex === 25) {
                         showEndings();
-                    }else if (currentBranch === 'monkey' && currentDialogueIndex === 26) {
+                    } else if (currentBranch === 'monkey' && currentDialogueIndex === 26) {
                         showEndings();
-                    }else if (currentBranch === 'berries' && currentDialogueIndex === 26) {
+                    } else if (currentBranch === 'berries' && currentDialogueIndex === 26) {
                         showEndings();
-                    }else if (currentBranch === 'monkeyBoss' && currentDialogueIndex === 25) {
+                    } else if (currentBranch === 'monkeyBoss' && currentDialogueIndex === 25) {
                         showEndings();
-                    }else if (currentBranch === "evil_scythe" && currentDialogueIndex === 1) {
+                    } else if (currentBranch === "evil_scythe" && currentDialogueIndex === 1) {
                         image.src = "assets/icons/evilChar.png";
                         document.getElementById('backgroundCity').src = "assets/bg/evilSchool.png"; // Fix background change
-                    }else if (currentBranch === "evil_magic" && currentDialogueIndex === 1) {
+                    } else if (currentBranch === "evil_magic" && currentDialogueIndex === 1) {
                         image.src = "assets/icons/evilChar.png";
                         document.getElementById('backgroundCity').src = "assets/bg/evilSchool.png"; // Fix background change
-                    }else if (currentBranch === "evil_trainingTwo" && currentDialogueIndex === 5) {
+                    } else if (currentBranch === "evil_trainingTwo" && currentDialogueIndex === 5) {
                         image.src = "assets/char/satAnn.png";
-                    }else if (currentBranch === "evil_travelFlight" && currentDialogueIndex === 0) {
+                    } else if (currentBranch === "evil_travelFlight" && currentDialogueIndex === 0) {
                         image.src = "assets/char/kraken.png";
-                    }else if (currentBranch === "evil_trainingOne" && currentDialogueIndex === 2) {
+                    } else if (currentBranch === "evil_trainingOne" && currentDialogueIndex === 2) {
                         image.src = "assets/char/police.gif";
-                    }else if (currentBranch === "evil_trainingTwo" && currentDialogueIndex === 0) {
+                    } else if (currentBranch === "evil_trainingTwo" && currentDialogueIndex === 0) {
                         image.src = "assets/char/homeless.png";
-                    }else if (currentBranch === "evil_trainingTwo" && currentDialogueIndex === 2) {
+                    } else if (currentBranch === "evil_trainingTwo" && currentDialogueIndex === 2) {
                         image.src = "assets/icons/evilChar.png";
-                    }else if (currentBranch === "evil_trainingThree" && currentDialogueIndex === 2) {
+                    } else if (currentBranch === "evil_trainingThree" && currentDialogueIndex === 2) {
                         image.src = "assets/char/police.gif";
-                    }else if (currentBranch === "evil_trainingOne" && currentDialogueIndex === 1) {
+                    } else if (currentBranch === "evil_trainingOne" && currentDialogueIndex === 1) {
                         image.src = "assets/icons/charNormal.png";
-                     }else if (currentBranch === "landTravel" && currentDialogueIndex === 3) {
+                    } else if (currentBranch === "landTravel" && currentDialogueIndex === 3) {
                         image.src = "assets/char/landPirates.png";
-                    }else if (currentBranch === "berries" && currentDialogueIndex === 6) {
+                    } else if (currentBranch === "landTravel" && currentDialogueIndex === 14) {
+                        image.src = "assets/char/mrRich.png";
+                    } else if (currentBranch === "landTravel" && currentDialogueIndex === 22) {
+                        image.src = "assets/char/bigSwordMan.png";
+                    } else if (currentBranch === "berries" && currentDialogueIndex === 6) {
                         image.src = "assets/char/shrek.png";
-                    }else if (currentBranch === "monkey" && currentDialogueIndex === 4) {
+                    } else if (currentBranch === "berries" && currentDialogueIndex === 15) {
+                        image.src = "assets/char/mrRich.png";
+                    } else if (currentBranch === "monkey" && currentDialogueIndex === 14) {
+                        image.src = "assets/char/mrRich.png";
+                    } else if (currentBranch === "monkeyBoss" && currentDialogueIndex === 13) {
+                        image.src = "assets/char/mrRich.png";
+                    } else if (currentBranch === "monkey" && currentDialogueIndex === 4) {
                         image.src = "assets/char/shrek.png";
-                    }else if (currentBranch === "monkeyBoss" && currentDialogueIndex === 5) {
+                    } else if (currentBranch === "monkeyBoss" && currentDialogueIndex === 5) {
                         image.src = "assets/char/shrek.png";
-                    }else if (currentBranch === "powerKraken" && currentDialogueIndex === 10) {
+                    } else if (currentBranch === "powerKraken" && currentDialogueIndex === 10) {
                         image.src = "assets/char/shrek.png";
-                     //bg images
-                    }else if (currentBranch === "mage_wand" && currentDialogueIndex === 1) {
+                    } else if (currentBranch === "powerKraken" && currentDialogueIndex === 16) {
+                        image.src = "assets/char/mrRich.png";
+                    } else if (currentBranch === "monkey" && currentDialogueIndex === 22) {
+                        image.src = "assets/char/bigSwordMan.png";
+                    } else if (currentBranch === "berries" && currentDialogueIndex === 24) {
+                        image.src = "assets/char/bigSwordMan.png";
+                    } else if (currentBranch === "powerKraken" && currentDialogueIndex === 25) {
+                        image.src = "assets/char/bigSwordMan.png";
+                    }else if (currentBranch === "monkeyBoss" && currentDialogueIndex === 23) {
+                        image.src = "assets/char/bigSwordMan.png";
+                    } else if (currentBranch === "weakKraken" && currentDialogueIndex === 18) {
+                        image.src = "assets/char/bigSwordMan.png";
+
+                        //bg images
+                    } else if (currentBranch === "mage_wand" && currentDialogueIndex === 1) {
                         document.getElementById('backgroundCity').src = "assets/bg/mageSchool.png";
-                    }else if (currentBranch === "seaTravel" && currentDialogueIndex === 2) {
+                    } else if (currentBranch === "landTravel" && currentDialogueIndex === 4) {
+                        document.getElementById('backgroundCity').src = "assets/bg/mountain.png";
+                    }  else if (currentBranch === "seaTravel" && currentDialogueIndex === 2) {
                         document.getElementById('backgroundCity').src = "assets/bg/ocean.png";
-                    }else if (currentBranch === "islandFood" && currentDialogueIndex === 2) {
+                    } else if (currentBranch === "islandFood" && currentDialogueIndex === 2) {
                         document.getElementById('backgroundCity').src = "assets/bg/jungle.png";
-                    }else if (currentBranch === "conjure" && currentDialogueIndex === 1) {
+                    } else if (currentBranch === "conjure" && currentDialogueIndex === 1) {
                         document.getElementById('backgroundCity').src = "assets/bg/ship.png";
-                    }else if (currentBranch === "mage_staff" && currentDialogueIndex === 1) {
+                    } else if (currentBranch === "mage_staff" && currentDialogueIndex === 1) {
                         document.getElementById('backgroundCity').src = "assets/bg/mageSchool.png";
-                    }else if (currentBranch === "great_sword" && currentDialogueIndex === 3) {
+                    } else if (currentBranch === "great_sword" && currentDialogueIndex === 3) {
                         document.getElementById('backgroundCity').src = "assets/bg/swordSchool.png";
-                    }else if (currentBranch === "short_sword" && currentDialogueIndex === 3) {
+                    } else if (currentBranch === "short_sword" && currentDialogueIndex === 3) {
                         document.getElementById('backgroundCity').src = "assets/bg/swordSchool.png";
-                    }else if (currentBranch === "evil_magic" && currentDialogueIndex === 1) {
+                    } else if (currentBranch === "evil_magic" && currentDialogueIndex === 1) {
                         document.getElementById('backgroundCity').src = "assets/bg/evilSchool.png";
-                    }else if (currentBranch === "evil_scythe" && currentDialogueIndex === 1) {
+                    } else if (currentBranch === "evil_scythe" && currentDialogueIndex === 1) {
                         document.getElementById('backgroundCity').src = "assets/bg/evilSchool.png";
-                    }else if (currentBranch === "evil_trainingOne" && currentDialogueIndex === 1) {
+                    } else if (currentBranch === "evil_trainingOne" && currentDialogueIndex === 1) {
                         document.getElementById('backgroundCity').src = "assets/bg/townNight.jpg";
                     }
                 });
@@ -716,6 +675,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isTyping) return;
 
         currentBranch = 'swordsman';
+        updateChoicesSidebar('Swordsman yay!');
         currentDialogueIndex = 0;
         optionBtns.style.display = 'none';
         nextBtn.style.display = 'block';
@@ -735,6 +695,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isTyping) return;
 
         currentBranch = 'evil';
+        updateChoicesSidebar('You were meant to destroy the sith not join it(Evil yay!)');
         currentDialogueIndex = 0;
         optionBtns.style.display = 'none';
         nextBtn.style.display = 'block';
@@ -761,6 +722,7 @@ document.addEventListener('DOMContentLoaded', () => {
         staffBtn.addEventListener('click', () => {
             typeText('You chose the Staff!', () => {
                 currentBranch = 'mage_staff';
+                updateChoicesSidebar('Chose the Staff');
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
@@ -772,6 +734,7 @@ document.addEventListener('DOMContentLoaded', () => {
         wandBtn.addEventListener('click', () => {
             typeText('You chose the Wand!', () => {
                 currentBranch = 'mage_wand';
+                updateChoicesSidebar('Chose the Wand');
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
@@ -791,6 +754,7 @@ document.addEventListener('DOMContentLoaded', () => {
         powerBtn.addEventListener('click', () => {
             typeText('You chose to charge up a big attack', () => {
                 currentBranch = 'powerKraken';
+                updateChoicesSidebar('Chose to charge up a big attack');
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
@@ -802,6 +766,7 @@ document.addEventListener('DOMContentLoaded', () => {
         weakBtn.addEventListener('click', () => {
             typeText('You chose to spam weak attacks', () => {
                 currentBranch = 'weakKraken';
+                updateChoicesSidebar('Chose to spam weak attacks');
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
@@ -815,40 +780,43 @@ document.addEventListener('DOMContentLoaded', () => {
         nextBtn.style.display = 'none';
         optionBtns.style.display = 'block';
         optionBtns.innerHTML = '';
-        
+
         const selfishBtn = document.createElement('button');
         selfishBtn.textContent = 'You chose to take the money all for yourself';
         selfishBtn.addEventListener('click', () => {
             typeText('You chose to take the money all for yourself', () => {
                 currentBranch = 'end1';
+                updateChoicesSidebar('Chose to be selfish');
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
             });
         });
-        
+
         const familyBtn = document.createElement('button');
         familyBtn.textContent = 'You chose to share with your family';
         familyBtn.addEventListener('click', () => {
             typeText('You chose to share with your family', () => {
                 currentBranch = 'end2';
+                updateChoicesSidebar('Chose to share with the fam');
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
             });
         });
-       
+
         const everyoneBtn = document.createElement('button');
         everyoneBtn.textContent = 'You chose to share with everyone you know';
         everyoneBtn.addEventListener('click', () => {
             typeText('You chose to share with everyone you know', () => {
                 currentBranch = 'end3';
+                updateChoicesSidebar('Chose to be a really good person');
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
             });
         });
-        
+
         optionBtns.appendChild(selfishBtn);
         optionBtns.appendChild(familyBtn);
         optionBtns.appendChild(everyoneBtn);
@@ -958,7 +926,7 @@ document.addEventListener('DOMContentLoaded', () => {
         optionBtns.appendChild(drinkBtn);
     }
 
-    function showTravelChoices () {
+    function showTravelChoices() {
         nextBtn.style.display = 'none';
         optionBtns.style.display = 'block';
         optionBtns.innerHTML = ''; // Clear previous options
@@ -968,6 +936,7 @@ document.addEventListener('DOMContentLoaded', () => {
         landBtn.addEventListener('click', () => {
             typeText('You chose to travel by land!', () => {
                 currentBranch = 'landTravel';
+                updateChoicesSidebar('Chose to climb over mountains');
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
@@ -979,6 +948,7 @@ document.addEventListener('DOMContentLoaded', () => {
         seaBtn.addEventListener('click', () => {
             typeText('You chose to travel by sea!', () => {
                 currentBranch = 'seaTravel';
+                updateChoicesSidebar('Chose to sail the sea');
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
@@ -988,7 +958,7 @@ document.addEventListener('DOMContentLoaded', () => {
         optionBtns.appendChild(landBtn);
         optionBtns.appendChild(seaBtn);
     }
-    function showHuntChoices () {
+    function showHuntChoices() {
         nextBtn.style.display = 'none';
         optionBtns.style.display = 'block';
         optionBtns.innerHTML = ''; // Clear previous options
@@ -998,6 +968,7 @@ document.addEventListener('DOMContentLoaded', () => {
         berriesBtn.addEventListener('click', () => {
             typeText('You chose to pick berries for everyone!', () => {
                 currentBranch = 'berries';
+                updateChoicesSidebar('Berries yum yum');
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
@@ -1009,6 +980,7 @@ document.addEventListener('DOMContentLoaded', () => {
         monkeyBtn.addEventListener('click', () => {
             typeText('You chose to fight a bunch of monkeys for food!', () => {
                 currentBranch = 'monkey';
+                updateChoicesSidebar('Chose to fight monke');
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
@@ -1019,6 +991,7 @@ document.addEventListener('DOMContentLoaded', () => {
         monkeyBossBtn.addEventListener('click', () => {
             typeText('You chose to fight one big monkey for food!', () => {
                 currentBranch = 'monkeyBoss';
+                updateChoicesSidebar('Chose to fight big monke');
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
@@ -1029,7 +1002,7 @@ document.addEventListener('DOMContentLoaded', () => {
         optionBtns.appendChild(monkeyBtn);
         optionBtns.appendChild(monkeyBossBtn);
     }
-    function showFoodChoices () {
+    function showFoodChoices() {
         nextBtn.style.display = 'none';
         optionBtns.style.display = 'block';
         optionBtns.innerHTML = ''; // Clear previous options
@@ -1039,6 +1012,7 @@ document.addEventListener('DOMContentLoaded', () => {
         huntBtn.addEventListener('click', () => {
             typeText('You chose to find an island and hunt or food!', () => {
                 currentBranch = 'islandFood';
+                updateChoicesSidebar('Chose to find food');
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
@@ -1050,6 +1024,7 @@ document.addEventListener('DOMContentLoaded', () => {
         conjureBtn.addEventListener('click', () => {
             typeText('You conjure food for everyone!', () => {
                 currentBranch = 'conjure';
+                updateChoicesSidebar('Your a mage so lifes easy(conjure food)');
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
@@ -1069,6 +1044,7 @@ document.addEventListener('DOMContentLoaded', () => {
         speedWeaponBtn.addEventListener('click', () => {
             typeText('You chose the Short Sword!', () => {
                 currentBranch = 'short_sword';
+                updateChoicesSidebar('Chose the Short Sword');
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
@@ -1080,6 +1056,7 @@ document.addEventListener('DOMContentLoaded', () => {
         damageWeaponBtn.addEventListener('click', () => {
             typeText('You chose the Great Sword!', () => {
                 currentBranch = 'great_sword';
+                updateChoicesSidebar('Chose the Great Sword');
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
@@ -1100,6 +1077,7 @@ document.addEventListener('DOMContentLoaded', () => {
         darkMagicBtn.addEventListener('click', () => {
             typeText('You chose the Dark Magic!', () => {
                 currentBranch = 'evil_magic';
+                updateChoicesSidebar('Chose Dark magic');
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
@@ -1112,6 +1090,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cursedSwordBtn.addEventListener('click', () => {
             typeText('You chose the Scythe!', () => {
                 currentBranch = 'evil_scythe';
+                updateChoicesSidebar('Chose the Scythe');
                 currentDialogueIndex = 0;
                 optionBtns.style.display = 'none';
                 nextBtn.style.display = 'block';
@@ -1150,10 +1129,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function showPuzzle() {
         var rows = 5;
         var columns = 5;
-        
+
         var currTile;
         var otherTile;
-        
+
         var turns = 0;
 
         // Create a close button for the puzzle menu
@@ -1169,7 +1148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.body.appendChild(closePuzzleBtn); // Add the button to the document
 
-        window.onload = function() {
+        window.onload = function () {
             document.getElementById('board').style.display = 'block'; // Ensure the board is visible
             closePuzzleBtn.style.display = 'block'; // Ensure the close button is visible
 
@@ -1194,11 +1173,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             //pieces
             let pieces = [];
-            for (let i=1; i <= rows*columns; i++) {
+            for (let i = 1; i <= rows * columns; i++) {
                 pieces.push(i.toString()); //put "1" to "25" into the array (puzzle images names)
             }
             pieces.reverse();
-            for (let i =0; i < pieces.length; i++) {
+            for (let i = 0; i < pieces.length; i++) {
                 let j = Math.floor(Math.random() * pieces.length);
 
                 //swap
@@ -1252,9 +1231,106 @@ document.addEventListener('DOMContentLoaded', () => {
             let otherImg = otherTile.src;
             currTile.src = otherImg;
             otherTile.src = currImg;
-
+            
             turns += 1;
             document.getElementById("turns").innerText = turns;
         }
+        function startCombat(player, enemy, onCombatEnd) {
+            // Hide the next button and show the combat options
+            nextBtn.style.display = 'none';
+            optionBtns.style.display = 'block';
+            optionBtns.innerHTML = ''; // Clear previous options
+        
+            // Display initial combat status
+            typeText(`Combat started! You are fighting ${enemy.name}.`, () => {
+                updateCombatStatus();
+                playerTurn();
+            });
+        
+            function updateCombatStatus() {
+                dialogueElement.innerHTML += `<br><br>${player.name}: ${player.health} HP<br>${enemy.name}: ${enemy.health} HP`;
+            }
+        
+            function playerTurn() {
+                typeText("It's your turn! Choose an attack:", () => {
+                    optionBtns.innerHTML = ''; // Clear previous options
+        
+                    const basicAttackBtn = document.createElement('button');
+                    basicAttackBtn.textContent = 'Basic Attack';
+                    basicAttackBtn.addEventListener('click', () => {
+                        performAttack(player, enemy, 'Basic Attack', 10, () => {
+                            if (enemy.health <= 0) {
+                                endCombat(true);
+                            } else {
+                                enemyTurn();
+                            }
+                        });
+                    });
+        
+                    const specialAttackBtn = document.createElement('button');
+                    specialAttackBtn.textContent = 'Special Attack';
+                    specialAttackBtn.addEventListener('click', () => {
+                        performAttack(player, enemy, 'Special Attack', 20, () => {
+                            if (enemy.health <= 0) {
+                                endCombat(true);
+                            } else {
+                                enemyTurn();
+                            }
+                        });
+                    });
+        
+                    optionBtns.appendChild(basicAttackBtn);
+                    optionBtns.appendChild(specialAttackBtn);
+                });
+            }
+        
+            function enemyTurn() {
+                typeText(`It's ${enemy.name}'s turn!`, () => {
+                    performAttack(enemy, player, 'Enemy Attack', 15, () => {
+                        if (player.health <= 0) {
+                            endCombat(false);
+                        } else {
+                            playerTurn();
+                        }
+                    });
+                });
+            }
+        
+            function performAttack(attacker, defender, attackName, damage, callback) {
+                const actualDamage = Math.max(0, damage - defender.defense);
+                defender.health -= actualDamage;
+        
+                typeText(`${attacker.name} used ${attackName} and dealt ${actualDamage} damage!`, () => {
+                    updateCombatStatus();
+                    callback();
+                });
+            }
+        
+            function endCombat(playerWon) {
+                optionBtns.style.display = 'none';
+                typeText(playerWon ? 'You have won the combat!' : 'You have been defeated!', () => {
+                    onCombatEnd(playerWon);
+                });
+            }
+        }
+     
     }
+    // Array to store all choices made
+const choicesMade = [];
+
+// Function to update the sidebar with choices
+function updateChoicesSidebar(choice) {
+    // Add the new choice to the array
+    choicesMade.push(choice);
+
+    // Get the sidebar list element
+    const choicesList = document.getElementById('choices-list');
+
+    // Create a new list item for the choice
+    const listItem = document.createElement('li');
+    listItem.textContent = choice;
+
+    // Append the new choice to the list
+    choicesList.appendChild(listItem);
+}
 });
