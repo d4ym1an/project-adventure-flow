@@ -85,33 +85,11 @@
         var rows = 5;
         var columns = 5;
 
-<<<<<<< Updated upstream
-            // Hide other content and show the puzzle
-            otherContent.style.display = "none";
-            puzzle.style.display = "block";
-        });
-    </script>
-    <div id="combat-log"></div>
-    <div id="combat-actions"></div>
-    <div id="player-health"></div>
-    <div id="enemy-health"></div>
-</body>
-</html>
-<script>
-    // JavaScript to handle button click
-    document.getElementById("showPuzzleBtn").addEventListener("click", function () {
-        // Get references to elements
-        const otherContent = document.getElementById("otherContent");
-        const puzzle = document.querySelector(".puzzle1");
-=======
         var currTile;
         var otherTile;
->>>>>>> Stashed changes
 
         var turns = 0;
 
-<<<<<<< Updated upstream
-    <script>
         var rows = 5;
         var columns = 5;
 
@@ -138,7 +116,7 @@
                     document.getElementById("board").append(tile);
                 }
             }
-
+        }
             // Pieces
             let pieces = [];
             for (let i = 1; i <= rows * columns; i++) {
@@ -154,7 +132,6 @@
                 pieces[j] = tmp;
             }
 
-=======
         window.onload = function () {
             // Initialize the 5x5 board
             for (let r = 0; r < rows; r++) {
@@ -189,7 +166,6 @@
                 pieces[j] = tmp;
             }
 
->>>>>>> Stashed changes
             for (let i = 0; i < pieces.length; i++) {
                 let tile = document.createElement("img");
                 tile.src = pieces[i] + ".jpg";
