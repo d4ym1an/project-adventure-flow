@@ -422,89 +422,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
-
-    // Add combat options after the Mage Wand choice
-    function showCombatOptions() {
-        nextBtn.style.display = 'none';
-        optionBtns.style.display = 'block';
-        optionBtns.innerHTML = ''; // Clear previous options
-
-        const attack1Btn = document.createElement('button');
-        attack1Btn.textContent = 'Basic Attack';
-        attack1Btn.addEventListener('click', () => {
-            performAttack('Basic Attack');
-        });
-
-        const attack2Btn = document.createElement('button');
-        attack2Btn.textContent = 'Fireball';
-        attack2Btn.addEventListener('click', () => {
-            performAttack('Fireball');
-        });
-
-        const attack3Btn = document.createElement('button');
-        attack3Btn.textContent = 'Lightning Strike';
-        attack3Btn.addEventListener('click', () => {
-            performAttack('Lightning Strike');
-        });
-
-        const attack4Btn = document.createElement('button');
-        attack4Btn.textContent = 'Ice Blast';
-        attack4Btn.addEventListener('click', () => {
-            performAttack('Ice Blast');
-        });
-
-        // Append the buttons to the options container
-        optionBtns.appendChild(attack1Btn);
-        optionBtns.appendChild(attack2Btn);
-        optionBtns.appendChild(attack3Btn);
-        optionBtns.appendChild(attack4Btn);
-    }
-
-    // Function to handle the player's attack
-    function performAttack(attackType) {
-        const enemy = enemy1; // Using Goblin as the enemy for now
-
-        let damage = 0;
-
-        switch (attackType) {
-            case 'Basic Attack':
-                damage = player3.attack; // Basic attack damage
-                break;
-            case 'Fireball':
-                damage = player3.attack + 10; // Fireball is stronger
-                break;
-            case 'Lightning Strike':
-                damage = player3.attack + 15; // Lightning is the strongest
-                break;
-            case 'Ice Blast':
-                damage = player3.attack + 5; // Ice blast is average
-                break;
-            default:
-                break;
-        }
-
-        const damageDealt = enemy.takeDamage(damage);
-
-        typeText(`You used ${attackType} and dealt ${damageDealt} damage to the enemy!`, () => {
-            if (enemy.health <= 0) {
-                typeText('You have defeated the Goblin!', () => {
-                    // Optionally add logic to end the combat or move to the next part
-                    optionBtns.style.display = 'none';
-                    nextBtn.style.display = 'block';
-                });
-            } else {
-                typeText(`The Goblin has ${enemy.health} health left.`, () => {
-                    showCombatOptions(); // Allow the player to choose again
-                });
-            }
-        });
-    }
-
-
     let currentDialogueIndex = 0;
     let currentBranch = null;
     let isTyping = false;
-    const typingSpeed = 0;
+    const typingSpeed = 25;
     const typingAudio = new Audio('/assets/sounds/talking-three.mp3');
 
     const dialogueElement = document.getElementById('dialogue');

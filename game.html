@@ -111,11 +111,46 @@
                     document.getElementById("board").append(tile);
                 }
             }
+        }
+            // Pieces
+            let pieces = [];
+            for (let i = 1; i <= rows * columns; i++) {
+                pieces.push(i.toString()); // Put "1" to "25" into the array (puzzle image names)
+            }
+            pieces.reverse();
+            for (let i = 0; i < pieces.length; i++) {
+                let j = Math.floor(Math.random() * pieces.length);
+
+                // Swap
+                let tmp = pieces[i];
+                pieces[i] = pieces[j];
+                pieces[j] = tmp;
+            }
+
+=======
+        window.onload = function () {
+            // Initialize the 5x5 board
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < columns; c++) {
+                    let tile = document.createElement("img");
+                    tile.src = "./blank.jpg";
+
+                    // Drag functionality
+                    tile.addEventListener("dragstart", dragStart); // Click on image to drag
+                    tile.addEventListener("dragover", dragOver);   // Drag an image
+                    tile.addEventListener("dragenter", dragEnter); // Dragging an image into another one
+                    tile.addEventListener("dragleave", dragLeave); // Dragging an image away from another one
+                    tile.addEventListener("drop", dragDrop);       // Drop an image onto another one
+                    tile.addEventListener("dragend", dragEnd);     // After you completed dragDrop
+
+                    document.getElementById("board").append(tile);
+                }
+            }
 
             // Pieces
             let pieces = [];
             for (let i = 1; i <= rows * columns; i++) {
-                pieces.push(i.toString());
+                pieces.push(i.toString()); // Put "1" to "25" into the array (puzzle image names)
             }
             pieces.reverse();
             for (let i = 0; i < pieces.length; i++) {
@@ -129,7 +164,7 @@
 
             for (let i = 0; i < pieces.length; i++) {
                 let tile = document.createElement("img");
-                tile.src = pieces[i] + ".jpg";
+                tile.src = pieces[i] + ".png";
 
                 // Drag functionality
                 tile.addEventListener("dragstart", dragStart);
