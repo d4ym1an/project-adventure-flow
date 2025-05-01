@@ -417,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentDialogueIndex = 0;
     let currentBranch = null;
     let isTyping = false;
-    const typingSpeed = 0;
+    const typingSpeed = 25;
     const typingAudio = new Audio('/assets/sounds/talking-three.mp3');
 
     const dialogueElement = document.getElementById('dialogue');
