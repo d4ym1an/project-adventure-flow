@@ -144,11 +144,18 @@ document.addEventListener('DOMContentLoaded', () => {
             "You will have my pupil accompany you to the treasure",
             "Its time to go off and find the tresure!",
             "Now you have to pick how to get there...",
+            () => evil_showTravelChoices() // Add call to evil_showTravelChoices
         ],
         evil_hidingCorpse: [
             "You decide to hide under all the people you have defeated",
             "You wait there all day and night",
-
+            "Once you notice that the coast is clear, you run back to the base",
+            "You find your mentor, and he introduces you to his other student",
+            "Sat Ann",
+            "You will have my pupil accompany you to the tresure",
+            "Its time to go off and find the tresure!",
+            "Now you have to pick how to get there...",
+            () => evil_showTravelChoices() // Add call to evil_showTravelChoices
         ],
         evil_travelFlight: [
             "you see this sea monster, the Kraken...",
@@ -414,6 +421,86 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
     };
 
+
+
+    // Add combat options after the Mage Wand choice
+    function showCombatOptions() {
+        nextBtn.style.display = 'none';
+        optionBtns.style.display = 'block';
+        optionBtns.innerHTML = ''; // Clear previous options
+
+        const attack1Btn = document.createElement('button');
+        attack1Btn.textContent = 'Basic Attack';
+        attack1Btn.addEventListener('click', () => {
+            performAttack('Basic Attack');
+        });
+
+        const attack2Btn = document.createElement('button');
+        attack2Btn.textContent = 'Fireball';
+        attack2Btn.addEventListener('click', () => {
+            performAttack('Fireball');
+        });
+
+        const attack3Btn = document.createElement('button');
+        attack3Btn.textContent = 'Lightning Strike';
+        attack3Btn.addEventListener('click', () => {
+            performAttack('Lightning Strike');
+        });
+
+        const attack4Btn = document.createElement('button');
+        attack4Btn.textContent = 'Ice Blast';
+        attack4Btn.addEventListener('click', () => {
+            performAttack('Ice Blast');
+        });
+
+        // Append the buttons to the options container
+        optionBtns.appendChild(attack1Btn);
+        optionBtns.appendChild(attack2Btn);
+        optionBtns.appendChild(attack3Btn);
+        optionBtns.appendChild(attack4Btn);
+    }
+
+    // Function to handle the player's attack
+    function performAttack(attackType) {
+        const enemy = enemy1; // Using Goblin as the enemy for now
+
+        let damage = 0;
+
+        switch (attackType) {
+            case 'Basic Attack':
+                damage = player3.attack; // Basic attack damage
+                break;
+            case 'Fireball':
+                damage = player3.attack + 10; // Fireball is stronger
+                break;
+            case 'Lightning Strike':
+                damage = player3.attack + 15; // Lightning is the strongest
+                break;
+            case 'Ice Blast':
+                damage = player3.attack + 5; // Ice blast is average
+                break;
+            default:
+                break;
+        }
+
+        const damageDealt = enemy.takeDamage(damage);
+
+        typeText(`You used ${attackType} and dealt ${damageDealt} damage to the enemy!`, () => {
+            if (enemy.health <= 0) {
+                typeText('You have defeated the Goblin!', () => {
+                    // Optionally add logic to end the combat or move to the next part
+                    optionBtns.style.display = 'none';
+                    nextBtn.style.display = 'block';
+                });
+            } else {
+                typeText(`The Goblin has ${enemy.health} health left.`, () => {
+                    showCombatOptions(); // Allow the player to choose again
+                });
+            }
+        });
+    }
+
+
     let currentDialogueIndex = 0;
     let currentBranch = null;
     let isTyping = false;
@@ -567,11 +654,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         image.src = "assets/char/kermit.png";
                     } else if (currentBranch === "seaTravel" && currentDialogueIndex === 1) {
                         image.src = "assets/char/pirate.png";
-                    } else if (currentBranch === 'powerKraken' && currentDialogueIndex === 28) {
+                    } else if (currentBranch === 'powerKraken' && currentDialogueIndex === 27) {
                         showEndings();
-                    } else if (currentBranch === 'weakKraken' && currentDialogueIndex === 21) {
+                    } else if (currentBranch === 'weakKraken' && currentDialogueIndex === 20) {
                         showEndings();
-                    } else if (currentBranch === 'landTravel' && currentDialogueIndex === 25) {
+                    } else if (currentBranch === 'landTravel' && currentDialogueIndex === 24) {
                         showEndings();
                     } else if (currentBranch === 'monkey' && currentDialogueIndex === 26) {
                         showEndings();
@@ -601,48 +688,24 @@ document.addEventListener('DOMContentLoaded', () => {
                         image.src = "assets/icons/charNormal.png";
                     } else if (currentBranch === "landTravel" && currentDialogueIndex === 3) {
                         image.src = "assets/char/landPirates.png";
-                    } else if (currentBranch === "landTravel" && currentDialogueIndex === 14) {
-                        image.src = "assets/char/mrRich.png";
-                    } else if (currentBranch === "landTravel" && currentDialogueIndex === 22) {
-                        image.src = "assets/char/bigSwordMan.png";
                     } else if (currentBranch === "berries" && currentDialogueIndex === 6) {
                         image.src = "assets/char/shrek.png";
-                    } else if (currentBranch === "berries" && currentDialogueIndex === 15) {
-                        image.src = "assets/char/mrRich.png";
-                    } else if (currentBranch === "monkey" && currentDialogueIndex === 14) {
-                        image.src = "assets/char/mrRich.png";
-                    } else if (currentBranch === "monkeyBoss" && currentDialogueIndex === 13) {
-                        image.src = "assets/char/mrRich.png";
                     } else if (currentBranch === "monkey" && currentDialogueIndex === 4) {
                         image.src = "assets/char/shrek.png";
                     } else if (currentBranch === "monkeyBoss" && currentDialogueIndex === 5) {
                         image.src = "assets/char/shrek.png";
                     } else if (currentBranch === "powerKraken" && currentDialogueIndex === 10) {
                         image.src = "assets/char/shrek.png";
-                    } else if (currentBranch === "powerKraken" && currentDialogueIndex === 16) {
-                        image.src = "assets/char/mrRich.png";
-                    } else if (currentBranch === "monkey" && currentDialogueIndex === 22) {
-                        image.src = "assets/char/bigSwordMan.png";
-                    } else if (currentBranch === "berries" && currentDialogueIndex === 24) {
-                        image.src = "assets/char/bigSwordMan.png";
-                    } else if (currentBranch === "powerKraken" && currentDialogueIndex === 25) {
-                        image.src = "assets/char/bigSwordMan.png";
-                    }else if (currentBranch === "monkeyBoss" && currentDialogueIndex === 23) {
-                        image.src = "assets/char/bigSwordMan.png";
-                    } else if (currentBranch === "weakKraken" && currentDialogueIndex === 18) {
-                        image.src = "assets/char/bigSwordMan.png";
-
-                        //bg images
-                    } else if (currentBranch === "mage_wand" && currentDialogueIndex === 1) {
+                    } else if (currentBranch === "evil_hidingSewers" && currentDialogueIndex === 2) {
+                        image.src = "assets/icons/evilChar.png";
+                    } else if (currentBranch === "evil_hidingSewersRun" && currentDialogueIndex === 1) {
+                        image.src = "assets/char/moistEvil.png";
+                    } else if (currentBranch === "evil_hidingSewersRun" && currentDialogueIndex === 3) {
+                        image.src = "assets/char/satann.png";
+                    }
+                    //bg images
+                    else if (currentBranch === "mage_wand" && currentDialogueIndex === 1) {
                         document.getElementById('backgroundCity').src = "assets/bg/mageSchool.png";
-                    } else if (currentBranch === "landTravel" && currentDialogueIndex === 4) {
-                        document.getElementById('backgroundCity').src = "assets/bg/mountain.png";
-                    }  else if (currentBranch === "seaTravel" && currentDialogueIndex === 2) {
-                        document.getElementById('backgroundCity').src = "assets/bg/ocean.png";
-                    } else if (currentBranch === "islandFood" && currentDialogueIndex === 2) {
-                        document.getElementById('backgroundCity').src = "assets/bg/jungle.png";
-                    } else if (currentBranch === "conjure" && currentDialogueIndex === 1) {
-                        document.getElementById('backgroundCity').src = "assets/bg/ship.png";
                     } else if (currentBranch === "mage_staff" && currentDialogueIndex === 1) {
                         document.getElementById('backgroundCity').src = "assets/bg/mageSchool.png";
                     } else if (currentBranch === "great_sword" && currentDialogueIndex === 3) {
@@ -655,6 +718,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.getElementById('backgroundCity').src = "assets/bg/evilSchool.png";
                     } else if (currentBranch === "evil_trainingOne" && currentDialogueIndex === 1) {
                         document.getElementById('backgroundCity').src = "assets/bg/townNight.jpg";
+                    } else if (currentBranch === "evil_trainingThree" && currentDialogueIndex === 1) {
+                        document.getElementById('backgroundCity').src = "assets/bg/townNight.jpg";
+                    } else if (currentBranch === "evil_hidingSewers" && currentDialogueIndex === 1) {
+                        document.getElementById('backgroundCity').src = "assets/bg/sewers.png";
+                    } else if (currentBranch === "evil_hidingSewersRun" && currentDialogueIndex === 2) {
+                        document.getElementById('backgroundCity').src = "assets/bg/evilSchool.png";
                     }
                 });
             }
@@ -924,6 +993,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
         optionBtns.appendChild(runSewersBtn);
         optionBtns.appendChild(drinkBtn);
+    }
+
+    function evil_showTravelChoices() {
+        nextBtn.style.display = 'none';
+        optionBtns.style.display = 'block';
+        optionBtns.innerHTML = ''; // Clear previous options
+
+        const evilLandBtn = document.createElement('button');
+        evilLandBtn.textContent = 'Travel by Land'; // Improved text clarity
+        evilLandBtn.addEventListener('click', () => {
+            typeText('You chose to travel by land!', () => {
+                currentBranch = 'evil_landTravel';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+
+        const evilSkyBtn = document.createElement('button');
+        evilSkyBtn.textContent = 'Travel by Sky'; // Improved text clarity
+        evilSkyBtn.addEventListener('click', () => {
+            typeText('You chose to travel by sky!', () => {
+                currentBranch = 'evil_travelFlight';
+                currentDialogueIndex = 0;
+                optionBtns.style.display = 'none';
+                nextBtn.style.display = 'block';
+            });
+        });
+
+        optionBtns.appendChild(evilLandBtn);
+        optionBtns.appendChild(evilSkyBtn);
     }
 
     function showTravelChoices() {
